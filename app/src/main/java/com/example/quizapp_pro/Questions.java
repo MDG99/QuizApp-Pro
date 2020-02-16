@@ -4,12 +4,10 @@ public class Questions {
 
     //Creación de variables
 
-    //
     private String questionText;
     private String answerText;
     private int topicId;
     private int questionId;
-
 
     //Métodos get para cada variable
 
