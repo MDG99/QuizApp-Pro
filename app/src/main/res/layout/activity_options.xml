@@ -168,7 +168,7 @@
                 android:id="@+id/medio_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medio"
+                android:text="Holaholahola"
                 android:textSize="24sp" />
 
 
