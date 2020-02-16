@@ -32,14 +32,21 @@
 
 
         <ImageView
-            android:id="@+id/imageView25"
+            android:id="@+id/nube1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="200"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/nube4" />
+
+        <ImageView
+            android:id="@+id/nube2"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/nube3" />
 
         <ImageView
-            android:id="@+id/imageView23"
+            android:id="@+id/nube3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,7 +64,7 @@
         <ImageView
             android:id="@+id/titulo_activity4"
             android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_height="390dp"
             android:layout_marginLeft="34dp"
             app:srcCompat="@drawable/titulopuntuaciones" />
 
