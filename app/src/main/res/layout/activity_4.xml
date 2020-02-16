@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="10dp"
-            android:text="ABC..........................................."
+            android:text="CTX.............................................."
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="10dp"
-            android:text="QWE..........................................."
+            android:text="MAX.............................................."
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="10dp"
-            android:text="ZXC..........................................."
+            android:text="JRK.............................................."
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="10dp"
-            android:text="RTY..........................................."
+            android:text="TOW.............................................."
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="10dp"
-            android:text="FGH..........................................."
+            android:text="PRZ.............................................."
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="10dp"
-            android:text="VBN..........................................."
+            android:text="IGN.............................................."
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -104,9 +104,9 @@
             android:id="@+id/puntaje1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
-            android:text="320"
+            android:text="900"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -114,9 +114,9 @@
             android:id="@+id/puntaje2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
-            android:text="320"
+            android:text="530"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -124,9 +124,9 @@
             android:id="@+id/puntaje3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
-            android:text="320"
+            android:text="450"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -134,9 +134,9 @@
             android:id="@+id/puntaje4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
-            android:text="320"
+            android:text="200"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -144,9 +144,9 @@
             android:id="@+id/puntaje5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
-            android:text="320"
+            android:text="130"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -154,9 +154,9 @@
             android:id="@+id/puntaje6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
-            android:text="320"
+            android:text="100"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
@@ -166,7 +166,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center||right"
-        android:orientation="vertical"/>
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/icono1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/oro" />
+
+        <ImageView
+            android:id="@+id/icono2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/plata" />
+
+        <ImageView
+            android:id="@+id/icono3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/plata" />
+
+        <ImageView
+            android:id="@+id/icono4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/bronce" />
+
+        <ImageView
+            android:id="@+id/icono5"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/trampa" />
+
+        <ImageView
+            android:id="@+id/icono6"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/trampa" />
+    </LinearLayout>
 
 
 </RelativeLayout>
