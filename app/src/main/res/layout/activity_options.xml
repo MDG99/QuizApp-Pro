@@ -15,7 +15,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:paddingTop="10dp"
             android:text="Temas"
             android:textSize="20sp" />
 
@@ -119,10 +118,84 @@
 
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/preguntas_spinner"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:text="Número de preguntas: "
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/preguntas_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/cantidad_preguntas" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="Dificultad"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/facil_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Fácil"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/medio_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medio"
+                android:textSize="24sp" />
+
+
+            <RadioButton
+                android:id="@+id/dificil_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Difícil"
+                android:textSize="24sp" />
+
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/pistas_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Habilitar pistas"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/pistas_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:entries="@array/cantidad_pistas" />
 
 </LinearLayout>

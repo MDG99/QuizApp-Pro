@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">QuizApp-Pro</string>
+
+    <string-array name="cantidad_preguntas">
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="cantidad_pistas">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+
+    </string-array>
 </resources>
