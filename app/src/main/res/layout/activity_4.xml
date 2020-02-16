@@ -34,7 +34,7 @@
         <ImageView
             android:id="@+id/nube1"
             android:layout_width="wrap_content"
-            android:layout_height="200"
+            android:layout_height="200dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/nube4" />
 
@@ -259,6 +259,21 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="8dp"
             app:srcCompat="@drawable/trampa" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/findeljuego_imagen"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="155dp"
+            app:srcCompat="@drawable/oro" />
     </LinearLayout>
 
 
