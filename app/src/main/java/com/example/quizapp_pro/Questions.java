@@ -5,7 +5,6 @@ public class Questions {
     //Creación de variables
 
     private String questionText;
-    private String answerText;
     private int topicId;
     private int questionId;
 
@@ -13,10 +12,6 @@ public class Questions {
 
     public String getQuestionText() {
         return questionText;
-    }
-
-    public String getAnswerText() {
-        return answerText;
     }
 
     public int getTopicId() {
@@ -29,9 +24,8 @@ public class Questions {
 
     //Constructor
 
-    Questions(String questionText, String answerText, int topicId, int questionId) {
+    Questions(String questionText, int topicId, int questionId) {
         this.questionText = questionText;
-        this.answerText = answerText;
         this.topicId = topicId;
         this.questionId = questionId;
     }
