@@ -9,9 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -24,7 +28,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -140,13 +144,13 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp">
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-
             android:orientation="vertical">
 
             <TextView
@@ -168,8 +172,8 @@
                 android:id="@+id/medio_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Holaholahola"
-                android:textSize="24sp" />
+                android:text="Medio"
+                android:textSize="20sp" />
 
 
             <RadioButton
@@ -177,7 +181,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Difícil"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
 
         </RadioGroup>
@@ -191,11 +195,23 @@
         android:text="Habilitar pistas"
         android:textSize="20sp" />
 
-    <Spinner
-        android:id="@+id/pistas_spinner"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:entries="@array/cantidad_pistas" />
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Número de pistas: "
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/pistas_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/cantidad_pistas" />
+    </LinearLayout>
 </LinearLayout>
