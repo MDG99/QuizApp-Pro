@@ -20,5 +20,7 @@ public class MainActivity extends AppCompatActivity {
         btnConfig = findViewById(R.id.options_button);
         btnPoints = findViewById(R.id.points_button);
 
+
+
     }
 }

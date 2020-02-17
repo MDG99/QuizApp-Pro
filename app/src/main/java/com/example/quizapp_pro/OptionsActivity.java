@@ -1,6 +1,8 @@
 package com.example.quizapp_pro;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -26,6 +28,9 @@ public class OptionsActivity extends AppCompatActivity {
     private Spinner pistasSpinner;
     private Topics[] topicsArray;
     private boolean[] topicsChosen;
+    private int preguntasCuantas = 5;
+    private String auxText = "Fácil";
+    private int dificultad = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,7 @@ public class OptionsActivity extends AppCompatActivity {
                 new Topics(4, "Historia"),
                 new Topics(5, "Cultura general")
         };
-
+//seccion para checar que temas se eligieron
         final CheckBox[] checkBoxes = {chkArte, chkGeografia, chkFrases, chkVideojuegos, chkHistoria, chkCultura};
 
         topicsChosen = new boolean[]{false, false, false, false, false, false};
@@ -81,6 +86,34 @@ public class OptionsActivity extends AppCompatActivity {
         chkVideojuegos.setOnCheckedChangeListener(chkListener);
         chkHistoria.setOnCheckedChangeListener(chkListener);
         chkCultura.setOnCheckedChangeListener(chkListener);
+//end seccion
 
+//seccion para tomar el numero de preguntas del spinner
+        preguntasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                preguntasCuantas = Integer.parseInt(parent.getItemAtPosition(position).toString());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                preguntasCuantas = 5;
+            }
+        });
+
+//end seccion
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RadioButton src = (RadioButton) v;
+                auxText = src.getText().toString();
+            }
+        };
+
+        btnFacil.setOnClickListener(listener);
+        btnMedio.setOnClickListener(listener);
+        btnDificil.setOnClickListener(listener);
     }
 }
