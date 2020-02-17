@@ -1,5 +1,6 @@
 package com.example.quizapp_pro;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +33,7 @@ public class OptionsActivity extends AppCompatActivity {
     private int preguntasCuantas = 5;
     private String auxText = "Fácil";
     private int dificultad = 2;
+    private int pistasCuantas = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +107,74 @@ public class OptionsActivity extends AppCompatActivity {
 
 //end seccion
 
+        //inicio seccion para elegir dificultad
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RadioButton src = (RadioButton) v;
                 auxText = src.getText().toString();
+
+                switch (auxText) {
+                    case "Fácil":
+                        dificultad = 2;
+                        break;
+                    case "Medio":
+                        dificultad = 3;
+                        break;
+                    case "Difícil":
+                        dificultad = 4;
+                        break;
+                    default:
+                        dificultad = 2;
+                        break;
+                }
             }
         };
-
         btnFacil.setOnClickListener(listener);
         btnMedio.setOnClickListener(listener);
         btnDificil.setOnClickListener(listener);
+        //end seccion
+
+        //inicio seccion para elegir pistas
+        pistasSpinner.setEnabled(false);
+        pistasSpinner.getBackground().setAlpha(64);
+
+        pistaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (pistaSwitch.isChecked()) {
+                    pistasSpinner.setEnabled(true);
+                    pistasCuantas = Integer.parseInt(pistasSpinner.getSelectedItem().toString());
+                    pistasSpinner.getBackground().setAlpha(255);
+                    Toast.makeText(OptionsActivity.this, preguntasCuantas + " - " + dificultad + " - " + pistasCuantas, Toast.LENGTH_SHORT).show();
+                } else {
+                    pistasSpinner.setEnabled(false);
+                    pistasSpinner.getBackground().setAlpha(64);
+                    pistasCuantas = 0;
+                }
+            }
+        });
+
+        pistasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                pistasCuantas = Integer.parseInt(parent.getItemAtPosition(position).toString());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                pistasCuantas = 0;
+            }
+        });
+        //end seccion
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(OptionsActivity.this, Activity4.class);
+        startActivity(intent);
     }
 }

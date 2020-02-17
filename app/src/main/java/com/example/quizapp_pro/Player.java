@@ -34,4 +34,5 @@ public class Player {
         Puntaje = puntaje;
         Cheat = cheat;
     }
+
 }
