@@ -34,6 +34,11 @@ public class OptionsActivity extends AppCompatActivity {
     private String auxText = "Fácil";
     private int dificultad = 2;
     private int pistasCuantas = 0;
+    private final String CUALES_TOPICS = "CUALES_TOPICS";
+    private final String NO_PREGUNTAS = "NO_PREGUNTAS";
+    private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";
+    private final String ENABLE_PISTAS = "ENABLE_PISTAS";
+    private final String NO_PISTAS = "NO_PISTAS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,9 +177,16 @@ public class OptionsActivity extends AppCompatActivity {
 
     }
 
+    //ESTO ABRE LA MAIN ACTIVITY Y LE MANDA UN INTENT
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(OptionsActivity.this, Activity4.class);
+
+        Intent intent = new Intent(OptionsActivity.this, MainActivity.class);
+        intent.putExtra(CUALES_TOPICS, topicsChosen);
+        intent.putExtra(NO_PREGUNTAS, preguntasCuantas);
+        intent.putExtra(DIFICULTAD_PUNTOS, dificultad);
+        intent.putExtra(ENABLE_PISTAS, pistaSwitch.isChecked());
+        intent.putExtra(NO_PISTAS, pistasCuantas);
         startActivity(intent);
     }
 }
