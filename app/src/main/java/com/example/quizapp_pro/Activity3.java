@@ -35,6 +35,7 @@ public class Activity3 extends AppCompatActivity {
 
     private List<Questions> questionsToShow;
     private List<Answers> answersToShow;
+    private List<Answers> fakeAnswers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,28 +55,15 @@ public class Activity3 extends AppCompatActivity {
         //Inicialización de las preguntas, recaudar la información de otros activities
         MainActivityViewModel model = new MainActivityViewModel();
         cheatRecorder = false;
-        quantityAnswers = 4;
+        quantityAnswers = 4; //DEPENDE DE LA DIFICULTAD
 
 
-        //Preguntas por tópico
-        questionsForTopic = questionsQuantity/topicsToAsk.length;
-        residueQuestionsForTopic = questionsQuantity%topicsToAsk.length;
-        int[][] topicsQuestion = new int[topicsToAsk.length][2];
-        for(int i=0; i<topicsToAsk.length;i++){
-            topicsQuestion[i][0]=topicsToAsk[i];
-            topicsQuestion[i][1]=questionsForTopic+residueQuestionsForTopic;
-            residueQuestionsForTopic--;
-        }
+        //Preguntas por tópico YA LO HACE OTRA CLASE
+
 
         //Llenado de las preguntas por tópico
-        for(int j=0;j<topicsToAsk.length;j++){
-            questionsToShow.addAll(model.questionsRandom(topicsQuestion[j][0], topicsQuestion[j][1]));
-        }
+        questionsToShow.addAll(model.questionsByTopicRandom(questionsQuantity,topicsToAsk));
 
-        //Llenado de las respuestas por pregunta
-        for(int j=0;j<questionsToShow.toArray().length;j++){
-            answersToShow.addAll(model.answersForQuestion(questionsToShow.get(j).getQuestionId(),quantityAnswers));
-        }
 
         //Desplegar preguntas con sus debidas respuestas de manera aleatoria
 
