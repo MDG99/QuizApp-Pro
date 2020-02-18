@@ -1,14 +1,13 @@
 package com.example.quizapp_pro;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -188,14 +187,14 @@ public class Activity3 extends AppCompatActivity {
         respuesta01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(AnswerChecker(0)){
+                if (AnswerChecker(0)) {
                     respuestas[currentQuestion][0].setTextColor(0x0000ff);
-                    BotonesRespuestaDeshabilitacion(difficult,0);
+                    BotonesRespuestaDeshabilitacion(difficult, 0);
                     NotEnableButtons();
 
-                }else{
+                } else {
                     respuestas[currentQuestion][0].setTextColor(0xff0000);
-                    BotonesRespuestaDeshabilitacion(difficult,0);
+                    BotonesRespuestaDeshabilitacion(difficult, 0);
                     NotEnableButtons();
                 }
             }
@@ -204,13 +203,13 @@ public class Activity3 extends AppCompatActivity {
         respuesta02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(AnswerChecker(0)){
+                if (AnswerChecker(0)) {
                     respuestas[currentQuestion][1].setTextColor(0x0000ff);
-                    BotonesRespuestaDeshabilitacion(difficult,0);
+                    BotonesRespuestaDeshabilitacion(difficult, 0);
                     NotEnableButtons();
-                }else{
+                } else {
                     respuestas[currentQuestion][1].setTextColor(0xff0000);
-                    BotonesRespuestaDeshabilitacion(difficult,0);
+                    BotonesRespuestaDeshabilitacion(difficult, 0);
                     NotEnableButtons();
                 }
             }
@@ -219,13 +218,13 @@ public class Activity3 extends AppCompatActivity {
         respuesta03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(AnswerChecker(0)){
+                if (AnswerChecker(0)) {
                     respuestas[currentQuestion][2].setTextColor(0x0000ff);
-                    BotonesRespuestaDeshabilitacion(difficult,0);
+                    BotonesRespuestaDeshabilitacion(difficult, 0);
                     NotEnableButtons();
-                }else{
+                } else {
                     respuestas[currentQuestion][2].setTextColor(0xff0000);
-                    BotonesRespuestaDeshabilitacion(difficult,0);
+                    BotonesRespuestaDeshabilitacion(difficult, 0);
                     NotEnableButtons();
                 }
             }
@@ -234,13 +233,13 @@ public class Activity3 extends AppCompatActivity {
         respuesta04.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(AnswerChecker(0)){
+                if (AnswerChecker(0)) {
                     respuestas[currentQuestion][3].setTextColor(0x0000ff);
-                    BotonesRespuestaDeshabilitacion(difficult,0);
+                    BotonesRespuestaDeshabilitacion(difficult, 0);
                     NotEnableButtons();
-                }else{
+                } else {
                     respuestas[currentQuestion][3].setTextColor(0xff0000);
-                    BotonesRespuestaDeshabilitacion(difficult,0);
+                    BotonesRespuestaDeshabilitacion(difficult, 0);
                     NotEnableButtons();
                 }
             }
@@ -338,11 +337,11 @@ public class Activity3 extends AppCompatActivity {
         respuesta04.setVisibility(View.INVISIBLE);
 
         respuestas = new Button[questionsQuantity][4];
-        for(int i = 0; i<questionsQuantity;i++){
-            respuestas[i][0]=respuesta01;
-            respuestas[i][1]=respuesta02;
-            respuestas[i][2]=respuesta03;
-            respuestas[i][3]=respuesta04;
+        for (int i = 0; i < questionsQuantity; i++) {
+            respuestas[i][0] = respuesta01;
+            respuestas[i][1] = respuesta02;
+            respuestas[i][2] = respuesta03;
+            respuestas[i][3] = respuesta04;
         }
     }
 
@@ -356,7 +355,7 @@ public class Activity3 extends AppCompatActivity {
 
     public void BotonesRespuestaDeshabilitacion(int quantity, int aux) {
         for (int i = 0; i < quantity; i++) {
-            if(i!=aux){
+            if (i != aux) {
                 respuestas[currentQuestion][i].setEnabled(true);
             }
         }
@@ -386,9 +385,9 @@ public class Activity3 extends AppCompatActivity {
         return a;
     }
 
-    public void NotEnableButtons(){
-        for(int h = 0; h<=3;h++){
-            if(respuestas[currentQuestion][h].isEnabled());
+    public void NotEnableButtons() {
+        for (int h = 0; h <= 3; h++) {
+            if (respuestas[currentQuestion][h].isEnabled()) ;
         }
     }
 

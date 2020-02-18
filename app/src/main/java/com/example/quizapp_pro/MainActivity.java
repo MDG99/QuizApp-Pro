@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnConfig;
     private Button btnPoints;
     private Button btnMusic;
-    private boolean[] topicsChosen;
+    private int[] topicsChosen;
     private int cuantasPreguntas;
     private int dificultadPuntos;
     private boolean enabledPistas;
@@ -36,13 +36,15 @@ public class MainActivity extends AppCompatActivity {
         btnMusic = findViewById(R.id.music_button);
 
         if (getIntent().getExtras() != null) {
-            topicsChosen = getIntent().getBooleanArrayExtra("CUALES_TOPICS");
+            Toast.makeText(MainActivity.this, "ME DEVUELVE EL INTENT", Toast.LENGTH_SHORT).show();
+            topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
             cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
             dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
             enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
             cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
         } else {
-            topicsChosen = new boolean[]{true, true, true, true, true, true};
+            Toast.makeText(MainActivity.this, "INICIO DE APP", Toast.LENGTH_SHORT).show();
+            topicsChosen = new int[]{0};
             cuantasPreguntas = 5;
             dificultadPuntos = 2;
             enabledPistas = false;
