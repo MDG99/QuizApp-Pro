@@ -33,26 +33,33 @@ public class Activity3 extends AppCompatActivity {
     private Button respuesta02;
     private Button respuesta03;
     private Button respuesta04;
+    private Button[] respuestas;
 
 
     private int difficult;
+    private int currentQuestion;
     private int questionsQuantity;
-    private int quantityAnswers;
     private int questionsForTopic;
+    int questionCurrent = 0;
     private int residueQuestionsForTopic;
     private int cheatsQuantity;
     private int[] topicsToAsk;
 
     private boolean cheatsEnable;
-    private boolean cheatRecorder;
+    private boolean cheatRecorder = false;
 
     //Nombres de los Intents de donde se recaudará información del OptionsActivity
     public static final String DIFFICULT_INTENT = "DIFICULTAD_PUNTOS";
     public static final String QUANTITY_QUESTIONS_INTENT = "NO_PREGUNTAS";
     public static final String CHEATS_ENABLE_INTENT = "ENABLE_PISTAS";
-    public static final String CHEATS_QUANTITY_INTENT ="NO_PISTAS";
+    public static final String CHEATS_QUANTITY_INTENT = "NO_PISTAS";
+    public static final String TOPICS_ID_INTENT = "CUALES_TOPICS";
 
     private List<Questions> questionsToShow;
+    private Questions[] questionsToShowSaved;
+
+    private Answers[][] answersToShowSaved;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,27 +79,18 @@ public class Activity3 extends AppCompatActivity {
         Intent intent = getIntent();
         difficult = intent.getIntExtra(DIFFICULT_INTENT, 4);
         questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60);
-        cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT,false);
-        cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT,0);
-
-
-                /*
-                *         Intent intent = new Intent(OptionsActivity.this, MainActivity.class);
-        intent.putExtra(CUALES_TOPICS, topicsChosen);
-        startActivity(intent);
-                * */
+        cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false);
+        cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0);
+        topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
 
 
         //Inicialización de las preguntas, recaudar la información de otros activities
         MainActivityViewModel model = new MainActivityViewModel();
-        cheatRecorder = false;
-        quantityAnswers = 4; //DEPENDE DE LA DIFICULTAD
-        int questionCurrent = 0;
 
 
-        //Preguntas por tópico YA LO HACE OTRA CLASE
+        //ANSWERSTOSHOWSAVED NO ESTÁ EN RANDOM, ESTO ES BUENO, PUES PERMITE LA VALIDACIÓN DE LA RESPUESTA
 
-
+        //#region Llenado de información Random
         //Llenado de las preguntas por tópico
         questionsToShow.addAll(model.questionsByTopicRandom(questionsQuantity, topicsToAsk));
         Questions[] questionsToShowSaved = new Questions[questionsToShow.toArray().length];
@@ -120,7 +118,7 @@ public class Activity3 extends AppCompatActivity {
         }
 
         //Respuestas aleatorias
-        Answers[][] answersToShowSaved = new Answers[questionsQuantity][difficult];
+        final Answers[][] answersToShowSaved = new Answers[questionsQuantity][difficult];
 
         for (int i = 0; i < questionsQuantity; i++) {
             List<Answers> auxAns = new ArrayList<>();
@@ -135,47 +133,105 @@ public class Activity3 extends AppCompatActivity {
             }
         }
 
+        //#endregion
+
         //Desplegar preguntas con sus debidas respuestas de manera aleatoria Tienes las que se van a mostrar, hay que cambiar el orden
 
-        questionsText.setText(questionsToShowSaved[questionCurrent].getQuestionText());
+        ShowQuestionsFollower(questionCurrent);
+        InicializacionBotones();
+        HabilitacionBotones(difficult);
+        CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
+        DesplegarPregunta_Respuestas(questionCurrent);
 
-        //Hay que hacer que se repita cuando se presiona un botón
-        switch (difficult) {
-            case 2:
-                respuesta01.setText(answersToShowSaved[questionCurrent][0].getAnswerText());
-                respuesta02.setText(answersToShowSaved[questionCurrent][1].getAnswerText());
-                respuesta03.setEnabled(false);
-                respuesta03.setVisibility(View.INVISIBLE);
-                respuesta04.setEnabled(false);
-                respuesta04.setVisibility(View.INVISIBLE);
-                break;
-            case 3:
-                respuesta01.setText(answersToShowSaved[questionCurrent][0].getAnswerText());
-                respuesta02.setText(answersToShowSaved[questionCurrent][1].getAnswerText());
-                respuesta03.setText(answersToShowSaved[questionCurrent][2].getAnswerText());
-                respuesta04.setEnabled(false);
-                respuesta04.setVisibility(View.INVISIBLE);
-                break;
-            case 4:
-                respuesta01.setText(answersToShowSaved[questionCurrent][0].getAnswerText());
-                respuesta02.setText(answersToShowSaved[questionCurrent][1].getAnswerText());
-                respuesta03.setText(answersToShowSaved[questionCurrent][2].getAnswerText());
-                respuesta04.setText(answersToShowSaved[questionCurrent][3].getAnswerText());
-                break;
-        }
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionCurrent = NextQuestionIndex(questionCurrent);
+                ShowQuestionsFollower(questionCurrent);
+                DesplegarPregunta_Respuestas(questionCurrent);
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                questionCurrent = PrevQuestionIndex(questionCurrent);
+                ShowQuestionsFollower(questionCurrent);
+                DesplegarPregunta_Respuestas(questionCurrent);
+            }
+        });
+
+        cheatsFollower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                cheatsQuantity--;
+                CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
+                //Falta guardar las habilitaciones del TextView de trampas
+                cheatRecorder = true;
+                //Hay que guardar los botones deshabilitados
+                if (difficult > 2) {
+                    Trampa();
+                } else {
+                    //Poner el método para responder
+                }
 
 
-        //Cambiar de pregunta
+            }
+        });
 
-        //Habilitar o deshabilitar el contador de trampas
-        if (cheatsEnable) {
-            cheatsCounter.setText(String.valueOf(cheatsQuantity));
-        } else {
-            cheatsCounter.setEnabled(false);
-            cheatsCounter.setVisibility(View.INVISIBLE);
-        }
+        respuesta01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AnswerChecker(0)){
+                    respuesta01.setTextColor("blue"); //Ver formato de colores
+                    BotonesRespuestaDeshabilitacion(difficult,0);
+                }else{
+                    respuesta01.setTextColor("red"); //Ver formato de colores
+                    BotonesRespuestaDeshabilitacion(difficult,0);
+                }
+            }
+        });
 
-        //Trampa: deshabilitar una respuesta incorrecta de manera aleatoria
+        respuesta02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AnswerChecker(0)){
+                    respuesta02.setTextColor("blue"); //Ver formato de colores
+                    BotonesRespuestaDeshabilitacion(difficult,0);
+                }else{
+                    respuesta02.setTextColor("red"); //Ver formato de colores
+                    BotonesRespuestaDeshabilitacion(difficult,0);
+                }
+            }
+        });
+
+        respuesta03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AnswerChecker(0)){
+                    respuesta03.setTextColor("blue"); //Ver formato de colores
+                    BotonesRespuestaDeshabilitacion(difficult,0);
+                }else{
+                    respuesta03.setTextColor("red"); //Ver formato de colores
+                    BotonesRespuestaDeshabilitacion(difficult,0);
+                }
+            }
+        });
+
+        respuesta04.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(AnswerChecker(0)){
+                    respuesta04.setTextColor("blue"); //Ver formato de colores
+                    BotonesRespuestaDeshabilitacion(difficult,0);
+                }else{
+                    respuesta04.setTextColor("red"); //Ver formato de colores
+                    BotonesRespuestaDeshabilitacion(difficult,0);
+                }
+            }
+        });
+
 
         //Mensaje al salir sin terminar la partida: SnackBar
 
@@ -189,4 +245,124 @@ public class Activity3 extends AppCompatActivity {
 
 
     }
+
+    public void DesplegarPregunta_Respuestas(int current) {
+
+        questionsText.setText(questionsToShowSaved[current].getQuestionText());
+
+        switch (difficult) {
+            case 2:
+                respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
+                respuesta02.setText(answersToShowSaved[current][1].getAnswerText());
+                respuesta03.setEnabled(false);
+                respuesta03.setVisibility(View.INVISIBLE);
+                respuesta04.setEnabled(false);
+                respuesta04.setVisibility(View.INVISIBLE);
+                break;
+            case 3:
+                respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
+                respuesta02.setText(answersToShowSaved[current][1].getAnswerText());
+                respuesta03.setText(answersToShowSaved[current][2].getAnswerText());
+                respuesta04.setEnabled(false);
+                respuesta04.setVisibility(View.INVISIBLE);
+                break;
+            case 4:
+                respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
+                respuesta02.setText(answersToShowSaved[current][1].getAnswerText());
+                respuesta03.setText(answersToShowSaved[current][2].getAnswerText());
+                respuesta04.setText(answersToShowSaved[current][3].getAnswerText());
+                break;
+        }
+    }
+
+    public int NextQuestionIndex(int current) {
+        if (current == questionsQuantity - 1)
+            return 0;
+        else
+            return current++;
+    }
+
+    public int PrevQuestionIndex(int current) {
+        if (current == 0)
+            return questionsQuantity - 1;
+        else
+            return current--;
+    }
+
+    public void BotonTrampa(int indice) {
+        respuestas[indice].setEnabled(false);
+    }
+
+    public void CheatsDeshabilitador(boolean cheats, int quantity) {
+        if (!cheats) {
+            cheatsImage.setEnabled(false);
+            cheatsFollower.setEnabled(false);
+        } else
+            ShowCheatsQuantity(quantity);
+    }
+
+    public void ShowQuestionsFollower(int current) {
+        String Contador = Integer.toString(current + 1) + "/" + Integer.toString(questionsQuantity);
+        questionsFollower.setText(Contador);
+    }
+
+    public void ShowCheatsQuantity(int quantity) {
+        cheatsFollower.setText(Integer.toString(quantity));
+        if (cheatsQuantity == 0)
+            cheatsFollower.setEnabled(false);
+    }
+
+    public void InicializacionBotones() {
+        respuesta01.setEnabled(false);
+        respuesta01.setVisibility(View.INVISIBLE);
+        respuesta02.setEnabled(false);
+        respuesta02.setVisibility(View.INVISIBLE);
+        respuesta03.setEnabled(false);
+        respuesta03.setVisibility(View.INVISIBLE);
+        respuesta04.setEnabled(false);
+        respuesta04.setVisibility(View.INVISIBLE);
+
+        respuestas = new Button[]{respuesta01, respuesta02, respuesta03, respuesta04};
+    }
+
+    public void HabilitacionBotones(int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            respuestas[i].setEnabled(true);
+            respuestas[i].setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    public void BotonesRespuestaDeshabilitacion(int quantity, int aux) {
+        for (int i = 0; i < quantity; i++) {
+            if(i!=aux){
+                respuestas[i].setEnabled(true);
+            }
+        }
+    }
+
+    public void Trampa() {
+        Random rand = new Random();
+        boolean finish = true;
+        while (finish) {
+            int aleatorio = rand.nextInt(respuestas.length) - 1;
+            if (respuestas[aleatorio].isEnabled()) {
+                if (respuestas[aleatorio].getText() != answersToShowSaved[currentQuestion][0].getAnswerText()) {
+                    respuestas[aleatorio].setEnabled(false);
+                    finish = false;
+                }
+
+            }
+        }
+    }
+
+    public boolean AnswerChecker(int i) {
+        boolean a;
+        if (respuestas[i].getText() == answersToShowSaved[currentQuestion][0].getAnswerText())
+            a = true;
+        else
+            a = false;
+        return a;
+    }
+
 }
