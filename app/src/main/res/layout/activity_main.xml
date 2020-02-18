@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="Jugar"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/options_button"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="Opciones"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -51,9 +51,19 @@
             android:id="@+id/points_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Opciones"
-            android:textSize="30sp" />
+            android:layout_gravity="start"
+            android:layout_marginRight="10dp"
+            android:text="Puntuación"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/music_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="10dp"
+            android:text="Música"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
