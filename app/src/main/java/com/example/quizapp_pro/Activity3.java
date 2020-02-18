@@ -2,10 +2,12 @@ package com.example.quizapp_pro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,17 +16,24 @@ import java.util.Random;
 
 public class Activity3 extends AppCompatActivity {
 
-    private TextView questionsCounter;
-    private TextView cheatsCounter;
+    //TextViews: contador, trampas y pregunta
+    private TextView questionsFollower;
+    private TextView cheatsFollower;
     private TextView questionsText;
 
-    private CheckBox respuesta01;
-    private CheckBox respuesta02;
-    private CheckBox respuesta03;
-    private CheckBox respuesta04;
+    //ImageView: ícono de trampas
+    private ImageView cheatsImage;
 
+    //Botones: controles de preguntas
     private Button prevButton;
     private Button nextButton;
+
+    //Botones: respuestas
+    private Button respuesta01;
+    private Button respuesta02;
+    private Button respuesta03;
+    private Button respuesta04;
+
 
     private int difficult;
     private int questionsQuantity;
@@ -37,6 +46,12 @@ public class Activity3 extends AppCompatActivity {
     private boolean cheatsEnable;
     private boolean cheatRecorder;
 
+    //Nombres de los Intents de donde se recaudará información del OptionsActivity
+    public static final String DIFFICULT_INTENT = "DIFICULTAD_PUNTOS";
+    public static final String QUANTITY_QUESTIONS_INTENT = "NO_PREGUNTAS";
+    public static final String CHEATS_ENABLE_INTENT = "ENABLE_PISTAS";
+    public static final String CHEATS_QUANTITY_INTENT ="NO_PISTAS";
+
     private List<Questions> questionsToShow;
 
     @Override
@@ -44,15 +59,29 @@ public class Activity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
 
-        questionsCounter = findViewById(R.id.questionsCounter);
-        cheatsCounter = findViewById(R.id.cheatsCounter);
+        questionsFollower = findViewById(R.id.questionsQuantity);
+        cheatsFollower = findViewById(R.id.cheatsQuantity);
         questionsText = findViewById(R.id.questionText);
-        respuesta01 = findViewById(R.id.respuesta01Text);
-        respuesta02 = findViewById(R.id.respuesta02Text);
-        respuesta03 = findViewById(R.id.respuesta03Text);
-        respuesta04 = findViewById(R.id.respuesta04Text);
-        prevButton = findViewById(R.id.previousButton);
+        respuesta01 = findViewById(R.id.respuesta01);
+        respuesta02 = findViewById(R.id.respuesta02);
+        respuesta03 = findViewById(R.id.respuesta03);
+        respuesta04 = findViewById(R.id.respuesta04);
+        prevButton = findViewById(R.id.prevButton);
         nextButton = findViewById(R.id.nextButton);
+
+        Intent intent = getIntent();
+        difficult = intent.getIntExtra(DIFFICULT_INTENT, 4);
+        questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60);
+        cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT,false);
+        cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT,0);
+
+
+                /*
+                *         Intent intent = new Intent(OptionsActivity.this, MainActivity.class);
+        intent.putExtra(CUALES_TOPICS, topicsChosen);
+        startActivity(intent);
+                * */
+
 
         //Inicialización de las preguntas, recaudar la información de otros activities
         MainActivityViewModel model = new MainActivityViewModel();
@@ -65,26 +94,26 @@ public class Activity3 extends AppCompatActivity {
 
 
         //Llenado de las preguntas por tópico
-        questionsToShow.addAll(model.questionsByTopicRandom(questionsQuantity,topicsToAsk));
+        questionsToShow.addAll(model.questionsByTopicRandom(questionsQuantity, topicsToAsk));
         Questions[] questionsToShowSaved = new Questions[questionsToShow.toArray().length];
         questionsToShow.toArray(questionsToShowSaved);
 
         Answers[][] answersToShow = new Answers[questionsQuantity][difficult];
 
         //Llenado de respuestas a mostrar aleatoriamente.- Te aseguras que esté la respuesta correcta
-        for(int i = 0; i<questionsQuantity;i++){
+        for (int i = 0; i < questionsQuantity; i++) {
             List<Answers> fakeAnswers = new ArrayList<>();
             //Agregamos las respuestas falsas
             fakeAnswers.add(questionsToShowSaved[i].getFakeAnswer1());
             fakeAnswers.add(questionsToShowSaved[i].getFakeAnswer2());
             fakeAnswers.add(questionsToShowSaved[i].getFakeAnswer3());
-            for (int d =0;d<difficult;d++){
-                if(d ==0)
-                answersToShow[i][d] = questionsToShowSaved[i].getCorrectAnswer();
-                else{
+            for (int d = 0; d < difficult; d++) {
+                if (d == 0)
+                    answersToShow[i][d] = questionsToShowSaved[i].getCorrectAnswer();
+                else {
                     Random rand = new Random();
                     int aleatorio = rand.nextInt(fakeAnswers.size());
-                    answersToShow[i][d]= fakeAnswers.get(aleatorio);
+                    answersToShow[i][d] = fakeAnswers.get(aleatorio);
                     fakeAnswers.remove(aleatorio);
                 }
             }
@@ -93,16 +122,16 @@ public class Activity3 extends AppCompatActivity {
         //Respuestas aleatorias
         Answers[][] answersToShowSaved = new Answers[questionsQuantity][difficult];
 
-        for(int i = 0; i<questionsQuantity;i++){
+        for (int i = 0; i < questionsQuantity; i++) {
             List<Answers> auxAns = new ArrayList<>();
-            for (int h = 0; h < difficult; h++){
+            for (int h = 0; h < difficult; h++) {
                 auxAns.add(answersToShow[i][h]);
             }
-            for (int d =0;d<difficult;d++){
-                    Random rand = new Random();
-                    int aleatorio = rand.nextInt(auxAns.size());
-                    answersToShowSaved[i][d]= auxAns.get(aleatorio);
-                    auxAns.remove(aleatorio);
+            for (int d = 0; d < difficult; d++) {
+                Random rand = new Random();
+                int aleatorio = rand.nextInt(auxAns.size());
+                answersToShowSaved[i][d] = auxAns.get(aleatorio);
+                auxAns.remove(aleatorio);
             }
         }
 
@@ -111,7 +140,7 @@ public class Activity3 extends AppCompatActivity {
         questionsText.setText(questionsToShowSaved[questionCurrent].getQuestionText());
 
         //Hay que hacer que se repita cuando se presiona un botón
-        switch (difficult){
+        switch (difficult) {
             case 2:
                 respuesta01.setText(answersToShowSaved[questionCurrent][0].getAnswerText());
                 respuesta02.setText(answersToShowSaved[questionCurrent][1].getAnswerText());
@@ -136,13 +165,12 @@ public class Activity3 extends AppCompatActivity {
         }
 
 
-
         //Cambiar de pregunta
 
         //Habilitar o deshabilitar el contador de trampas
-        if(cheatsEnable){
+        if (cheatsEnable) {
             cheatsCounter.setText(String.valueOf(cheatsQuantity));
-        }else{
+        } else {
             cheatsCounter.setEnabled(false);
             cheatsCounter.setVisibility(View.INVISIBLE);
         }

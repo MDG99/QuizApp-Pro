@@ -15,6 +15,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/questionsQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
@@ -28,6 +29,7 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/cheatsQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
@@ -38,7 +40,7 @@
             android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/cheatsImageView"
             android:layout_width="25sp"
             android:layout_height="25sp"
             android:layout_marginTop="19sp"
@@ -63,6 +65,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/questionText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20sp"
@@ -80,27 +83,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="4"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_weight="4">
+            android:orientation="horizontal">
 
             <Button
+                android:id="@+id/prevButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
-                android:text="Prev"/>
+                android:text="Prev" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Elige la opción correcta"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="12sp"
-                android:layout_weight="1"/>
+                android:text="Elige la opción correcta"
+                android:textSize="12sp" />
+
             <Button
+                android:id="@+id/nextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20sp"
-                android:text="Next"/>
+                android:text="Next" />
 
         </LinearLayout>
 
@@ -115,6 +122,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/respuesta01"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30sp"
@@ -126,6 +134,7 @@
             android:textColor="#FFFFFF" />
 
         <Button
+            android:id="@+id/respuesta02"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30sp"
@@ -138,6 +147,7 @@
             android:textColor="#FFFFFF" />
 
         <Button
+            android:id="@+id/respuesta03"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30sp"
@@ -150,6 +160,7 @@
             android:textColor="#FFFFFF" />
 
         <Button
+            android:id="@+id/respuesta04"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30sp"

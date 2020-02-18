@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "LA APP CRASHEA", Toast.LENGTH_SHORT).show();
-                /*Intent intent = new Intent(MainActivity.this, Activity3.class);
+                Intent intent = new Intent(MainActivity.this, Activity3.class);
                 intent.putExtra(CUALES_TOPICS, topicsChosen);
                 intent.putExtra(NO_PREGUNTAS, cuantasPreguntas);
                 intent.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
                 intent.putExtra(ENABLE_PISTAS, enabledPistas);
                 intent.putExtra(NO_PISTAS, cuantasPistas);
-                startActivity(intent);*/
+                startActivity(intent);
 
             }
         });
