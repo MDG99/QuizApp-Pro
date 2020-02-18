@@ -33,7 +33,7 @@ public class Activity3 extends AppCompatActivity {
     private Button respuesta02;
     private Button respuesta03;
     private Button respuesta04;
-    private Button[] respuestas;
+    private Button[][] respuestas;
 
 
     private int difficult;
@@ -47,6 +47,7 @@ public class Activity3 extends AppCompatActivity {
 
     private boolean cheatsEnable;
     private boolean cheatRecorder = false;
+    private boolean cheatsFollowerEnable[];
 
     //Nombres de los Intents de donde se recaudará información del OptionsActivity
     public static final String DIFFICULT_INTENT = "DIFICULTAD_PUNTOS";
@@ -59,6 +60,7 @@ public class Activity3 extends AppCompatActivity {
     private Questions[] questionsToShowSaved;
 
     private Answers[][] answersToShowSaved;
+    private Answers[][] answersToShow;
 
 
     @Override
@@ -180,15 +182,21 @@ public class Activity3 extends AppCompatActivity {
             }
         });
 
+        //Estoy deshabilitando todos los botones, para que ya no puedas volver a dar click
+        //Pero la respuesta se guarda
+
         respuesta01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(AnswerChecker(0)){
-                    respuesta01.setTextColor("blue"); //Ver formato de colores
+                    respuestas[currentQuestion][0].setTextColor(0x0000ff);
                     BotonesRespuestaDeshabilitacion(difficult,0);
+                    NotEnableButtons();
+
                 }else{
-                    respuesta01.setTextColor("red"); //Ver formato de colores
+                    respuestas[currentQuestion][0].setTextColor(0xff0000);
                     BotonesRespuestaDeshabilitacion(difficult,0);
+                    NotEnableButtons();
                 }
             }
         });
@@ -197,11 +205,13 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(AnswerChecker(0)){
-                    respuesta02.setTextColor("blue"); //Ver formato de colores
+                    respuestas[currentQuestion][1].setTextColor(0x0000ff);
                     BotonesRespuestaDeshabilitacion(difficult,0);
+                    NotEnableButtons();
                 }else{
-                    respuesta02.setTextColor("red"); //Ver formato de colores
+                    respuestas[currentQuestion][1].setTextColor(0xff0000);
                     BotonesRespuestaDeshabilitacion(difficult,0);
+                    NotEnableButtons();
                 }
             }
         });
@@ -210,11 +220,13 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(AnswerChecker(0)){
-                    respuesta03.setTextColor("blue"); //Ver formato de colores
+                    respuestas[currentQuestion][2].setTextColor(0x0000ff);
                     BotonesRespuestaDeshabilitacion(difficult,0);
+                    NotEnableButtons();
                 }else{
-                    respuesta03.setTextColor("red"); //Ver formato de colores
+                    respuestas[currentQuestion][2].setTextColor(0xff0000);
                     BotonesRespuestaDeshabilitacion(difficult,0);
+                    NotEnableButtons();
                 }
             }
         });
@@ -223,11 +235,13 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(AnswerChecker(0)){
-                    respuesta04.setTextColor("blue"); //Ver formato de colores
+                    respuestas[currentQuestion][3].setTextColor(0x0000ff);
                     BotonesRespuestaDeshabilitacion(difficult,0);
+                    NotEnableButtons();
                 }else{
-                    respuesta04.setTextColor("red"); //Ver formato de colores
+                    respuestas[currentQuestion][3].setTextColor(0xff0000);
                     BotonesRespuestaDeshabilitacion(difficult,0);
+                    NotEnableButtons();
                 }
             }
         });
@@ -241,13 +255,14 @@ public class Activity3 extends AppCompatActivity {
 
         //Guardado de la partida
 
-        //Enviar información al siguiente activity
+        //Enviar información al siguiente activity: Puntaje, si hizo trampa y todas las respuestas
 
 
     }
 
     public void DesplegarPregunta_Respuestas(int current) {
 
+        //Esta mal
         questionsText.setText(questionsToShowSaved[current].getQuestionText());
 
         switch (difficult) {
@@ -290,7 +305,7 @@ public class Activity3 extends AppCompatActivity {
     }
 
     public void BotonTrampa(int indice) {
-        respuestas[indice].setEnabled(false);
+        respuestas[currentQuestion][indice].setEnabled(false);
     }
 
     public void CheatsDeshabilitador(boolean cheats, int quantity) {
@@ -322,13 +337,19 @@ public class Activity3 extends AppCompatActivity {
         respuesta04.setEnabled(false);
         respuesta04.setVisibility(View.INVISIBLE);
 
-        respuestas = new Button[]{respuesta01, respuesta02, respuesta03, respuesta04};
+        respuestas = new Button[questionsQuantity][4];
+        for(int i = 0; i<questionsQuantity;i++){
+            respuestas[i][0]=respuesta01;
+            respuestas[i][1]=respuesta02;
+            respuestas[i][2]=respuesta03;
+            respuestas[i][3]=respuesta04;
+        }
     }
 
     public void HabilitacionBotones(int quantity) {
         for (int i = 0; i < quantity; i++) {
-            respuestas[i].setEnabled(true);
-            respuestas[i].setVisibility(View.VISIBLE);
+            respuestas[currentQuestion][i].setEnabled(true);
+            respuestas[currentQuestion][i].setVisibility(View.VISIBLE);
         }
     }
 
@@ -336,7 +357,7 @@ public class Activity3 extends AppCompatActivity {
     public void BotonesRespuestaDeshabilitacion(int quantity, int aux) {
         for (int i = 0; i < quantity; i++) {
             if(i!=aux){
-                respuestas[i].setEnabled(true);
+                respuestas[currentQuestion][i].setEnabled(true);
             }
         }
     }
@@ -346,9 +367,9 @@ public class Activity3 extends AppCompatActivity {
         boolean finish = true;
         while (finish) {
             int aleatorio = rand.nextInt(respuestas.length) - 1;
-            if (respuestas[aleatorio].isEnabled()) {
-                if (respuestas[aleatorio].getText() != answersToShowSaved[currentQuestion][0].getAnswerText()) {
-                    respuestas[aleatorio].setEnabled(false);
+            if (respuestas[currentQuestion][aleatorio].isEnabled()) {
+                if (respuestas[currentQuestion][aleatorio].getText() != answersToShow[currentQuestion][0].getAnswerText()) {
+                    respuestas[currentQuestion][aleatorio].setEnabled(false);
                     finish = false;
                 }
 
@@ -358,11 +379,17 @@ public class Activity3 extends AppCompatActivity {
 
     public boolean AnswerChecker(int i) {
         boolean a;
-        if (respuestas[i].getText() == answersToShowSaved[currentQuestion][0].getAnswerText())
+        if (respuestas[currentQuestion][i].getText() == answersToShow[currentQuestion][0].getAnswerText())
             a = true;
         else
             a = false;
         return a;
+    }
+
+    public void NotEnableButtons(){
+        for(int h = 0; h<=3;h++){
+            if(respuestas[currentQuestion][h].isEnabled());
+        }
     }
 
 }
