@@ -80,8 +80,8 @@ public class Activity3 extends AppCompatActivity {
 
         Intent intent = getIntent();
         difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
-        //questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60); //Me da valores de 0 o 1
-        questionsQuantity = 20;
+        questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60); //Me da valores de 0 o 1
+        //questionsQuantity = 20;
         cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false); //Correcto
         cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
         //topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
@@ -89,6 +89,8 @@ public class Activity3 extends AppCompatActivity {
         topicsToAsk[0] = 0;
         topicsToAsk[1] = 1;
         topicsToAsk[2] = 2;
+
+        Toast.makeText(Activity3.this, Integer.toString(difficult), Toast.LENGTH_SHORT).show();
 
 
         //Inicialización de las preguntas, recaudar la información de otros activities
