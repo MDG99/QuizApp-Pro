@@ -201,6 +201,9 @@ public class OptionsActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         pistaBoolean = pistaSwitch.isChecked();
+        if (!pistaBoolean) {
+            pistasCuantas = 0;
+        }
 
         Intent intent = new Intent(OptionsActivity.this, MainActivity.class);
         intent.putExtra(CUALES_TOPICS, ArregloTemasId(topicsChosen));
