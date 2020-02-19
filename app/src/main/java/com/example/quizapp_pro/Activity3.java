@@ -155,6 +155,8 @@ public class Activity3 extends AppCompatActivity {
         InicializacionBotones();
         HabilitacionBotones(difficult);
         CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
+        questionsText.setText(questionsToShowSaved[questionCurrent].getQuestionText());
+
         //DesplegarPregunta_Respuestas(questionCurrent);
 /*
         nextButton.setOnClickListener(new View.OnClickListener() {
