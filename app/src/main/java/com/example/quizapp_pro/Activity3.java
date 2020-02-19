@@ -77,6 +77,7 @@ public class Activity3 extends AppCompatActivity {
         respuesta04 = findViewById(R.id.respuesta04);
         prevButton = findViewById(R.id.prevButton);
         nextButton = findViewById(R.id.nextButton);
+        cheatsImage = findViewById(R.id.cheatsImageView);
 
         Intent intent = getIntent();
         difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
@@ -327,10 +328,12 @@ public class Activity3 extends AppCompatActivity {
 */
 
     public void CheatsDeshabilitador(boolean cheats, int quantity) {
-        //if (!cheats) {
-        //cheatsImage.setEnabled(false);
-        //  cheatsFollower.setEnabled(false);
-        //} else
+        if (!cheats) {
+        cheatsImage.setEnabled(false);
+        cheatsImage.setVisibility(View.INVISIBLE);
+          cheatsFollower.setEnabled(false);
+          cheatsFollower.setVisibility(View.INVISIBLE);
+        } else
         ShowCheatsQuantity(quantity);
     }
 
