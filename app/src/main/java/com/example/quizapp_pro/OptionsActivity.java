@@ -30,6 +30,7 @@ public class OptionsActivity extends AppCompatActivity {
     private RadioButton btnMedio;
     private RadioButton btnDificil;
     private Switch pistaSwitch;
+    private boolean pistaBoolean = false;
     private Spinner pistasSpinner;
     private Topics[] topicsArray;
     private boolean[] topicsChosen;
@@ -88,8 +89,23 @@ public class OptionsActivity extends AppCompatActivity {
                     i++;
                 }
 
+
             }
         };
+
+        chkTodos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    chkArte.setChecked(true);
+                    chkGeografia.setChecked(true);
+                    chkFrases.setChecked(true);
+                    chkVideojuegos.setChecked(true);
+                    chkHistoria.setChecked(true);
+                    chkCultura.setChecked(true);
+                }
+            }
+        });
 
         chkArte.setOnCheckedChangeListener(chkListener);
         chkGeografia.setOnCheckedChangeListener(chkListener);
@@ -184,12 +200,13 @@ public class OptionsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+        pistaBoolean = pistaSwitch.isChecked();
 
         Intent intent = new Intent(OptionsActivity.this, MainActivity.class);
         intent.putExtra(CUALES_TOPICS, ArregloTemasId(topicsChosen));
         intent.putExtra(NO_PREGUNTAS, preguntasCuantas);
         intent.putExtra(DIFICULTAD_PUNTOS, dificultad);
-        intent.putExtra(ENABLE_PISTAS, pistaSwitch.isChecked());
+        intent.putExtra(ENABLE_PISTAS, pistaBoolean);
         intent.putExtra(NO_PISTAS, pistasCuantas);
         startActivity(intent);
     }

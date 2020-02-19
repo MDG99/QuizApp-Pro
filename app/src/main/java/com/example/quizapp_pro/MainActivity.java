@@ -55,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
         btnConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (getIntent().getExtras() != null) {
+                    topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
+                    cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
+                    dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
+                    enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
+                    cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
+                }
+
                 Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
                 startActivity(intent);
 
