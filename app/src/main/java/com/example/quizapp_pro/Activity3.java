@@ -37,10 +37,9 @@ public class Activity3 extends AppCompatActivity {
 
 
     private int difficult;
-    private int currentQuestion;
+    private int currentQuestion = 0;
     private int questionsQuantity;
     private int questionsForTopic;
-    int questionCurrent = 0;
     private int residueQuestionsForTopic;
     private int cheatsQuantity;
     private int[] topicsToAsk;
@@ -82,7 +81,6 @@ public class Activity3 extends AppCompatActivity {
         Intent intent = getIntent();
         difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
         questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60); //Me da valores de 0 o 1
-        //questionsQuantity = 20;
         cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false); //Correcto
         cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
         //topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
@@ -90,8 +88,6 @@ public class Activity3 extends AppCompatActivity {
         topicsToAsk[0] = 0;
         topicsToAsk[1] = 1;
         topicsToAsk[2] = 2;
-
-        Toast.makeText(Activity3.this, Integer.toString(difficult), Toast.LENGTH_SHORT).show();
 
 
         //Inicialización de las preguntas, recaudar la información de otros activities
@@ -103,10 +99,8 @@ public class Activity3 extends AppCompatActivity {
 
         questionsToShow = new ArrayList<>();
         questionsToShow.addAll(model.questionsByTopicRandom(questionsQuantity, topicsToAsk));
-        Questions[] questionsToShowSaved = new Questions[questionsToShow.toArray().length];
+        questionsToShowSaved = new Questions[questionsQuantity];
         questionsToShow.toArray(questionsToShowSaved);
-        Toast.makeText(Activity3.this, questionsToShowSaved[0].getQuestionText(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(Activity3.this, Integer.toString(questionsToShowSaved.length), Toast.LENGTH_SHORT).show();
 
 
         Answers[][] answersToShow = new Answers[questionsQuantity][difficult];
@@ -151,32 +145,34 @@ public class Activity3 extends AppCompatActivity {
 
         //Desplegar preguntas con sus debidas respuestas de manera aleatoria Tienes las que se van a mostrar, hay que cambiar el orden
 
-        ShowQuestionsFollower(questionCurrent);
+        ShowQuestionsFollower(currentQuestion);
         InicializacionBotones();
         HabilitacionBotones(difficult);
         CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
-        questionsText.setText(questionsToShowSaved[questionCurrent].getQuestionText());
+        questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
 
         //DesplegarPregunta_Respuestas(questionCurrent);
-/*
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questionCurrent = NextQuestionIndex(questionCurrent);
-                ShowQuestionsFollower(questionCurrent);
-                DesplegarPregunta_Respuestas(questionCurrent);
+                NextQuestionIndex();
+                ShowQuestionsFollower(currentQuestion);
+                questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
+                //DesplegarPregunta_Respuestas(questionCurrent);
             }
         });
 
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                questionCurrent = PrevQuestionIndex(questionCurrent);
-                ShowQuestionsFollower(questionCurrent);
-                DesplegarPregunta_Respuestas(questionCurrent);
+                PrevQuestionIndex();
+                ShowQuestionsFollower(currentQuestion);
+                questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
+                //DesplegarPregunta_Respuestas(questionCurrent);
             }
         });
-
+/*
         cheatsFollower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -276,27 +272,20 @@ public class Activity3 extends AppCompatActivity {
 
     }
 */
-/*
-    public void DesplegarPregunta_Respuestas(int current) {
 
-        //Esta mal
-        questionsText.setText(questionsToShowSaved[current].getQuestionText());
+    public void DesplegarPregunta_Respuestas(int current) {
 
         switch (difficult) {
             case 2:
                 respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
                 respuesta02.setText(answersToShowSaved[current][1].getAnswerText());
-                respuesta03.setEnabled(false);
-                respuesta03.setVisibility(View.INVISIBLE);
-                respuesta04.setEnabled(false);
-                respuesta04.setVisibility(View.INVISIBLE);
+
                 break;
             case 3:
                 respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
                 respuesta02.setText(answersToShowSaved[current][1].getAnswerText());
                 respuesta03.setText(answersToShowSaved[current][2].getAnswerText());
-                respuesta04.setEnabled(false);
-                respuesta04.setVisibility(View.INVISIBLE);
+
                 break;
             case 4:
                 respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
@@ -306,23 +295,16 @@ public class Activity3 extends AppCompatActivity {
                 break;
         }
     }
-*/
-/*
-    public int NextQuestionIndex(int current) {
-        if (current == questionsQuantity - 1)
-            return 0;
-        else
-            return current++;
-    }
-*/
-/*    public int PrevQuestionIndex(int current) {
-        if (current == 0)
-            return questionsQuantity - 1;
-        else
-            return current--;
+
+
+    public void NextQuestionIndex() {
+        currentQuestion = (currentQuestion + 1) % questionsQuantity;
     }
 
- */
+    public void PrevQuestionIndex() {
+        currentQuestion = (currentQuestion + questionsQuantity - 1) % questionsQuantity;
+    }
+
 /*
     public void BotonTrampa(int indice) {
         respuestas[currentQuestion][indice].setEnabled(false);
@@ -331,12 +313,12 @@ public class Activity3 extends AppCompatActivity {
 
     public void CheatsDeshabilitador(boolean cheats, int quantity) {
         if (!cheats) {
-        cheatsImage.setEnabled(false);
-        cheatsImage.setVisibility(View.INVISIBLE);
-          cheatsFollower.setEnabled(false);
-          cheatsFollower.setVisibility(View.INVISIBLE);
+            cheatsImage.setEnabled(false);
+            cheatsImage.setVisibility(View.INVISIBLE);
+            cheatsFollower.setEnabled(false);
+            cheatsFollower.setVisibility(View.INVISIBLE);
         } else
-        ShowCheatsQuantity(quantity);
+            ShowCheatsQuantity(quantity);
     }
 
     public void ShowQuestionsFollower(int c) {
