@@ -76,7 +76,7 @@ public class Activity3 extends AppCompatActivity {
         respuesta04 = findViewById(R.id.respuesta04);
         prevButton = findViewById(R.id.prevButton);
         nextButton = findViewById(R.id.nextButton);
-        cheatsImage = findViewById(R.id.cheatsImageView);
+        cheatsImage = findViewById(R.id.cheatsImageView); //Habrá que quitar esto :v
 
         Intent intent = getIntent();
         difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto

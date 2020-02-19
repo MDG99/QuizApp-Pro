@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.3"
+        android:background="@drawable/fondo_abajo"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.15" />
+
+        <Button
+            android:id="@+id/respuesta01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="2sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
+            android:layout_weight="1"
+            android:background="@drawable/respuesta"
+            android:text="Respuesta 1"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/respuesta02"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
+            android:layout_weight="1"
+            android:background="@drawable/respuesta"
+            android:text="Respuesta 2"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/respuesta03"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
+            android:layout_weight="1"
+            android:background="@drawable/respuesta"
+            android:text="Respuesta 3"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/respuesta04"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
+            android:layout_weight="1"
+            android:background="@drawable/respuesta"
+            android:text="Respuesta 4"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.15" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="80sp"
+            android:layout_marginRight="8sp"
+            android:layout_marginBottom="80sp"
+            android:layout_weight="1"
+            android:background="@drawable/rectangulo1"
+            android:gravity="center"
+            android:padding="20sp"
+            android:text="¿Quién dijo: “El sabio no dice nunca todo lo que piensa, pero siempre piensa todo lo que dice”?"
+            android:textColor="#474747"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2sp"
+            android:layout_weight="2.5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/prevButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72sp"
+                android:layout_marginRight="2sp"
+                android:text="Prev"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Elige la respuesta correcta"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2sp"
+                android:layout_marginBottom="72sp"
+                android:text="NEXT"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="8sp"
+        android:layout_height="match_parent"
+        android:background="@drawable/detalle1"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/rectangulo1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/questionsQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25sp"
+            android:layout_marginTop="45sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginBottom="20sp"
+            android:gravity="center"
+            android:text="1/60"
+            android:textColor="#26A69A"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/cheatsQuantity"
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15sp"
+            android:layout_marginBottom="60sp"
+            android:background="@drawable/rectangulo1"
+            android:drawableRight="@drawable/key4"
+            android:paddingRight="5sp"
+            android:text="5"
+            android:textColor="#26A69A"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

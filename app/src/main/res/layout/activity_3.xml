@@ -28,25 +28,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <TextView
+        <Button
             android:id="@+id/cheatsQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
-            android:layout_marginRight="5sp"
+            android:layout_marginRight="20sp"
             android:layout_marginBottom="20sp"
+            android:background="@drawable/rectangulo1"
+            android:drawableRight="@drawable/key4"
+            android:paddingLeft="20sp"
+            android:paddingRight="20sp"
             android:text="5"
             android:textColor="#26A69A"
             android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/cheatsImageView"
-            android:layout_width="25sp"
-            android:layout_height="25sp"
-            android:layout_marginTop="19sp"
-            android:layout_marginRight="20sp"
-            android:layout_marginBottom="20sp"
-            app:srcCompat="@drawable/key1" />
 
     </LinearLayout>
 
@@ -121,6 +116,11 @@
         android:background="@drawable/fondo_abajo"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.25" />
+
         <Button
             android:id="@+id/respuesta01"
             android:layout_width="match_parent"
@@ -170,6 +170,11 @@
             android:background="@drawable/respuesta"
             android:text="Respuesta 4"
             android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2" />
 
     </LinearLayout>
 
