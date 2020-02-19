@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "LA APP CRASHEA", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "LA APP CRASHEA", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, Activity3.class);
                 intent.putExtra(CUALES_TOPICS, topicsChosen);
                 intent.putExtra(NO_PREGUNTAS, cuantasPreguntas);

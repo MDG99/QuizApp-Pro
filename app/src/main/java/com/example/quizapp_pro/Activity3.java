@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,11 +80,16 @@ public class Activity3 extends AppCompatActivity {
         nextButton = findViewById(R.id.nextButton);
 
         Intent intent = getIntent();
-        difficult = intent.getIntExtra(DIFFICULT_INTENT, 4);
-        questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60);
-        cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false);
-        cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0);
-        topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
+        difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
+        //questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60); //Me da valores de 0 o 1
+        questionsQuantity = 20;
+        cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false); //Correcto
+        cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
+        //topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
+        topicsToAsk = new int[3];
+        topicsToAsk[0] = 0;
+        topicsToAsk[1] = 1;
+        topicsToAsk[2] = 2;
 
 
         //Inicialización de las preguntas, recaudar la información de otros activities
@@ -94,10 +100,18 @@ public class Activity3 extends AppCompatActivity {
 
         //#region Llenado de información Random
         //Llenado de las preguntas por tópico
+
+        //Toast.makeText(Activity3.this,model.questionsByTopicRandom(20,topicsToAsk).get(1).getQuestionText(), Toast.LENGTH_SHORT).show();
+        questionsToShow = new ArrayList<>();
         questionsToShow.addAll(model.questionsByTopicRandom(questionsQuantity, topicsToAsk));
         Questions[] questionsToShowSaved = new Questions[questionsToShow.toArray().length];
         questionsToShow.toArray(questionsToShowSaved);
+        Toast.makeText(Activity3.this, questionsToShowSaved[0].getQuestionText(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(Activity3.this, Integer.toString(questionsToShowSaved.length), Toast.LENGTH_SHORT).show();
 
+
+
+                /*
         Answers[][] answersToShow = new Answers[questionsQuantity][difficult];
 
         //Llenado de respuestas a mostrar aleatoriamente.- Te aseguras que esté la respuesta correcta
@@ -393,3 +407,8 @@ public class Activity3 extends AppCompatActivity {
     }
 
 }
+
+*/
+    }
+}
+
