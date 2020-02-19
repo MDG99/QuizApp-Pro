@@ -327,11 +327,11 @@ public class Activity3 extends AppCompatActivity {
 */
 
     public void CheatsDeshabilitador(boolean cheats, int quantity) {
-        //if (!cheats) {
-        //cheatsImage.setEnabled(false);
-        //  cheatsFollower.setEnabled(false);
-        //} else
-        ShowCheatsQuantity(quantity);
+        if (!cheats) {
+            cheatsImage.setEnabled(false);
+            cheatsFollower.setEnabled(false);
+        } else
+            ShowCheatsQuantity(quantity);
     }
 
     public void ShowQuestionsFollower(int c) {
