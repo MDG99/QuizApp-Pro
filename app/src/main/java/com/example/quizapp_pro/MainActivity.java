@@ -15,10 +15,10 @@ public class MainActivity extends AppCompatActivity {
     private Button btnPoints;
     private Button btnMusic;
     private int[] topicsChosen;
-    private int cuantasPreguntas;
-    private int dificultadPuntos;
-    private boolean enabledPistas;
-    private int cuantasPistas;
+    private int cuantasPreguntas = 5;
+    private int dificultadPuntos = 2;
+    private boolean enabledPistas = false;
+    private int cuantasPistas = 0;
     private final String CUALES_TOPICS = "CUALES_TOPICS";
     private final String NO_PREGUNTAS = "NO_PREGUNTAS";
     private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";

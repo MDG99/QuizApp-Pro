@@ -16,46 +16,46 @@ public class MainActivityViewModel {
 
                 //region Respuestas de arte
 
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", true),
-                new Answers("", false),
-                new Answers("", false),
-                new Answers("", false),
+                new Answers("Edvard Munch", true),
+                new Answers("Edvard Hopper", false),
+                new Answers("Rembrant", false),
+                new Answers("Remedios Varo", false),
+                new Answers("Felix Mendelssohn", true),
+                new Answers("Richard Wagner ", false),
+                new Answers("Amadeus Mozart", false),
+                new Answers("Beethoven", false),
+                new Answers("Vincent van Gogh", true),
+                new Answers("Pablo Picasso", false),
+                new Answers("Francisco de Goya", false),
+                new Answers("Claude Monet", false),
+                new Answers("Barroco", true),
+                new Answers("Clásico", false),
+                new Answers("Renacentista", false),
+                new Answers("Romántico", false),
+                new Answers("Julio Verne", true),
+                new Answers("Edgar Allan Poe", false),
+                new Answers("Alfred Hitchcock ", false),
+                new Answers("Johann Wolfgang von Goethe", false),
+                new Answers("Joseph Haydn", true),
+                new Answers("Wolfgang A. Mozart", false),
+                new Answers("Carl Philipp Emanuel Bach", false),
+                new Answers("Franz Schubert", false),
+                new Answers("Franz Kafka", true),
+                new Answers("Oscar Wilde", false),
+                new Answers("William Faulkner", false),
+                new Answers("James Joyce", false),
+                new Answers("Octavio Paz", true),
+                new Answers("Juan Rulfo", false),
+                new Answers("Carlos Fuentes", false),
+                new Answers("Sor Juana Inés de la Cruz", false),
+                new Answers("Nezahualcóyotl", true),
+                new Answers("Tizoc", false),
+                new Answers("Cuāuhtemōc", false),
+                new Answers("Xoximilco", false),
+                new Answers("Richard Wagner", true),
+                new Answers("Giuseppe Verdi", false),
+                new Answers("Gioachino Rossin", false),
+                new Answers("Giacomo Puccini", false),
                 //endregion
 
                 //region Respuestas de geografía
@@ -462,7 +462,6 @@ public class MainActivityViewModel {
     }
 
 
-
     public List<Questions> questionsByTopicRandom(int questionsQuantity, int topicsid[]) {
 
         List<Questions> questionRandom = new ArrayList<>();
@@ -483,8 +482,8 @@ public class MainActivityViewModel {
         }
 
         //Temas ordenados, preguntas random, YA FILTRADO
-        for(int x = 0; x < topicsid.length; x++){
-            aux.addAll(RandomList(QuestionsByTopic(topicsid[x]),questionByTopic[x]));
+        for (int x = 0; x < topicsid.length; x++) {
+            aux.addAll(RandomList(QuestionsByTopic(topicsid[x]), questionByTopic[x]));
 
         }
 
