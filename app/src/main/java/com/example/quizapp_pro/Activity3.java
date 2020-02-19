@@ -97,12 +97,9 @@ public class Activity3 extends AppCompatActivity {
         MainActivityViewModel model = new MainActivityViewModel();
 
 
-        //ANSWERSTOSHOWSAVED NO ESTÁ EN RANDOM, ESTO ES BUENO, PUES PERMITE LA VALIDACIÓN DE LA RESPUESTA
-
         //#region Llenado de información Random
         //Llenado de las preguntas por tópico
 
-        //Toast.makeText(Activity3.this,model.questionsByTopicRandom(20,topicsToAsk).get(1).getQuestionText(), Toast.LENGTH_SHORT).show();
         questionsToShow = new ArrayList<>();
         questionsToShow.addAll(model.questionsByTopicRandom(questionsQuantity, topicsToAsk));
         Questions[] questionsToShowSaved = new Questions[questionsToShow.toArray().length];
@@ -111,8 +108,6 @@ public class Activity3 extends AppCompatActivity {
         Toast.makeText(Activity3.this, Integer.toString(questionsToShowSaved.length), Toast.LENGTH_SHORT).show();
 
 
-
-                /*
         Answers[][] answersToShow = new Answers[questionsQuantity][difficult];
 
         //Llenado de respuestas a mostrar aleatoriamente.- Te aseguras que esté la respuesta correcta
@@ -133,6 +128,7 @@ public class Activity3 extends AppCompatActivity {
                 }
             }
         }
+
 
         //Respuestas aleatorias
         final Answers[][] answersToShowSaved = new Answers[questionsQuantity][difficult];
@@ -158,8 +154,8 @@ public class Activity3 extends AppCompatActivity {
         InicializacionBotones();
         HabilitacionBotones(difficult);
         CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
-        DesplegarPregunta_Respuestas(questionCurrent);
-
+        //DesplegarPregunta_Respuestas(questionCurrent);
+/*
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,7 +257,9 @@ public class Activity3 extends AppCompatActivity {
             }
         });
 
-
+*/
+    }
+/*
         //Mensaje al salir sin terminar la partida: SnackBar
 
         //Acción al presionar back();
@@ -274,7 +272,8 @@ public class Activity3 extends AppCompatActivity {
 
 
     }
-
+*/
+/*
     public void DesplegarPregunta_Respuestas(int current) {
 
         //Esta mal
@@ -304,24 +303,28 @@ public class Activity3 extends AppCompatActivity {
                 break;
         }
     }
-
+*/
+/*
     public int NextQuestionIndex(int current) {
         if (current == questionsQuantity - 1)
             return 0;
         else
             return current++;
     }
-
-    public int PrevQuestionIndex(int current) {
+*/
+/*    public int PrevQuestionIndex(int current) {
         if (current == 0)
             return questionsQuantity - 1;
         else
             return current--;
     }
 
+ */
+/*
     public void BotonTrampa(int indice) {
         respuestas[currentQuestion][indice].setEnabled(false);
     }
+*/
 
     public void CheatsDeshabilitador(boolean cheats, int quantity) {
         if (!cheats) {
@@ -331,8 +334,8 @@ public class Activity3 extends AppCompatActivity {
             ShowCheatsQuantity(quantity);
     }
 
-    public void ShowQuestionsFollower(int current) {
-        String Contador = Integer.toString(current + 1) + "/" + Integer.toString(questionsQuantity);
+    public void ShowQuestionsFollower(int c) {
+        String Contador = Integer.toString(c + 1) + "/" + Integer.toString(questionsQuantity);
         questionsFollower.setText(Contador);
     }
 
@@ -341,6 +344,7 @@ public class Activity3 extends AppCompatActivity {
         if (cheatsQuantity == 0)
             cheatsFollower.setEnabled(false);
     }
+
 
     public void InicializacionBotones() {
         respuesta01.setEnabled(false);
@@ -361,6 +365,7 @@ public class Activity3 extends AppCompatActivity {
         }
     }
 
+
     public void HabilitacionBotones(int quantity) {
         for (int i = 0; i < quantity; i++) {
             respuestas[currentQuestion][i].setEnabled(true);
@@ -368,7 +373,7 @@ public class Activity3 extends AppCompatActivity {
         }
     }
 
-
+/*
     public void BotonesRespuestaDeshabilitacion(int quantity, int aux) {
         for (int i = 0; i < quantity; i++) {
             if (i != aux) {
@@ -376,7 +381,8 @@ public class Activity3 extends AppCompatActivity {
             }
         }
     }
-
+*/
+/*
     public void Trampa() {
         Random rand = new Random();
         boolean finish = true;
@@ -391,7 +397,8 @@ public class Activity3 extends AppCompatActivity {
             }
         }
     }
-
+*/
+/*
     public boolean AnswerChecker(int i) {
         boolean a;
         if (respuestas[currentQuestion][i].getText() == answersToShow[currentQuestion][0].getAnswerText())
@@ -400,16 +407,15 @@ public class Activity3 extends AppCompatActivity {
             a = false;
         return a;
     }
-
+*/
+/*
     public void NotEnableButtons() {
         for (int h = 0; h <= 3; h++) {
             if (respuestas[currentQuestion][h].isEnabled()) ;
         }
     }
-
-}
-
 */
-    }
 }
+
+
 
