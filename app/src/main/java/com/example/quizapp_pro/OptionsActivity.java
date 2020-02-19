@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OptionsActivity extends AppCompatActivity {
 
     private CheckBox chkTodos;
@@ -181,12 +184,34 @@ public class OptionsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+
         Intent intent = new Intent(OptionsActivity.this, MainActivity.class);
-        intent.putExtra(CUALES_TOPICS, topicsChosen);
+        intent.putExtra(CUALES_TOPICS, ArregloTemasId(topicsChosen));
         intent.putExtra(NO_PREGUNTAS, preguntasCuantas);
         intent.putExtra(DIFICULTAD_PUNTOS, dificultad);
         intent.putExtra(ENABLE_PISTAS, pistaSwitch.isChecked());
         intent.putExtra(NO_PISTAS, pistasCuantas);
         startActivity(intent);
     }
+
+    public int[] ArregloTemasId(boolean[] b) {
+        List<Integer> list = new ArrayList<>();
+        int i = 0;
+        for (boolean x : b) {
+            if (x == true) {
+                list.add(i);
+            }
+            i++;
+        }
+
+
+        int[] arreglo = new int[i - 1];
+        int i2 = 0;
+        for (Integer y : list) {
+            arreglo[i2] = list.get(i2);
+            i2++;
+        }
+        return arreglo;
+    }
 }
+
