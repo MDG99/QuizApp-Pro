@@ -24,11 +24,13 @@ public class MainActivity extends AppCompatActivity {
     private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";
     private final String ENABLE_PISTAS = "ENABLE_PISTAS";
     private final String NO_PISTAS = "NO_PISTAS";
+    //private MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         btnPlay = findViewById(R.id.play_button);
         btnConfig = findViewById(R.id.options_button);
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         btnMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(MainActivity.this, Activity5Music.class);
                 startActivity(intent);
 

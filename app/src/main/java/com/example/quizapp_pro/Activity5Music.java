@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ public class Activity5Music extends AppCompatActivity {
 
     private Button BtnTrivia;
     private Button BtnRock;
-    private Button BtnClascia;
+    private Button BtnClasica;
     private Button BtnGeneral;
     private ImageView ImgTrvia;
     private ImageView ImgRock;
@@ -47,7 +48,7 @@ public class Activity5Music extends AppCompatActivity {
         player4 = MediaPlayer.create(Activity5Music.this, R.raw.clasicademo);
 
         BtnTrivia = findViewById(R.id.btnTrvia);
-        BtnClascia = findViewById(R.id.btnClasica);
+        BtnClasica = findViewById(R.id.btnClasica);
         BtnRock = findViewById(R.id.btnRock);
         BtnGeneral = findViewById(R.id.btnGeneral);
         BtnExit = findViewById(R.id.btnExit);
@@ -59,6 +60,7 @@ public class Activity5Music extends AppCompatActivity {
 
         BtnExit.getBackground().setAlpha(60);
 
+
         BtnTrivia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,11 +69,11 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnRock.setBackgroundResource(R.drawable.boton_redondo_musica);
                 BtnGeneral.setBackgroundResource(R.drawable.boton_redondo_musica);
-                BtnClascia.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnClasica.setBackgroundResource(R.drawable.boton_redondo_musica);
 
                 BtnRock.getBackground().setAlpha(60);
                 BtnGeneral.getBackground().setAlpha(60);
-                BtnClascia.getBackground().setAlpha(60);
+                BtnClasica.getBackground().setAlpha(60);
 
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("A darle");
@@ -81,7 +83,7 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnRock.setClickable(true);
                 BtnGeneral.setClickable(true);
-                BtnClascia.setClickable(true);
+                BtnClasica.setClickable(true);
 
 
                 if (player2.isPlaying()) {
@@ -109,11 +111,11 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnTrivia.setBackgroundResource(R.drawable.boton_redondo_musica);
                 BtnGeneral.setBackgroundResource(R.drawable.boton_redondo_musica);
-                BtnClascia.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnClasica.setBackgroundResource(R.drawable.boton_redondo_musica);
 
                 BtnTrivia.getBackground().setAlpha(60);
                 BtnGeneral.getBackground().setAlpha(60);
-                BtnClascia.getBackground().setAlpha(60);
+                BtnClasica.getBackground().setAlpha(60);
 
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("Demuestra quien es el que sabe");
@@ -123,7 +125,7 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnTrivia.setClickable(true);
                 BtnGeneral.setClickable(true);
-                BtnClascia.setClickable(true);
+                BtnClasica.setClickable(true);
 
                 if (player1.isPlaying()) {
                     player1.stop();
@@ -145,11 +147,11 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnTrivia.setBackgroundResource(R.drawable.boton_redondo_musica);
                 BtnRock.setBackgroundResource(R.drawable.boton_redondo_musica);
-                BtnClascia.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnClasica.setBackgroundResource(R.drawable.boton_redondo_musica);
 
                 BtnTrivia.getBackground().setAlpha(60);
                 BtnRock.getBackground().setAlpha(60);
-                BtnClascia.getBackground().setAlpha(60);
+                BtnClasica.getBackground().setAlpha(60);
 
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("Bueno... si es que el quieres...");
@@ -159,7 +161,7 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnTrivia.setClickable(true);
                 BtnRock.setClickable(true);
-                BtnClascia.setClickable(true);
+                BtnClasica.setClickable(true);
 
                 if (player1.isPlaying()) {
                     player1.stop();
@@ -174,10 +176,10 @@ public class Activity5Music extends AppCompatActivity {
             }
         });
 
-        BtnClascia.setOnClickListener(new View.OnClickListener() {
+        BtnClasica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BtnClascia.setBackgroundResource(R.drawable.opcionescogida4);
+                BtnClasica.setBackgroundResource(R.drawable.opcionescogida4);
                 Activity.setBackgroundResource(R.drawable.opcionescogidac);
 
                 BtnTrivia.setBackgroundResource(R.drawable.boton_redondo_musica);
@@ -192,7 +194,7 @@ public class Activity5Music extends AppCompatActivity {
                 BtnExit.setText("Levanta el meñique, Jaime");
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
-                BtnClascia.setClickable(false);
+                BtnClasica.setClickable(false);
 
                 BtnTrivia.setClickable(true);
                 BtnRock.setClickable(true);
@@ -209,7 +211,43 @@ public class Activity5Music extends AppCompatActivity {
                 animacion("bucle");
             }
         });
+        BtnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MediaPlayer playerX1 = MediaPlayer.create(Activity5Music.this, R.raw.trivia);
+                MediaPlayer playerX2 = MediaPlayer.create(Activity5Music.this, R.raw.rock);
+                MediaPlayer playerX3 = MediaPlayer.create(Activity5Music.this, R.raw.general);
+                MediaPlayer playerX4 = MediaPlayer.create(Activity5Music.this, R.raw.clasica);
+
+                if (player1.isPlaying()) {
+                    player1.stop();
+                } else if (player2.isPlaying()) {
+                    player2.stop();
+                } else if (player3.isPlaying()) {
+                    player3.stop();
+                } else if (player4.isPlaying()) {
+                    player4.stop();
+                }
+
+
+                if (!BtnTrivia.isClickable()) {
+                    playerX1.start();
+                } else if (!BtnRock.isClickable()) {
+                    playerX2.start();
+                } else if (!BtnGeneral.isClickable()) {
+                    playerX3.start();
+                } else if (!BtnClasica.isClickable()) {
+                    playerX4.start();
+                } else {
+                    playerX4.start();
+                }
+
+                //Intent intent = new Intent(Activity5Music.this, MainActivity.class);
+                //startActivity(intent);
+            }
+        });
     }
+
 
     private void animacion(String animacion) {
         switch (animacion) {
@@ -251,5 +289,13 @@ public class Activity5Music extends AppCompatActivity {
                 animatorSetBucle.start();
                 break;
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(Activity5Music.this, MainActivity.class);
+        startActivity(intent);
     }
 }
