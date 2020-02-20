@@ -271,7 +271,7 @@
                 android:layout_gravity="center"
                 android:checked="true"
                 android:gravity="center"
-                android:text="  Fácil"
+                android:text="Fácil"
                 android:textColor="#FFFFFF"
                 android:textSize="13dp" />
 
@@ -286,7 +286,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="  Medio"
+                android:text="Medio"
                 android:textColor="#FFFFFF"
                 android:textSize="13dp" />
 
@@ -301,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="  Difícil"
+                android:text="Difícil"
                 android:textColor="#FFFFFF"
                 android:textSize="13dp" />
 
