@@ -1,6 +1,7 @@
 package com.example.quizapp_pro;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,9 @@ public class Activity3 extends AppCompatActivity {
     private int questionsForTopic;
     private int residueQuestionsForTopic;
     private int cheatsQuantity;
+    private int Puntaje;
     private int[] topicsToAsk;
+    private int[][] colorsAnswers;
 
     private boolean cheatsEnable;
     private boolean cheatRecorder = false;
@@ -145,11 +148,21 @@ public class Activity3 extends AppCompatActivity {
         //#endregion
 
         //Desplegar preguntas con sus debidas respuestas de manera aleatoria Tienes las que se van a mostrar, hay que cambiar el orden
-
+//            respuestas[currentQuestion][i].setBackgroundColor(Color.rgb(0, 0, 100));
         ShowQuestionsFollower(currentQuestion);
         InicializacionBotones();
         HabilitacionBotones(difficult);
         CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
+        colorsAnswers = new int[questionsQuantity][difficult];
+        for (int y = 0; y < questionsQuantity; y++) {
+            for (int x = 0; x < difficult; x++) {
+                colorsAnswers[y][x] = Color.rgb(0, 0, 100);
+            }
+        }
+
+        GetAnswersColors();
+
+
         questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
 
         DesplegarRespuestas(currentQuestion);
@@ -161,6 +174,7 @@ public class Activity3 extends AppCompatActivity {
                 ShowQuestionsFollower(currentQuestion);
                 questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
                 DesplegarRespuestas(currentQuestion);
+                GetAnswersColors();
             }
         });
 
@@ -171,10 +185,11 @@ public class Activity3 extends AppCompatActivity {
                 ShowQuestionsFollower(currentQuestion);
                 questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
                 DesplegarRespuestas(currentQuestion);
+                GetAnswersColors();
             }
         });
-/*
-        cheatsFollower.setOnClickListener(new View.OnClickListener() {
+
+        cheatsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -188,41 +203,39 @@ public class Activity3 extends AppCompatActivity {
                 } else {
                     //Poner el método para responder
                 }
-
-
             }
         });
+
 
         //Estoy deshabilitando todos los botones, para que ya no puedas volver a dar click
         //Pero la respuesta se guarda
 
-        respuesta01.setOnClickListener(new View.OnClickListener() {
+        respuestas[currentQuestion][0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(Activity3.this, Boolean.toString(AnswerChecker(0)), Toast.LENGTH_SHORT).show();
                 if (AnswerChecker(0)) {
-                    respuestas[currentQuestion][0].setTextColor(0x0000ff);
-                    BotonesRespuestaDeshabilitacion(difficult, 0);
-                    NotEnableButtons();
+                    colorsAnswers[currentQuestion][0] = Color.rgb(0, 100, 0);
+                    Puntaje += difficult;
 
                 } else {
-                    respuestas[currentQuestion][0].setTextColor(0xff0000);
-                    BotonesRespuestaDeshabilitacion(difficult, 0);
-                    NotEnableButtons();
+                    colorsAnswers[currentQuestion][0] = Color.rgb(0, 100, 0);
                 }
+                GetAnswersColors();
+                //NotEnableButtons();
             }
         });
+
 
         respuesta02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (AnswerChecker(0)) {
-                    respuestas[currentQuestion][1].setTextColor(0x0000ff);
-                    BotonesRespuestaDeshabilitacion(difficult, 0);
-                    NotEnableButtons();
+                if (AnswerChecker(1)) {
+                    respuestas[currentQuestion][1].setBackgroundColor(Color.rgb(0, 100, 0));
+                    Puntaje += difficult;
+
                 } else {
-                    respuestas[currentQuestion][1].setTextColor(0xff0000);
-                    BotonesRespuestaDeshabilitacion(difficult, 0);
-                    NotEnableButtons();
+                    respuestas[currentQuestion][1].setBackgroundColor(Color.rgb(100, 0, 0));
                 }
             }
         });
@@ -230,14 +243,12 @@ public class Activity3 extends AppCompatActivity {
         respuesta03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (AnswerChecker(0)) {
-                    respuestas[currentQuestion][2].setTextColor(0x0000ff);
-                    BotonesRespuestaDeshabilitacion(difficult, 0);
-                    NotEnableButtons();
+                if (AnswerChecker(2)) {
+                    respuestas[currentQuestion][2].setBackgroundColor(Color.rgb(0, 100, 0));
+                    Puntaje += difficult;
+
                 } else {
-                    respuestas[currentQuestion][2].setTextColor(0xff0000);
-                    BotonesRespuestaDeshabilitacion(difficult, 0);
-                    NotEnableButtons();
+                    respuestas[currentQuestion][2].setBackgroundColor(Color.rgb(100, 0, 0));
                 }
             }
         });
@@ -245,21 +256,26 @@ public class Activity3 extends AppCompatActivity {
         respuesta04.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (AnswerChecker(0)) {
-                    respuestas[currentQuestion][3].setTextColor(0x0000ff);
-                    BotonesRespuestaDeshabilitacion(difficult, 0);
-                    NotEnableButtons();
+                if (AnswerChecker(3)) {
+                    respuestas[currentQuestion][3].setBackgroundColor(Color.rgb(0, 100, 0));
+                    Puntaje += difficult;
+
                 } else {
-                    respuestas[currentQuestion][3].setTextColor(0xff0000);
-                    BotonesRespuestaDeshabilitacion(difficult, 0);
-                    NotEnableButtons();
+                    respuestas[currentQuestion][3].setBackgroundColor(Color.rgb(100, 0, 0));
                 }
             }
         });
 
-*/
+
     }
+
+
 /*
+
+//Las trampas no funcionan bien
+
+//Los botones no guardan su color
+
         //Mensaje al salir sin terminar la partida: SnackBar
 
         //Acción al presionar back();
@@ -272,7 +288,35 @@ public class Activity3 extends AppCompatActivity {
 
 
     }
+
 */
+
+    public void GetAnswersColors() {
+
+        switch (difficult) {
+            case 2:
+                respuesta01.setBackgroundColor(colorsAnswers[currentQuestion][0]);
+                respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
+
+
+                break;
+            case 3:
+                respuesta01.setBackgroundColor(colorsAnswers[currentQuestion][0]);
+                respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
+                respuesta03.setBackgroundColor(colorsAnswers[currentQuestion][2]);
+
+                break;
+            case 4:
+                respuesta01.setBackgroundColor(colorsAnswers[currentQuestion][0]);
+                respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
+                respuesta03.setBackgroundColor(colorsAnswers[currentQuestion][2]);
+                respuesta04.setBackgroundColor(colorsAnswers[currentQuestion][3]);
+                break;
+
+
+        }
+
+    }
 
     public void DesplegarRespuestas(int current) {
 
@@ -280,6 +324,7 @@ public class Activity3 extends AppCompatActivity {
             case 2:
                 respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
                 respuesta02.setText(answersToShowSaved[current][1].getAnswerText());
+
 
                 break;
             case 3:
@@ -354,10 +399,11 @@ public class Activity3 extends AppCompatActivity {
         for (int i = 0; i < quantity; i++) {
             respuestas[currentQuestion][i].setEnabled(true);
             respuestas[currentQuestion][i].setVisibility(View.VISIBLE);
+
         }
     }
 
-/*
+
     public void BotonesRespuestaDeshabilitacion(int quantity, int aux) {
         for (int i = 0; i < quantity; i++) {
             if (i != aux) {
@@ -365,8 +411,8 @@ public class Activity3 extends AppCompatActivity {
             }
         }
     }
-*/
-/*
+
+
     public void Trampa() {
         Random rand = new Random();
         boolean finish = true;
@@ -381,8 +427,8 @@ public class Activity3 extends AppCompatActivity {
             }
         }
     }
-*/
-/*
+
+
     public boolean AnswerChecker(int i) {
         boolean a;
         if (respuestas[currentQuestion][i].getText() == answersToShow[currentQuestion][0].getAnswerText())
@@ -391,14 +437,14 @@ public class Activity3 extends AppCompatActivity {
             a = false;
         return a;
     }
-*/
-/*
+
     public void NotEnableButtons() {
-        for (int h = 0; h <= 3; h++) {
-            if (respuestas[currentQuestion][h].isEnabled()) ;
+        for (int h = 0; h <= difficult; h++) {
+            respuestas[currentQuestion][h].setEnabled(false);
+
         }
     }
-*/
+
 }
 
 
