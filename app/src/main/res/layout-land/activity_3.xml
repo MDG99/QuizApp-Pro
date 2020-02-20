@@ -163,16 +163,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <Button
+        <TextView
             android:id="@+id/cheatsQuantity"
-            android:layout_width="50sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15sp"
             android:layout_marginBottom="60sp"
             android:background="@drawable/rectangulo1"
             android:drawableRight="@drawable/key4"
-            android:paddingRight="5sp"
-            android:text="5"
+            android:text="5  "
             android:textColor="#26A69A"
             android:textSize="18sp" />
 
