@@ -364,59 +364,45 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <RadioButton
-                android:id="@+id/facil_radio"
+            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginRight="10sp"
-                android:checked="true"
-                android:gravity="center"
-                android:text="  Fácil"
-                android:textColor="#FFFFFF"
-                android:textSize="13dp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                <RadioButton
+                    android:id="@+id/facil_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Fácil"
+                    android:layout_marginLeft="30dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp" />
 
-            <RadioButton
-                android:id="@+id/medio_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10sp"
-                android:gravity="center"
-                android:text="  Medio"
-                android:textColor="#FFFFFF"
-                android:textSize="13dp" />
+                <RadioButton
+                    android:id="@+id/medio_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Medio"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                <RadioButton
+                    android:id="@+id/dificil_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Difícil"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp" />
 
-            <RadioButton
-                android:id="@+id/dificil_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="20sp"
-                android:gravity="center"
-                android:text="  Difícil"
-                android:textColor="#FFFFFF"
-                android:textSize="13dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+            </RadioGroup>
 
         </LinearLayout>
 

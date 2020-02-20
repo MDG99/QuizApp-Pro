@@ -1,157 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@drawable/fondomusic"
+    android:orientation="vertical"
     tools:context=".Activity5Music">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/demode"
+        android:gravity="center"
+        android:text="PREGUNTADOS"
+        android:textColor="#FF0"
+        android:textSize="45dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/detalle4">
+
+    </LinearLayout>
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/fondo5" />
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/settings1"
+        android:padding="7dp"
+        android:text="MUSIC"
+        android:textColor="#FF00FF"
+        android:textSize="30dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="560dp"
-        android:gravity="center|top"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/disco1"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginRight="30dp"
-            app:srcCompat="@drawable/disco5" />
-
-        <ImageView
-            android:id="@+id/disco2"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginLeft="30dp"
-            app:srcCompat="@drawable/disco6" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="530dp"
-        android:gravity="center|top"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="5dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/boton_redondo_musica"
-            android:text="Clásica"
-            android:textColor="#FFFFFF"
-            android:textSize="22dp" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="25dp"
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/iconotrampa" />
+
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/iconotrampa" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.15"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnTrvia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondo_musica"
+                android:text="TRIVIA"
+                android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/btnRock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondo_musica"
+                android:text="ROCK"
+                android:textColor="#FFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/boton_redondo_musica"
-            android:text="Trivia"
-            android:textColor="#FFFFFF"
-            android:textSize="22dp" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/iconotrampa" />
+
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/iconotrampa" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.15"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondo_musica"
+                android:text="GENERAL"
+                android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/btnClasica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondo_musica"
+                android:text="ClÁSICA"
+                android:textColor="#FFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.15"
+            android:gravity="center|bottom"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/boton_redondo_musica2"
+                android:padding="15dp"
+                android:textColor="#FFF"
+                tools:text="A DARLE" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.3"
+            android:orientation="horizontal">
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="250dp"
-        android:layout_marginBottom="350dp"
-        android:gravity="center|top"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/disco3"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginRight="30dp"
-            app:srcCompat="@drawable/disco2" />
-
-        <ImageView
-            android:id="@+id/disco4"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginLeft="30dp"
-            app:srcCompat="@drawable/disco4" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="390dp"
-        android:layout_marginBottom="270dp"
-        android:gravity="center|top"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/boton_redondo_musica"
-            android:text="Synth"
-            android:textColor="#FFFFFF"
-            android:textSize="22dp" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="25dp"
-            android:layout_weight="1"
-            android:background="@drawable/boton_redondo_musica"
-            android:text="Blues"
-            android:textColor="#FFFFFF"
-            android:textSize="22dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="600dp"
-        android:layout_marginBottom="50dp"
-        android:gravity="center|left"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="77dp"
-            android:background="@drawable/boton_redondo_musica2"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:text="Hecho" />
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
