@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#69EBBA"
     android:orientation="vertical"
     tools:context=".OptionsActivity">
@@ -259,56 +259,49 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <RadioButton
-                android:id="@+id/facil_radio"
+            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:checked="true"
-                android:gravity="center"
-                android:text="Fácil"
-                android:textColor="#FFFFFF"
-                android:textSize="13dp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                <RadioButton
+                    android:id="@+id/facil_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="Fácil"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp" />
 
-            <RadioButton
-                android:id="@+id/medio_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Medio"
-                android:textColor="#FFFFFF"
-                android:textSize="13dp" />
+                <RadioButton
+                    android:id="@+id/medio_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center"
+                    android:text="Medio"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                <RadioButton
+                    android:id="@+id/dificil_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center"
+                    android:text="Difícil"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp" />
 
-            <RadioButton
-                android:id="@+id/dificil_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Difícil"
-                android:textColor="#FFFFFF"
-                android:textSize="13dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+            </RadioGroup>
 
         </LinearLayout>
 
