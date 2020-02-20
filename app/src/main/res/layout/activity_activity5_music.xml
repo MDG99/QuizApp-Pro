@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/iconotrampa" />
+                app:srcCompat="@drawable/disco1" />
 
 
             <ImageView
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/iconotrampa" />
+                app:srcCompat="@drawable/disco2" />
 
 
         </LinearLayout>
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/iconotrampa" />
+                app:srcCompat="@drawable/disco5" />
 
 
             <ImageView
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/iconotrampa" />
+                app:srcCompat="@drawable/disco4" />
 
         </LinearLayout>
 

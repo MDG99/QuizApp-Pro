@@ -64,7 +64,7 @@ public class OptionsActivity extends AppCompatActivity {
         pistaSwitch = findViewById(R.id.pistas_button);
         pistasSpinner = findViewById(R.id.pistas_spinner);
 
-
+        final CheckBox[] checkBoxes = {chkArte, chkGeografia, chkFrases, chkVideojuegos, chkHistoria, chkCultura};
         topicsArray = new Topics[]{
                 new Topics(0, "Arte"),
                 new Topics(1, "Geografía"),
@@ -74,7 +74,7 @@ public class OptionsActivity extends AppCompatActivity {
                 new Topics(5, "Cultura general")
         };
 //seccion para checar que temas se eligieron
-        final CheckBox[] checkBoxes = {chkArte, chkGeografia, chkFrases, chkVideojuegos, chkHistoria, chkCultura};
+
 
         topicsChosen = new boolean[]{false, false, false, false, false, false};
 
@@ -85,10 +85,11 @@ public class OptionsActivity extends AppCompatActivity {
                 for (CheckBox chk : checkBoxes) {
                     if (chk.isChecked()) {
                         topicsChosen[i] = true;
+                    } else {
+                        topicsChosen[i] = false;
                     }
                     i++;
                 }
-
 
             }
         };
@@ -97,12 +98,19 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    chkArte.setChecked(true);
-                    chkGeografia.setChecked(true);
-                    chkFrases.setChecked(true);
-                    chkVideojuegos.setChecked(true);
-                    chkHistoria.setChecked(true);
-                    chkCultura.setChecked(true);
+                    checkBoxes[0].setChecked(true);
+                    checkBoxes[1].setChecked(true);
+                    checkBoxes[2].setChecked(true);
+                    checkBoxes[3].setChecked(true);
+                    checkBoxes[4].setChecked(true);
+                    checkBoxes[5].setChecked(true);
+
+                    topicsChosen[0] = true;
+                    topicsChosen[1] = true;
+                    topicsChosen[2] = true;
+                    topicsChosen[3] = true;
+                    topicsChosen[4] = true;
+                    topicsChosen[5] = true;
                 }
             }
         });

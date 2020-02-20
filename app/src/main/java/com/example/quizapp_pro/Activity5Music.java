@@ -26,6 +26,10 @@ public class Activity5Music extends AppCompatActivity {
     private ImageView ImgGeneral;
     private Button BtnExit;
     private LinearLayout Activity;
+    private MediaPlayer player1;
+    private MediaPlayer player2;
+    private MediaPlayer player3;
+    private MediaPlayer player4;
 
     private ObjectAnimator animatorRotation;
 
@@ -36,6 +40,11 @@ public class Activity5Music extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity5_music);
+
+        player1 = MediaPlayer.create(Activity5Music.this, R.raw.trividademo);
+        player2 = MediaPlayer.create(Activity5Music.this, R.raw.rockdemo);
+        player3 = MediaPlayer.create(Activity5Music.this, R.raw.generaldemo);
+        player4 = MediaPlayer.create(Activity5Music.this, R.raw.clasicademo);
 
         BtnTrivia = findViewById(R.id.btnTrvia);
         BtnClascia = findViewById(R.id.btnClasica);
@@ -66,7 +75,7 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("A darle");
-                BtnExit.setTextColor(Color.rgb(255,255,255));
+                BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
                 BtnTrivia.setClickable(false);
 
@@ -74,14 +83,21 @@ public class Activity5Music extends AppCompatActivity {
                 BtnGeneral.setClickable(true);
                 BtnClascia.setClickable(true);
 
-                MediaPlayer player = MediaPlayer.create(Activity5Music.this, R.raw.trividademo); //Me confundí de nombre xd
-                player.start();
+
+                if (player2.isPlaying()) {
+                    player2.stop();
+                } else if (player3.isPlaying()) {
+                    player3.stop();
+                } else if (player4.isPlaying()) {
+                    player4.stop();
+                }
+                player1.start();
                 //final MediaPlayer mp = MediaPlayer.create(this, R.raw.music1);
                 //mp.setLooping(true);
                 //mp.start();
 
                 animacion("rotation");
-                animacion("bucle");
+                //animacion("bucle");
             }
         });
 
@@ -101,7 +117,7 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("Demuestra quien es el que sabe");
-                BtnExit.setTextColor(Color.rgb(255,255,255));
+                BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
                 BtnRock.setClickable(false);
 
@@ -109,6 +125,14 @@ public class Activity5Music extends AppCompatActivity {
                 BtnGeneral.setClickable(true);
                 BtnClascia.setClickable(true);
 
+                if (player1.isPlaying()) {
+                    player1.stop();
+                } else if (player4.isPlaying()) {
+                    player4.stop();
+                } else if (player3.isPlaying()) {
+                    player3.stop();
+                }
+                player2.start();
                 animacion("rotation2");
             }
         });
@@ -129,7 +153,7 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("Bueno... si es que el quieres...");
-                BtnExit.setTextColor(Color.rgb(255,255,255));
+                BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
                 BtnGeneral.setClickable(false);
 
@@ -137,6 +161,15 @@ public class Activity5Music extends AppCompatActivity {
                 BtnRock.setClickable(true);
                 BtnClascia.setClickable(true);
 
+                if (player1.isPlaying()) {
+                    player1.stop();
+                } else if (player2.isPlaying()) {
+                    player2.stop();
+                } else if (player4.isPlaying()) {
+                    player4.stop();
+                }
+
+                player3.start();
                 animacion("rotation3");
             }
         });
@@ -157,7 +190,7 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("Levanta el meñique, Jaime");
-                BtnExit.setTextColor(Color.rgb(255,255,255));
+                BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
                 BtnClascia.setClickable(false);
 
@@ -165,13 +198,21 @@ public class Activity5Music extends AppCompatActivity {
                 BtnRock.setClickable(true);
                 BtnGeneral.setClickable(true);
 
-                animacion("rotation4");
+                if (player1.isPlaying()) {
+                    player1.stop();
+                } else if (player2.isPlaying()) {
+                    player2.stop();
+                } else if (player3.isPlaying()) {
+                    player3.stop();
+                }
+                player4.start();
+                animacion("bucle");
             }
         });
     }
 
-    private void animacion(String animacion){
-        switch (animacion){
+    private void animacion(String animacion) {
+        switch (animacion) {
             case "rotation":
                 animatorRotation = ObjectAnimator.ofFloat(ImgTrvia, "rotation", 0f, 360f);
                 animatorRotation.setDuration(30000);
@@ -198,7 +239,7 @@ public class Activity5Music extends AppCompatActivity {
 
             case "bucle":
                 animatorRotation = ObjectAnimator.ofFloat(ImgClasica, "rotation", 0f, 360f);
-                animatorRotation.setDuration(2000);
+                animatorRotation.setDuration(30000);
                 AnimatorSet animatorSetBucle = new AnimatorSet();
                 animatorSetBucle.play(animatorRotation);
                 animatorSetBucle.addListener(new AnimatorListenerAdapter() {
