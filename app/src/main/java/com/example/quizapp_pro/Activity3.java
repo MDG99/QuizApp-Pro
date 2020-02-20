@@ -1,19 +1,26 @@
 package com.example.quizapp_pro;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+
 
 public class Activity3 extends AppCompatActivity {
 
@@ -25,10 +32,10 @@ public class Activity3 extends AppCompatActivity {
 
 
     //Colores a usar
-    private int COLOR_NORMAL = Color.rgb(55,134,197);
-    private int COLOR_CORRECTO = Color.rgb(55,197,62);
-    private int COLOR_INCORRECTO = Color.rgb(197,55,72);
-    private int COLOR_TRAMPA = Color.rgb(46,55,58);
+    private int COLOR_NORMAL = Color.rgb(55, 134, 197);
+    private int COLOR_CORRECTO = Color.rgb(55, 197, 62);
+    private int COLOR_INCORRECTO = Color.rgb(197, 55, 72);
+    private int COLOR_TRAMPA = Color.rgb(46, 55, 58);
 
     //ImageView: ícono de trampas
     private ImageView cheatsImage;
@@ -45,21 +52,24 @@ public class Activity3 extends AppCompatActivity {
     private Button[][] respuestas;
 
 
-    private int difficult;
+    private int difficult = 4;
     private int currentQuestion = 0;
     private int questionsQuantity;
+    private int[] cheatsCounterByQuestion;
     private int questionsForTopic;
     private int residueQuestionsForTopic;
-    private int cheatsQuantity;
+    private int cheatsQuantity = 5;
     private int Puntaje = 0;
     private int[] topicsToAsk;
     private int[][] colorsAnswers;
 
-    private boolean cheatsEnable;
+    private boolean cheatsEnable = true;
     private boolean cheatRecorder = false;
     private boolean cheatsFollowerEnable[];
     private boolean[][] habilitadorDeRespuestas;
+    private boolean[] puntajeCheats;
     private boolean[] habilitadorDeCheats;
+    private boolean[] Respondido;
 
     //Nombres de los Intents de donde se recaudará información del OptionsActivity
     public static final String DIFFICULT_INTENT = "DIFICULTAD_PUNTOS";
@@ -83,7 +93,6 @@ public class Activity3 extends AppCompatActivity {
         //#region Inicialización de variables
 
         questionsFollower = findViewById(R.id.questionsQuantity);
-        cheatsFollower = findViewById(R.id.cheatsQuantity);
         questionsText = findViewById(R.id.questionText);
         respuesta01 = findViewById(R.id.respuesta01);
         respuesta02 = findViewById(R.id.respuesta02);
@@ -93,18 +102,34 @@ public class Activity3 extends AppCompatActivity {
         nextButton = findViewById(R.id.nextButton);
         cheatsButton = findViewById(R.id.cheatsQuantity);
 
+        puntajeCheats = new boolean[questionsQuantity];
+        for (boolean b : puntajeCheats) {
+            b = false;
+        }
+
         Intent intent = getIntent();
-        difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
+        //difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
         questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60); //Me da valores de 0 o 1
-        cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false); //Correcto
-        cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
+        //cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false); //Correcto
+        //cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
         //topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
         topicsToAsk = new int[3];
         topicsToAsk[0] = 0;
         topicsToAsk[1] = 1;
         topicsToAsk[2] = 2;
 
+        habilitadorDeCheats = new boolean[questionsQuantity];
+        cheatsCounterByQuestion = new int[questionsQuantity];
         colorsAnswers = new int[questionsQuantity][difficult];
+        Respondido = new boolean[questionsQuantity];
+
+        for (int x = 0; x < questionsQuantity; x++) {
+            Respondido[x] = false;
+        }
+
+        for (int x = 0; x < questionsQuantity; x++) {
+            cheatsCounterByQuestion[x] = difficult;
+        }
 
         for (int y = 0; y < questionsQuantity; y++) {
             for (int x = 0; x < difficult; x++) {
@@ -113,6 +138,7 @@ public class Activity3 extends AppCompatActivity {
         }
 
         habilitadorDeRespuestas = new boolean[questionsQuantity][difficult];
+        puntajeCheats = new boolean[questionsQuantity];
 
         for (int y = 0; y < questionsQuantity; y++) {
             for (int x = 0; x < difficult; x++) {
@@ -177,7 +203,7 @@ public class Activity3 extends AppCompatActivity {
         ShowQuestionsFollower(currentQuestion);
         InicializacionBotones();
         HabilitacionBotones(difficult);
-        CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
+        CheckerCheatsButton(cheatsEnable);
         GetAnswersColors();
         questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
         DesplegarRespuestas(currentQuestion);
@@ -192,6 +218,7 @@ public class Activity3 extends AppCompatActivity {
                 questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
                 DesplegarRespuestas(currentQuestion);
                 GetAnswersColors();
+                CheatsButtonByQuestion();
             }
         });
         //#endregion
@@ -205,6 +232,7 @@ public class Activity3 extends AppCompatActivity {
                 questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
                 DesplegarRespuestas(currentQuestion);
                 GetAnswersColors();
+                CheatsButtonByQuestion();
             }
         });
         //#endregion
@@ -213,14 +241,22 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(Activity3.this, "Tramposo", Toast.LENGTH_SHORT).show();
                 cheatsQuantity--;
-                CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
-                cheatRecorder = true;
-                if (difficult > 2) {
-                    Trampa();
-                } else {
+                ShowCheatsQuantity();
+                cheatRecorder=true;
 
+                if (cheatsCounterByQuestion[currentQuestion]>2) {
+                   Trampa();
+                puntajeCheats[currentQuestion] = true;
+                cheatsCounterByQuestion[currentQuestion]--;
+                } else {
+                    Trampa();
+                    ShowAnswerByCheats();
                 }
+                SnackTrampa();
+                CheatsButtonByQuestion();
+                GameChecker();
                 GetAnswersColors();
             }
         });
@@ -233,12 +269,15 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(0)) {
                     colorsAnswers[currentQuestion][0] = Color.rgb(0, 100, 0);
+                    if(!puntajeCheats[currentQuestion])
                     Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][0] = Color.rgb(100, 0, 0);
                 }
                 RespuestasHabilitador(false);
+                Respondido[currentQuestion]=true;
+                GameChecker();
                 GetAnswersColors();
             }
         });
@@ -246,37 +285,45 @@ public class Activity3 extends AppCompatActivity {
 
         //# endregion
 
-        //# region  Click respuesta 04
+        //# region  Click respuesta 02
         respuesta02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(1)) {
                     colorsAnswers[currentQuestion][1] = Color.rgb(0, 100, 0);
-                    Puntaje += difficult;
+                    if(!puntajeCheats[currentQuestion])
+                        Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][1] = Color.rgb(100, 0, 0);
                 }
                 RespuestasHabilitador(false);
+                Respondido[currentQuestion]=true;
+                GameChecker();
                 GetAnswersColors();
             }
         });
 
 
+
+
         //# endregion
 
-        //# region  Click respuesta 04
+        //# region  Click respuesta 03
         respuesta03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(2)) {
                     colorsAnswers[currentQuestion][2] = Color.rgb(0, 100, 0);
-                    Puntaje += difficult;
+                    if(!puntajeCheats[currentQuestion])
+                        Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][2] = Color.rgb(100, 0, 0);
                 }
                 RespuestasHabilitador(false);
+                Respondido[currentQuestion]=true;
+                GameChecker();
                 GetAnswersColors();
             }
         });
@@ -289,12 +336,15 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(3)) {
                     colorsAnswers[currentQuestion][3] = Color.rgb(0, 100, 0);
-                    Puntaje += difficult;
+                    if(!puntajeCheats[currentQuestion])
+                        Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][3] = Color.rgb(100, 0, 0);
                 }
                 RespuestasHabilitador(false);
+                Respondido[currentQuestion]=true;
+                GameChecker();
                 GetAnswersColors();
             }
         });
@@ -308,15 +358,13 @@ public class Activity3 extends AppCompatActivity {
 //Leer los temas de los que se va a preguntar, vienen de un arreglo
 
 // Revisar que las preguntas estén siendo seleccionadas al azar realmente
-//Las trampas no funcionan bien
-
-//Game checker para terminar el juego
 
         //Mensaje al salir sin terminar la partida: SnackBar
 
         //Acción al presionar back();
 
-
+//Modificar dialogo
+//Falra que el botón de trampas se deshabilite cuando ya no sea necesario hacer trampas en la pregunta
         //Guardado de la partida
 
         //Enviar información al siguiente activity: Puntaje, si hizo trampa y todas las respuestas
@@ -453,65 +501,95 @@ public class Activity3 extends AppCompatActivity {
         }
     }
 
-    public void ShowCheatsQuantity(int quantity) {
-        cheatsButton.setText(Integer.toString(quantity));
-        if (cheatsQuantity == 0)
-            cheatsButton.setEnabled(false);
-        else{
-            for(int t=0;t<cheatsQuantity;t++){
-                habilitadorDeCheats[t]=true;
+    public void CheckerCheatsButton(boolean checker) {
+        if (checker) {
+            cheatsButton.setEnabled(true);
+            for (int t = 0; t < cheatsQuantity; t++) {
+                habilitadorDeCheats[t] = true;
             }
+            ShowCheatsQuantity();
+        } else {
+            cheatsButton.setEnabled(false);
+            cheatsButton.setVisibility(View.INVISIBLE);
         }
     }
 
-    //#endregion
-
-    //#region Métodos por probar
-    public void BotonTrampa(int indice) {
-        respuestas[currentQuestion][indice].setEnabled(false);
+    public void ShowCheatsQuantity() {
+        cheatsButton.setText(Integer.toString(cheatsQuantity));
     }
 
-
-    public void CheatsDeshabilitador(boolean cheats, int quantity) {
-        if (!cheats) {
-            cheatsButton.setEnabled(false);
-        } else
-            ShowCheatsQuantity(quantity);
-    }
-
-
-
-
-
-
-    public void BotonesRespuestaDeshabilitacion(int quantity, int aux) {
-        for (int i = 0; i < quantity; i++) {
-            if (i != aux) {
-                respuestas[currentQuestion][i].setEnabled(true);
+    public void ShowAnswerByCheats() {
+        for (int o =0; o<4;o++){
+            if(respuestas[currentQuestion][o].isEnabled()){
+                colorsAnswers[currentQuestion][o] = COLOR_CORRECTO;
+                NotEnableButtons();
+                Respondido[currentQuestion] = true;
             }
         }
     }
-
 
     public void Trampa() {
         Random rand = new Random();
         boolean finish = true;
         while (finish) {
-            int aleatorio = rand.nextInt(respuestas.length) - 1;
+            int aleatorio = rand.nextInt(4);
             if (respuestas[currentQuestion][aleatorio].isEnabled()) {
                 if (respuestas[currentQuestion][aleatorio].getText() != answersToShow[currentQuestion][0].getAnswerText()) {
                     habilitadorDeRespuestas[currentQuestion][aleatorio] = false;
                     colorsAnswers[currentQuestion][aleatorio] = COLOR_TRAMPA;
+                    respuestas[currentQuestion][aleatorio].setEnabled(habilitadorDeRespuestas[currentQuestion][aleatorio]);
                     finish = false;
                 }
 
             }
         }
+        if(cheatsQuantity == 0){
+            for (int t = 0; t < questionsQuantity; t++) {
+                habilitadorDeCheats[t] = false;
+            }
+        }
     }
 
-
+    public void CheatsButtonByQuestion(){
+        cheatsButton.setEnabled(habilitadorDeCheats[currentQuestion]);
+    }
 
     //#endregion
+
+    public void GameChecker(){
+        int finish =0;
+        for(int d = 0; d<questionsQuantity;d++){
+            if(Respondido[d])
+                    finish++;
+        }
+        if(finish==questionsQuantity)
+            CreacionDialogo();
+    }
+
+    public void CreacionDialogo(){
+        AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(this);
+        DialogoNickname.setTitle("Juego terminado");
+        DialogoNickname.setMessage("Ingrese su Nickname (Solo 3 carácteres)");
+        DialogoNickname.setCancelable(false);
+        DialogoNickname.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+           Toast.makeText(Activity3.this,"Hi",Toast.LENGTH_SHORT);
+            }
+        });
+        DialogoNickname.show();
+    }
+
+    public void onBackPressed() {
+        View Contenido = findViewById(R.id.content);
+        Snackbar.make(Contenido,"Al salir se perderá tu partida",Snackbar.LENGTH_INDEFINITE).show();
+        //super.onBackPressed();
+    }
+
+    public void SnackTrampa(){
+        View Contenido = findViewById(R.id.content);
+        Snackbar.make(Contenido,"Haz hecho trampa",Snackbar.LENGTH_SHORT).show();
+    }
 
 }
 
