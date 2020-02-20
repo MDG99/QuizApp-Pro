@@ -33,6 +33,7 @@ public class Activity3 extends AppCompatActivity {
     private Button respuesta02;
     private Button respuesta03;
     private Button respuesta04;
+    private Button cheatsButton;
     private Button[][] respuestas;
 
 
@@ -76,7 +77,7 @@ public class Activity3 extends AppCompatActivity {
         respuesta04 = findViewById(R.id.respuesta04);
         prevButton = findViewById(R.id.prevButton);
         nextButton = findViewById(R.id.nextButton);
-        cheatsImage = findViewById(R.id.cheatsImageView); //Habrá que quitar esto :v
+        cheatsButton = findViewById(R.id.cheatsQuantity);
 
         Intent intent = getIntent();
         difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
@@ -103,7 +104,7 @@ public class Activity3 extends AppCompatActivity {
         questionsToShow.toArray(questionsToShowSaved);
 
 
-        Answers[][] answersToShow = new Answers[questionsQuantity][difficult];
+        answersToShow = new Answers[questionsQuantity][difficult];
 
         //Llenado de respuestas a mostrar aleatoriamente.- Te aseguras que esté la respuesta correcta
         for (int i = 0; i < questionsQuantity; i++) {
@@ -126,7 +127,7 @@ public class Activity3 extends AppCompatActivity {
 
 
         //Respuestas aleatorias
-        final Answers[][] answersToShowSaved = new Answers[questionsQuantity][difficult];
+        answersToShowSaved = new Answers[questionsQuantity][difficult];
 
         for (int i = 0; i < questionsQuantity; i++) {
             List<Answers> auxAns = new ArrayList<>();
@@ -151,7 +152,7 @@ public class Activity3 extends AppCompatActivity {
         CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
         questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
 
-        //DesplegarPregunta_Respuestas(questionCurrent);
+        DesplegarRespuestas(currentQuestion);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +160,7 @@ public class Activity3 extends AppCompatActivity {
                 NextQuestionIndex();
                 ShowQuestionsFollower(currentQuestion);
                 questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
-                //DesplegarPregunta_Respuestas(questionCurrent);
+                DesplegarRespuestas(currentQuestion);
             }
         });
 
@@ -169,7 +170,7 @@ public class Activity3 extends AppCompatActivity {
                 PrevQuestionIndex();
                 ShowQuestionsFollower(currentQuestion);
                 questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
-                //DesplegarPregunta_Respuestas(questionCurrent);
+                DesplegarRespuestas(currentQuestion);
             }
         });
 /*
@@ -273,7 +274,7 @@ public class Activity3 extends AppCompatActivity {
     }
 */
 
-    public void DesplegarPregunta_Respuestas(int current) {
+    public void DesplegarRespuestas(int current) {
 
         switch (difficult) {
             case 2:
@@ -313,10 +314,8 @@ public class Activity3 extends AppCompatActivity {
 
     public void CheatsDeshabilitador(boolean cheats, int quantity) {
         if (!cheats) {
-            cheatsImage.setEnabled(false);
-            cheatsImage.setVisibility(View.INVISIBLE);
-            cheatsFollower.setEnabled(false);
-            cheatsFollower.setVisibility(View.INVISIBLE);
+            cheatsButton.setEnabled(false);
+            cheatsButton.setVisibility(View.INVISIBLE);
         } else
             ShowCheatsQuantity(quantity);
     }
@@ -327,11 +326,10 @@ public class Activity3 extends AppCompatActivity {
     }
 
     public void ShowCheatsQuantity(int quantity) {
-        cheatsFollower.setText(Integer.toString(quantity));
+        cheatsButton.setText(Integer.toString(quantity));
         if (cheatsQuantity == 0)
-            cheatsFollower.setEnabled(false);
+            cheatsButton.setEnabled(false);
     }
-
 
     public void InicializacionBotones() {
         respuesta01.setEnabled(false);
@@ -351,7 +349,6 @@ public class Activity3 extends AppCompatActivity {
             respuestas[i][3] = respuesta04;
         }
     }
-
 
     public void HabilitacionBotones(int quantity) {
         for (int i = 0; i < quantity; i++) {
