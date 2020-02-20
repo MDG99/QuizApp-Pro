@@ -51,6 +51,7 @@ public class Activity3 extends AppCompatActivity {
     private boolean cheatsEnable;
     private boolean cheatRecorder = false;
     private boolean cheatsFollowerEnable[];
+    private boolean[][] habilitadorDeRespuestas;
 
     //Nombres de los Intents de donde se recaudará información del OptionsActivity
     public static final String DIFFICULT_INTENT = "DIFICULTAD_PUNTOS";
@@ -153,10 +154,18 @@ public class Activity3 extends AppCompatActivity {
         InicializacionBotones();
         HabilitacionBotones(difficult);
         CheatsDeshabilitador(cheatsEnable, cheatsQuantity);
+
         colorsAnswers = new int[questionsQuantity][difficult];
         for (int y = 0; y < questionsQuantity; y++) {
             for (int x = 0; x < difficult; x++) {
                 colorsAnswers[y][x] = Color.rgb(0, 0, 100);
+            }
+        }
+
+        habilitadorDeRespuestas = new boolean[questionsQuantity][difficult];
+        for (int y = 0; y < questionsQuantity; y++) {
+            for (int x = 0; x < difficult; x++) {
+                habilitadorDeRespuestas[y][x] = true;
             }
         }
 
@@ -210,19 +219,18 @@ public class Activity3 extends AppCompatActivity {
         //Estoy deshabilitando todos los botones, para que ya no puedas volver a dar click
         //Pero la respuesta se guarda
 
-        respuestas[currentQuestion][0].setOnClickListener(new View.OnClickListener() {
+        respuesta01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Activity3.this, Boolean.toString(AnswerChecker(0)), Toast.LENGTH_SHORT).show();
                 if (AnswerChecker(0)) {
                     colorsAnswers[currentQuestion][0] = Color.rgb(0, 100, 0);
                     Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][0] = Color.rgb(0, 100, 0);
+                    colorsAnswers[currentQuestion][0] = Color.rgb(100, 0, 0);
                 }
+                RespuestasHabilitador(false);
                 GetAnswersColors();
-                //NotEnableButtons();
             }
         });
 
@@ -231,12 +239,14 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(1)) {
-                    respuestas[currentQuestion][1].setBackgroundColor(Color.rgb(0, 100, 0));
+                    colorsAnswers[currentQuestion][1] = Color.rgb(0, 100, 0);
                     Puntaje += difficult;
 
                 } else {
-                    respuestas[currentQuestion][1].setBackgroundColor(Color.rgb(100, 0, 0));
+                    colorsAnswers[currentQuestion][1] = Color.rgb(100, 0, 0);
                 }
+                RespuestasHabilitador(false);
+                GetAnswersColors();
             }
         });
 
@@ -244,12 +254,14 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(2)) {
-                    respuestas[currentQuestion][2].setBackgroundColor(Color.rgb(0, 100, 0));
+                    colorsAnswers[currentQuestion][2] = Color.rgb(0, 100, 0);
                     Puntaje += difficult;
 
                 } else {
-                    respuestas[currentQuestion][2].setBackgroundColor(Color.rgb(100, 0, 0));
+                    colorsAnswers[currentQuestion][2] = Color.rgb(100, 0, 0);
                 }
+                RespuestasHabilitador(false);
+                GetAnswersColors();
             }
         });
 
@@ -257,12 +269,14 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(3)) {
-                    respuestas[currentQuestion][3].setBackgroundColor(Color.rgb(0, 100, 0));
+                    colorsAnswers[currentQuestion][3] = Color.rgb(0, 100, 0);
                     Puntaje += difficult;
 
                 } else {
-                    respuestas[currentQuestion][3].setBackgroundColor(Color.rgb(100, 0, 0));
+                    colorsAnswers[currentQuestion][3] = Color.rgb(100,0 , 0);
                 }
+                RespuestasHabilitador(false);
+                GetAnswersColors();
             }
         });
 
@@ -274,13 +288,12 @@ public class Activity3 extends AppCompatActivity {
 
 //Las trampas no funcionan bien
 
-//Los botones no guardan su color
+//Game checker para terminar el juego
 
         //Mensaje al salir sin terminar la partida: SnackBar
 
         //Acción al presionar back();
 
-        //Cambiar color de la pregunta según se haya contestato: Bien, Mal, Bien con trampa
 
         //Guardado de la partida
 
@@ -298,6 +311,8 @@ public class Activity3 extends AppCompatActivity {
                 respuesta01.setBackgroundColor(colorsAnswers[currentQuestion][0]);
                 respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
 
+                respuesta01.setEnabled(habilitadorDeRespuestas[currentQuestion][0]);
+                respuesta02.setEnabled(habilitadorDeRespuestas[currentQuestion][1]);
 
                 break;
             case 3:
@@ -305,12 +320,24 @@ public class Activity3 extends AppCompatActivity {
                 respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
                 respuesta03.setBackgroundColor(colorsAnswers[currentQuestion][2]);
 
+                respuesta01.setEnabled(habilitadorDeRespuestas[currentQuestion][0]);
+                respuesta02.setEnabled(habilitadorDeRespuestas[currentQuestion][1]);
+                respuesta03.setEnabled(habilitadorDeRespuestas[currentQuestion][2]);
+
+
+
                 break;
             case 4:
                 respuesta01.setBackgroundColor(colorsAnswers[currentQuestion][0]);
                 respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
                 respuesta03.setBackgroundColor(colorsAnswers[currentQuestion][2]);
                 respuesta04.setBackgroundColor(colorsAnswers[currentQuestion][3]);
+
+                respuesta01.setEnabled(habilitadorDeRespuestas[currentQuestion][0]);
+                respuesta02.setEnabled(habilitadorDeRespuestas[currentQuestion][1]);
+                respuesta03.setEnabled(habilitadorDeRespuestas[currentQuestion][2]);
+                respuesta04.setEnabled(habilitadorDeRespuestas[currentQuestion][3]);
+
                 break;
 
 
@@ -439,9 +466,15 @@ public class Activity3 extends AppCompatActivity {
     }
 
     public void NotEnableButtons() {
-        for (int h = 0; h <= difficult; h++) {
-            respuestas[currentQuestion][h].setEnabled(false);
+        for (int h = 0; h < difficult; h++) {
+            habilitadorDeRespuestas[currentQuestion][h] = false;
 
+        }
+    }
+
+    public void RespuestasHabilitador(boolean habilitador){
+        if(!habilitador){
+            NotEnableButtons();
         }
     }
 
