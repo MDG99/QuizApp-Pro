@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <Button
+        <TextView
             android:id="@+id/cheatsQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:drawableRight="@drawable/key4"
             android:paddingLeft="20sp"
             android:paddingRight="20sp"
-            android:text="5"
+            android:text="5  "
             android:textColor="#26A69A"
             android:textSize="18sp" />
 
