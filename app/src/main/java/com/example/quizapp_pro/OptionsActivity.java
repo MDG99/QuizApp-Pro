@@ -34,7 +34,7 @@ public class OptionsActivity extends AppCompatActivity {
     private Spinner pistasSpinner;
     private Topics[] topicsArray;
     private boolean[] topicsChosen;
-    private int preguntasCuantas = 5;
+    private int preguntasCuantas = 10;
     private String auxText = "Fácil";
     private int dificultad = 2;
     private int pistasCuantas = 0;
@@ -43,6 +43,7 @@ public class OptionsActivity extends AppCompatActivity {
     private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";
     private final String ENABLE_PISTAS = "ENABLE_PISTAS";
     private final String NO_PISTAS = "NO_PISTAS";
+    //private final String RECIBE_PREGUNTAS = "XD";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +124,64 @@ public class OptionsActivity extends AppCompatActivity {
         chkCultura.setOnCheckedChangeListener(chkListener);
 //end seccion
 
+
 //seccion para tomar el numero de preguntas del spinner
+
+        pistasSpinner.setEnabled(false);
+        pistasSpinner.getBackground().setAlpha(64);
+
+        if (getIntent().getExtras() != null) {
+            int noPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
+            int noDif = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
+            boolean cheats = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
+            int noPistas = getIntent().getIntExtra("NO_PISTAS", 0);
+
+            pistaBoolean = cheats;
+            dificultad = noDif;
+            preguntasCuantas = noPreguntas;
+            pistasCuantas = noPistas;
+
+            if (pistaBoolean) {
+                pistasSpinner.setSelection(pistasCuantas - 1);
+                pistasSpinner.setEnabled(true);
+                pistasSpinner.getBackground().setAlpha(255);
+            }
+
+            switch (noPreguntas) {
+                case 5:
+                    preguntasSpinner.setSelection(0);
+                    break;
+                case 10:
+                    preguntasSpinner.setSelection(1);
+                    break;
+                default:
+                    preguntasSpinner.setSelection(0);
+                    break;
+            }
+
+            switch (noDif) {
+                case 2:
+                    btnFacil.toggle();
+                    break;
+                case 3:
+                    btnMedio.toggle();
+                    break;
+                case 4:
+                    btnDificil.toggle();
+                    break;
+                default:
+                    btnFacil.toggle();
+                    break;
+            }
+
+            if (cheats) {
+                pistaSwitch.setChecked(true);
+            } else {
+                pistaSwitch.setChecked(false);
+            }
+
+        }
+
         preguntasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -168,8 +226,7 @@ public class OptionsActivity extends AppCompatActivity {
         //end seccion
 
         //inicio seccion para elegir pistas
-        pistasSpinner.setEnabled(false);
-        pistasSpinner.getBackground().setAlpha(64);
+
 
         pistaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

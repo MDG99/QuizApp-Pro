@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";
     private final String ENABLE_PISTAS = "ENABLE_PISTAS";
     private final String NO_PISTAS = "NO_PISTAS";
+    //private final String ENVIA_PREGUNTAS = "XD";
     //private MediaPlayer player;
 
     @Override
@@ -58,16 +59,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (getIntent().getExtras() != null) {
-                    topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
-                    cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
-                    dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
-                    enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
-                    cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
+
+                    Intent intentConfig = new Intent(MainActivity.this, OptionsActivity.class);
+                    intentConfig.putExtra(CUALES_TOPICS, topicsChosen);
+                    intentConfig.putExtra(NO_PREGUNTAS, cuantasPreguntas);
+                    intentConfig.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
+                    intentConfig.putExtra(ENABLE_PISTAS, enabledPistas);
+                    intentConfig.putExtra(NO_PISTAS, cuantasPistas);
+                    startActivity(intentConfig);
+
+                    startActivity(intentConfig);
+                } else {
+
+                    Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
+                    startActivity(intent);
                 }
-
-                Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
-                startActivity(intent);
-
 
             }
         });
