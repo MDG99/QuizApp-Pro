@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private int cuantasPreguntas;
     private int dificultadPuntos;
     private boolean enabledPistas;
+    private ImageView ImagenMundo;
     private int cuantasPistas;
     private final String CUALES_TOPICS = "CUALES_TOPICS";
     private final String NO_PREGUNTAS = "NO_PREGUNTAS";
@@ -45,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
         btnConfig = findViewById(R.id.options_button);
         btnPoints = findViewById(R.id.points_button);
         btnMusic = findViewById(R.id.music_button);
+        ImagenMundo = findViewById(R.id.imagen_portada);
+
+        ImagenMundo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Elaborado por: Ignacio Isaac, Maximiliano Ballina y Aarón Calixto", Toast.LENGTH_LONG).show();
+            }
+        });
 
         if (getIntent().getExtras() != null) {
             //Toast.makeText(MainActivity.this, "ME DEVUELVE EL INTENT", Toast.LENGTH_SHORT).show();
