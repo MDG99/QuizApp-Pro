@@ -69,7 +69,7 @@ public class Activity4 extends AppCompatActivity {
         btnGallina = findViewById(R.id.findeljuego_imagen);
 
         Intent intent04 = getIntent();
-        estado = intent04.getBundleExtra("PARTIDA");//gallinaActual = intent04.getBooleanExtra("CHECADOR_TRAMPAS",false);
+        //estado = intent04.getBundleExtra("PARTIDA");//gallinaActual = intent04.getBooleanExtra("CHECADOR_TRAMPAS",false);
         nicknameActual = intent04.getStringExtra("NICKNAME");
         puntajeActual = intent04.getIntExtra("PUNTAJE", 0);
 
