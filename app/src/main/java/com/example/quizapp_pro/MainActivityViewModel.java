@@ -381,7 +381,7 @@ public class MainActivityViewModel extends ViewModel {
                         3, 37, answersArray[144], answersArray[145], answersArray[146], answersArray[147]),
                 new Questions("¿A qué generación pertenece la PlayStation 2?",
                         3, 38, answersArray[148], answersArray[149], answersArray[150], answersArray[151]),
-                new Questions("¿A qué generación pertenece la PlayStation 2?",
+                new Questions("¿Quién es la heroína más exitosa de los videojuegos?",
                         3, 39, answersArray[152], answersArray[153], answersArray[154], answersArray[155]),
                 new Questions("¿Quién es apodado como el “Padre de los Videojuegos?",
                         3, 40, answersArray[156], answersArray[157], answersArray[158], answersArray[159]),

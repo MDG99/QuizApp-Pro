@@ -44,7 +44,7 @@ public class Activity3 extends AppCompatActivity {
 
     private boolean cheatsEnable; //guardar
     private boolean cheatRecorder; //guardar
-    private boolean cheatsFollowerEnable[];
+    private boolean [] cheatsFollowerEnable;
     private boolean[][] habilitadorDeRespuestas;
     private boolean[] puntajeCheats;
     private boolean[] habilitadorDeCheats;
@@ -529,7 +529,7 @@ public class Activity3 extends AppCompatActivity {
     }
 
     public void ShowQuestionsFollower(int c) {
-        String Contador = Integer.toString(c + 1) + "/" + Integer.toString(questionsQuantity);
+        String Contador = (c + 1) + "/" +(questionsQuantity);
         questionsFollower.setText(Contador);
     }
 
@@ -659,8 +659,8 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //nickname = NickName.getText().toString();
-                String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
-                Toast.makeText(Activity3.this, msg,Toast.LENGTH_SHORT).show();
+                String msg = nickname + ": " + Puntaje + " puntos";
+                //Toast.makeText(Activity3.this, msg,Toast.LENGTH_SHORT).show();
                 EnviarInfo();
             }
         });
