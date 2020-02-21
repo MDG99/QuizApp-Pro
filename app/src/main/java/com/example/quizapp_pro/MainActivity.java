@@ -25,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
     private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";
     private final String ENABLE_PISTAS = "ENABLE_PISTAS";
     private final String NO_PISTAS = "NO_PISTAS";
+    private final String NICKNAME_ARRAY = "PLAYER_NICKNAME";
+    private final String PUNTAJE_ARRAY = "PLAYER_POINTS";
+    private final String GALLINA_ARRAY = "PLAYER_CHEATED";
+    private String[] nicknames;
+    private int[] puntajes;
+    private boolean[] gallinas;
+
     //private final String ENVIA_PREGUNTAS = "XD";
     //private MediaPlayer player;
 
@@ -40,12 +47,16 @@ public class MainActivity extends AppCompatActivity {
         btnMusic = findViewById(R.id.music_button);
 
         if (getIntent().getExtras() != null) {
-            Toast.makeText(MainActivity.this, "ME DEVUELVE EL INTENT", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "ME DEVUELVE EL INTENT", Toast.LENGTH_SHORT).show();
             topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
             cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
             dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
             enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
             cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
+
+            nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
+            puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
+            gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
         } else {
             Toast.makeText(MainActivity.this, "INICIO DE APP", Toast.LENGTH_SHORT).show();
             topicsChosen = new int[]{0};
@@ -53,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
             dificultadPuntos = 2;
             enabledPistas = false;
             cuantasPistas = 0;
+
+            nicknames = new String[]{"MAX"};
+            puntajes = new int[]{0};
+            gallinas = new boolean[]{false};
+
         }
 
 
@@ -67,13 +83,17 @@ public class MainActivity extends AppCompatActivity {
                     intentConfig.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
                     intentConfig.putExtra(ENABLE_PISTAS, enabledPistas);
                     intentConfig.putExtra(NO_PISTAS, cuantasPistas);
+
+                    intentConfig.putExtra(NICKNAME_ARRAY, nicknames);
+                    intentConfig.putExtra(PUNTAJE_ARRAY, puntajes);
+                    intentConfig.putExtra(GALLINA_ARRAY, gallinas);
                     startActivity(intentConfig);
 
                     startActivity(intentConfig);
                 } else {
 
-                    Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
-                    startActivity(intent);
+                    Intent intentConfig = new Intent(MainActivity.this, OptionsActivity.class);
+                    startActivity(intentConfig);
                 }
 
             }
@@ -82,8 +102,17 @@ public class MainActivity extends AppCompatActivity {
         btnPoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Activity4.class);
-                startActivity(intent);
+                Intent intentPoints = new Intent(MainActivity.this, Activity4.class);
+                intentPoints.putExtra(CUALES_TOPICS, topicsChosen);
+                intentPoints.putExtra(NO_PREGUNTAS, cuantasPreguntas);
+                intentPoints.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
+                intentPoints.putExtra(ENABLE_PISTAS, enabledPistas);
+                intentPoints.putExtra(NO_PISTAS, cuantasPistas);
+
+                intentPoints.putExtra(NICKNAME_ARRAY, nicknames);
+                intentPoints.putExtra(PUNTAJE_ARRAY, puntajes);
+                intentPoints.putExtra(GALLINA_ARRAY, gallinas);
+                startActivity(intentPoints);
 
 
             }
@@ -93,9 +122,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(MainActivity.this, cuantasPreguntas + " - " + dificultadPuntos + " - " + cuantasPistas, Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(MainActivity.this, Activity5Music.class);
-                //startActivity(intent);
+                //Toast.makeText(MainActivity.this, cuantasPreguntas + " - " + dificultadPuntos + " - " + cuantasPistas, Toast.LENGTH_SHORT).show();
+                Intent intentMusic = new Intent(MainActivity.this, Activity5Music.class);
+                intentMusic.putExtra(CUALES_TOPICS, topicsChosen);
+                intentMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
+                intentMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
+                intentMusic.putExtra(ENABLE_PISTAS, enabledPistas);
+                intentMusic.putExtra(NO_PISTAS, cuantasPistas);
+
+                intentMusic.putExtra(NICKNAME_ARRAY, nicknames);
+                intentMusic.putExtra(PUNTAJE_ARRAY, puntajes);
+                intentMusic.putExtra(GALLINA_ARRAY, gallinas);
+                //Esto manda la informacion de config
+                startActivity(intentMusic);
 
             }
         });
@@ -104,13 +143,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this, "LA APP CRASHEA", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, Activity3.class);
-                intent.putExtra(CUALES_TOPICS, topicsChosen);
-                intent.putExtra(NO_PREGUNTAS, cuantasPreguntas);
-                intent.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
-                intent.putExtra(ENABLE_PISTAS, enabledPistas);
-                intent.putExtra(NO_PISTAS, cuantasPistas);
-                startActivity(intent);
+                Intent intentPlay = new Intent(MainActivity.this, Activity3.class);
+                intentPlay.putExtra(CUALES_TOPICS, topicsChosen);
+                intentPlay.putExtra(NO_PREGUNTAS, cuantasPreguntas);
+                intentPlay.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
+                intentPlay.putExtra(ENABLE_PISTAS, enabledPistas);
+                intentPlay.putExtra(NO_PISTAS, cuantasPistas);
+
+                intentPlay.putExtra(NICKNAME_ARRAY, nicknames);
+                intentPlay.putExtra(PUNTAJE_ARRAY, puntajes);
+                intentPlay.putExtra(GALLINA_ARRAY, gallinas);
+
+                startActivity(intentPlay);
 
             }
         });
