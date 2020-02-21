@@ -80,6 +80,10 @@ public class Activity3 extends AppCompatActivity {
     public static final String CHEATS_QUANTITY_INTENT = "NO_PISTAS";
     public static final String TOPICS_ID_INTENT = "CUALES_TOPICS";
 
+    private final String NICKNAME_ARRAY = "PLAYER_NICKNAME";
+    private final String PUNTAJE_ARRAY = "PLAYER_POINTS";
+    private final String GALLINA_ARRAY = "PLAYER_CHEATED";
+
     private List<Questions> questionsToShow;
     private Questions[] questionsToShowSaved;
 
@@ -610,6 +614,8 @@ public class Activity3 extends AppCompatActivity {
         intent.putExtra("NICKNAME", nickname);
         intent.putExtra("PUNTAJE", Puntaje);
         intent.putExtra("CHECADOR_TRAMPAS",cheatsEnable);
+
+
         startActivity(intent);
 
     }
