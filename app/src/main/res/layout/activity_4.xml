@@ -274,6 +274,7 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/findeljuego_imagen"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="10dp"
