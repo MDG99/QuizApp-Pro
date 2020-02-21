@@ -101,6 +101,7 @@
                 android:background="@drawable/boton_redondo_musica"
                 android:text="ROCK"
                 android:textColor="#FFF" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -156,6 +157,7 @@
                 android:background="@drawable/boton_redondo_musica"
                 android:text="ClÁSICA"
                 android:textColor="#FFF" />
+
         </LinearLayout>
 
         <LinearLayout
