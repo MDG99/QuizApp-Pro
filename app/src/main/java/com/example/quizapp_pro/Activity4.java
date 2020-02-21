@@ -31,14 +31,14 @@ public class Activity4 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_4);
 
-        topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
-        cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
-        dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
-        enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
-        cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
-        nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
-        puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
-        gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
+        //topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
+        //cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
+        //dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
+        //enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
+        //cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
+        //nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
+        //puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
+        //gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
 
     }
 }
