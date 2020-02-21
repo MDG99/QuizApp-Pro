@@ -1,6 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5C84E2"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.4"
+        android:background="#365BAD"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/points_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#365BAD"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_sort_by_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/detalle3">
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/music_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#365BAD"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_lock_silent_mode_off" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/detalle3">
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/options_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#365BAD"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_preferences" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/play_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="160dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="160dp"
+            android:layout_weight="4"
+            android:background="@drawable/jugarmain2"
+            android:padding="22dp"
+            android:text="jugar"
+            android:textColor="#304FA2"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/imagen_portada"
+            android:layout_width="480dp"
+            android:layout_height="380dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/fondomundo"
+            app:srcCompat="@drawable/mainphoto" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.3"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.05" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="P"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="R"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="E"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="G"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="U"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="N"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="T"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="D"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="O"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:text="S"
+            android:textColor="#FFF"
+            android:textSize="38dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.05"
+            android:gravity="center"
+            android:textColor="#FFF"
+            android:textSize="30dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

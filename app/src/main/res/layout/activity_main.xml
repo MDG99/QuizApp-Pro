@@ -1,69 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#5C84E2"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/imagen_portada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:paddingTop="50dp"
-        android:text="LOGO"
-        android:textSize="80sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/play_button"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="Jugar"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/options_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Opciones"
-            android:textSize="20sp" />
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="10sp"
+            android:fontFamily="@font/demode"
+            android:gravity="center"
+            android:textColor="#FFF"
+            android:text="PREGUNTADOS"
+            android:textSize="45dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/detalle3">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imagen_portada"
+            android:layout_width="380dp"
+            android:layout_height="480dp"
+            android:layout_margin="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/fondomundo"
+            app:srcCompat="@drawable/mainphoto" />
+
+        <Button
+            android:id="@+id/play_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginBottom="40dp"
+            android:layout_weight="4"
+            android:background="@drawable/jugarmain"
+            android:text="jugar"
+            android:textColor="#304FA2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:background="#365BAD"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/points_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginRight="10dp"
-            android:text="Puntuación"
-            android:textSize="20sp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#365BAD"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_sort_by_size" />
 
-        <Button
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/detalle3">
+
+        </LinearLayout>
+
+        <ImageButton
             android:id="@+id/music_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginLeft="10dp"
-            android:text="Música"
-            android:textSize="20sp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#365BAD"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_lock_silent_mode_off" />
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/detalle3">
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/options_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#365BAD"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_preferences" />
 
     </LinearLayout>
 
