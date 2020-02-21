@@ -246,6 +246,15 @@ public class Activity3_ViewModel extends ViewModel {
     }
 
     public Activity3_ViewModel() {
+        habilitadorDeCheats = new boolean[questionsQuantity];
+        cheatsCounterByQuestion = new int[questionsQuantity];
+        colorsAnswers = new int[questionsQuantity][difficult];
+        Respondido = new boolean[questionsQuantity];
+        habilitadorDeRespuestas = new boolean[questionsQuantity][difficult];
+        puntajeCheats = new boolean[questionsQuantity];
+        questionsToShowSaved = new Questions[questionsQuantity];
+        answersToShow = new Answers[questionsQuantity][difficult];
+        answersToShowSaved = new Answers[questionsQuantity][difficult];
 
     }
 }

@@ -24,12 +24,42 @@ import java.util.Random;
 
 public class Activity3 extends AppCompatActivity {
 
+    private String nickname; //Al final se guarda y se pssa
+    private int difficult = 4; //guardar
+    private int currentQuestion = 0; //guardar
+    private int questionsQuantity; //guardar
+    private int[] cheatsCounterByQuestion; //guardar
+    private int questionsForTopic;
+    private int residueQuestionsForTopic;
+    private int cheatsQuantity = 5; //guardar
+    private int Puntaje = 0; //guardar
+    private int[] topicsToAsk; //guardar
+    private int[][] colorsAnswers; //guardar
+    private Activity3_ViewModel act;
+
+    private boolean cheatsEnable = true; //guardar
+    private boolean cheatRecorder = false; //guardar
+    private boolean cheatsFollowerEnable[];
+    private boolean[][] habilitadorDeRespuestas;
+    private boolean[] puntajeCheats;
+    private boolean[] habilitadorDeCheats;
+    private boolean[] Respondido;
+
+    private List<Questions> questionsToShow;
+    private Questions[] questionsToShowSaved;
+
+    private Answers[][] answersToShowSaved;
+    private Answers[][] answersToShow;
+
+
+
+
     //TextViews: contador, trampas y pregunta
     private TextView questionsFollower;
     private TextView cheatsFollower;
     private TextView questionsText;
     private TextView cheatsButton;
-    private String nickname;
+
     private EditText NickName;
 
 
@@ -54,24 +84,7 @@ public class Activity3 extends AppCompatActivity {
     private Button[][] respuestas;
 
 
-    private int difficult = 4;
-    private int currentQuestion = 0;
-    private int questionsQuantity;
-    private int[] cheatsCounterByQuestion;
-    private int questionsForTopic;
-    private int residueQuestionsForTopic;
-    private int cheatsQuantity = 5;
-    private int Puntaje = 0;
-    private int[] topicsToAsk;
-    private int[][] colorsAnswers;
 
-    private boolean cheatsEnable = true;
-    private boolean cheatRecorder = false;
-    private boolean cheatsFollowerEnable[];
-    private boolean[][] habilitadorDeRespuestas;
-    private boolean[] puntajeCheats;
-    private boolean[] habilitadorDeCheats;
-    private boolean[] Respondido;
 
     //Nombres de los Intents de donde se recaudará información del OptionsActivity
     public static final String DIFFICULT_INTENT = "DIFICULTAD_PUNTOS";
@@ -80,11 +93,8 @@ public class Activity3 extends AppCompatActivity {
     public static final String CHEATS_QUANTITY_INTENT = "NO_PISTAS";
     public static final String TOPICS_ID_INTENT = "CUALES_TOPICS";
 
-    private List<Questions> questionsToShow;
-    private Questions[] questionsToShowSaved;
 
-    private Answers[][] answersToShowSaved;
-    private Answers[][] answersToShow;
+
 
 
     @Override
@@ -105,11 +115,6 @@ public class Activity3 extends AppCompatActivity {
         cheatsButton = findViewById(R.id.cheatsQuantity);
         NickName = findViewById(R.id.dialogo);
 
-        puntajeCheats = new boolean[questionsQuantity];
-        for (boolean b : puntajeCheats) {
-            b = false;
-        }
-
         Intent intent = getIntent();
         //difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
         questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60); //Me da valores de 0 o 1
@@ -121,10 +126,15 @@ public class Activity3 extends AppCompatActivity {
         topicsToAsk[1] = 1;
         topicsToAsk[2] = 2;
 
+         act = new Activity3_ViewModel();
+
+
         habilitadorDeCheats = new boolean[questionsQuantity];
         cheatsCounterByQuestion = new int[questionsQuantity];
         colorsAnswers = new int[questionsQuantity][difficult];
         Respondido = new boolean[questionsQuantity];
+        habilitadorDeRespuestas = new boolean[questionsQuantity][difficult];
+        puntajeCheats = new boolean[questionsQuantity];
 
         for (int x = 0; x < questionsQuantity; x++) {
             Respondido[x] = false;
@@ -140,8 +150,9 @@ public class Activity3 extends AppCompatActivity {
             }
         }
 
-        habilitadorDeRespuestas = new boolean[questionsQuantity][difficult];
-        puntajeCheats = new boolean[questionsQuantity];
+        for (boolean b : puntajeCheats) {
+            b = false;
+        }
 
         for (int y = 0; y < questionsQuantity; y++) {
             for (int x = 0; x < difficult; x++) {
@@ -149,18 +160,28 @@ public class Activity3 extends AppCompatActivity {
             }
         }
 
+
+        act.setPuntajeCheats(puntajeCheats);
+        act.setHabilitadorDeCheats(habilitadorDeCheats);
+        act.setCheatsCounterByQuestion(cheatsCounterByQuestion);
+        act.setColorsAnswers(colorsAnswers);
+        act.setRespondido(Respondido);
+        act.setHabilitadorDeRespuestas(habilitadorDeRespuestas);
+
+        act.setDifficult(difficult);
+        act.setQuestionsQuantity(questionsQuantity);
+
+
         MainActivityViewModel model = new MainActivityViewModel();
 
         //#endregion
 
         //#region Llenado de información Random
-        //Llenado de las preguntas por tópico
 
         questionsToShow = new ArrayList<>();
         questionsToShow.addAll(model.questionsByTopicRandom(questionsQuantity, topicsToAsk));
         questionsToShowSaved = new Questions[questionsQuantity];
         questionsToShow.toArray(questionsToShowSaved);
-
 
         answersToShow = new Answers[questionsQuantity][difficult];
 
@@ -200,16 +221,20 @@ public class Activity3 extends AppCompatActivity {
             }
         }
 
+        act.setQuestionsToShowSaved(questionsToShowSaved);
+        act.setAnswersToShow(answersToShow);
+        act.setAnswersToShowSaved(answersToShowSaved);
+
         //#endregion
 
         //#region Actividades iniciales de la apliación
-        ShowQuestionsFollower(currentQuestion);
+        ShowQuestionsFollower(act.getCurrentQuestion());
         InicializacionBotones();
         HabilitacionBotones(difficult);
         CheckerCheatsButton(cheatsEnable);
         GetAnswersColors();
-        questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
-        DesplegarRespuestas(currentQuestion);
+        questionsText.setText(questionsToShowSaved[act.getCurrentQuestion()].getQuestionText());
+        DesplegarRespuestas(act.getCurrentQuestion());
         //#endregion
 
         //#region Click botón Next
@@ -217,9 +242,9 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 NextQuestionIndex();
-                ShowQuestionsFollower(currentQuestion);
-                questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
-                DesplegarRespuestas(currentQuestion);
+                ShowQuestionsFollower(act.getCurrentQuestion());
+                questionsText.setText(questionsToShowSaved[act.getCurrentQuestion()].getQuestionText());
+                DesplegarRespuestas(act.getCurrentQuestion());
                 GetAnswersColors();
                 CheatsButtonByQuestion();
             }
@@ -231,9 +256,9 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PrevQuestionIndex();
-                ShowQuestionsFollower(currentQuestion);
-                questionsText.setText(questionsToShowSaved[currentQuestion].getQuestionText());
-                DesplegarRespuestas(currentQuestion);
+                ShowQuestionsFollower(act.getCurrentQuestion());
+                questionsText.setText(questionsToShowSaved[act.getCurrentQuestion()].getQuestionText());
+                DesplegarRespuestas(act.getCurrentQuestion());
                 GetAnswersColors();
                 CheatsButtonByQuestion();
             }
@@ -249,10 +274,10 @@ public class Activity3 extends AppCompatActivity {
                 ShowCheatsQuantity();
                 cheatRecorder = true;
 
-                if (cheatsCounterByQuestion[currentQuestion] > 2) {
+                if (cheatsCounterByQuestion[act.getCurrentQuestion()] > 2) {
                     Trampa();
-                    puntajeCheats[currentQuestion] = true;
-                    cheatsCounterByQuestion[currentQuestion]--;
+                    puntajeCheats[act.getCurrentQuestion()] = true;
+                    cheatsCounterByQuestion[act.getCurrentQuestion()]--;
                 } else {
                     Trampa();
                     ShowAnswerByCheats();
@@ -271,15 +296,15 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(0)) {
-                    colorsAnswers[currentQuestion][0] = COLOR_CORRECTO;
-                    if (!puntajeCheats[currentQuestion])
+                    colorsAnswers[act.getCurrentQuestion()][0] = COLOR_CORRECTO;
+                    if (!puntajeCheats[act.getCurrentQuestion()])
                         Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][0] = COLOR_INCORRECTO;
+                    colorsAnswers[act.getCurrentQuestion()][0] = COLOR_INCORRECTO;
                 }
                 RespuestasHabilitador(false);
-                Respondido[currentQuestion] = true;
+                Respondido[act.getCurrentQuestion()] = true;
                 GameChecker();
                 GetAnswersColors();
             }
@@ -293,15 +318,15 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(1)) {
-                    colorsAnswers[currentQuestion][1] = COLOR_CORRECTO;
-                    if (!puntajeCheats[currentQuestion])
+                    colorsAnswers[act.getCurrentQuestion()][1] = COLOR_CORRECTO;
+                    if (!puntajeCheats[act.getCurrentQuestion()])
                         Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][1] = COLOR_INCORRECTO;
+                    colorsAnswers[act.getCurrentQuestion()][1] = COLOR_INCORRECTO;
                 }
                 RespuestasHabilitador(false);
-                Respondido[currentQuestion] = true;
+                Respondido[act.getCurrentQuestion()] = true;
                 GameChecker();
                 GetAnswersColors();
             }
@@ -315,15 +340,15 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(2)) {
-                    colorsAnswers[currentQuestion][2] = COLOR_CORRECTO;
-                    if (!puntajeCheats[currentQuestion])
+                    colorsAnswers[act.getCurrentQuestion()][2] = COLOR_CORRECTO;
+                    if (!puntajeCheats[act.getCurrentQuestion()])
                         Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][2] = COLOR_INCORRECTO;
+                    colorsAnswers[act.getCurrentQuestion()][2] = COLOR_INCORRECTO;
                 }
                 RespuestasHabilitador(false);
-                Respondido[currentQuestion] = true;
+                Respondido[act.getCurrentQuestion()] = true;
                 GameChecker();
                 GetAnswersColors();
             }
@@ -336,15 +361,15 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(3)) {
-                    colorsAnswers[currentQuestion][3] = COLOR_CORRECTO;
-                    if (!puntajeCheats[currentQuestion])
+                    colorsAnswers[act.getCurrentQuestion()][3] = COLOR_CORRECTO;
+                    if (!puntajeCheats[act.getCurrentQuestion()])
                         Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][3] = COLOR_INCORRECTO;
+                    colorsAnswers[act.getCurrentQuestion()][3] = COLOR_INCORRECTO;
                 }
                 RespuestasHabilitador(false);
-                Respondido[currentQuestion] = true;
+                Respondido[act.getCurrentQuestion()] = true;
                 GameChecker();
                 GetAnswersColors();
             }
@@ -373,34 +398,34 @@ public class Activity3 extends AppCompatActivity {
 
         switch (difficult) {
             case 2:
-                respuesta01.setBackgroundColor(colorsAnswers[currentQuestion][0]);
-                respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
+                respuesta01.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][0]);
+                respuesta02.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][1]);
 
-                respuesta01.setEnabled(habilitadorDeRespuestas[currentQuestion][0]);
-                respuesta02.setEnabled(habilitadorDeRespuestas[currentQuestion][1]);
+                respuesta01.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][0]);
+                respuesta02.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][1]);
 
                 break;
             case 3:
-                respuesta01.setBackgroundColor(colorsAnswers[currentQuestion][0]);
-                respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
-                respuesta03.setBackgroundColor(colorsAnswers[currentQuestion][2]);
+                respuesta01.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][0]);
+                respuesta02.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][1]);
+                respuesta03.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][2]);
 
-                respuesta01.setEnabled(habilitadorDeRespuestas[currentQuestion][0]);
-                respuesta02.setEnabled(habilitadorDeRespuestas[currentQuestion][1]);
-                respuesta03.setEnabled(habilitadorDeRespuestas[currentQuestion][2]);
+                respuesta01.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][0]);
+                respuesta02.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][1]);
+                respuesta03.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][2]);
 
 
                 break;
             case 4:
-                respuesta01.setBackgroundColor(colorsAnswers[currentQuestion][0]);
-                respuesta02.setBackgroundColor(colorsAnswers[currentQuestion][1]);
-                respuesta03.setBackgroundColor(colorsAnswers[currentQuestion][2]);
-                respuesta04.setBackgroundColor(colorsAnswers[currentQuestion][3]);
+                respuesta01.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][0]);
+                respuesta02.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][1]);
+                respuesta03.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][2]);
+                respuesta04.setBackgroundColor(colorsAnswers[act.getCurrentQuestion()][3]);
 
-                respuesta01.setEnabled(habilitadorDeRespuestas[currentQuestion][0]);
-                respuesta02.setEnabled(habilitadorDeRespuestas[currentQuestion][1]);
-                respuesta03.setEnabled(habilitadorDeRespuestas[currentQuestion][2]);
-                respuesta04.setEnabled(habilitadorDeRespuestas[currentQuestion][3]);
+                respuesta01.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][0]);
+                respuesta02.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][1]);
+                respuesta03.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][2]);
+                respuesta04.setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][3]);
 
                 break;
 
@@ -435,10 +460,12 @@ public class Activity3 extends AppCompatActivity {
 
     public void NextQuestionIndex() {
         currentQuestion = (currentQuestion + 1) % questionsQuantity;
+        act.setCurrentQuestion(currentQuestion);
     }
 
     public void PrevQuestionIndex() {
         currentQuestion = (currentQuestion + questionsQuantity - 1) % questionsQuantity;
+        act.setCurrentQuestion(currentQuestion);
     }
 
     public void ShowQuestionsFollower(int c) {
@@ -467,15 +494,15 @@ public class Activity3 extends AppCompatActivity {
 
     public void HabilitacionBotones(int quantity) {
         for (int i = 0; i < quantity; i++) {
-            respuestas[currentQuestion][i].setEnabled(true);
-            respuestas[currentQuestion][i].setVisibility(View.VISIBLE);
+            respuestas[act.getCurrentQuestion()][i].setEnabled(true);
+            respuestas[act.getCurrentQuestion()][i].setVisibility(View.VISIBLE);
 
         }
     }
 
     public boolean AnswerChecker(int i) {
         boolean a;
-        if (respuestas[currentQuestion][i].getText() == answersToShow[currentQuestion][0].getAnswerText())
+        if (respuestas[act.getCurrentQuestion()][i].getText() == answersToShow[act.getCurrentQuestion()][0].getAnswerText())
             a = true;
         else
             a = false;
@@ -484,7 +511,7 @@ public class Activity3 extends AppCompatActivity {
 
     public void NotEnableButtons() {
         for (int h = 0; h < difficult; h++) {
-            habilitadorDeRespuestas[currentQuestion][h] = false;
+            habilitadorDeRespuestas[act.getCurrentQuestion()][h] = false;
         }
     }
 
@@ -513,10 +540,10 @@ public class Activity3 extends AppCompatActivity {
 
     public void ShowAnswerByCheats() {
         for (int o = 0; o < 4; o++) {
-            if (respuestas[currentQuestion][o].isEnabled()) {
-                colorsAnswers[currentQuestion][o] = COLOR_CORRECTO;
+            if (respuestas[act.getCurrentQuestion()][o].isEnabled()) {
+                colorsAnswers[act.getCurrentQuestion()][o] = COLOR_CORRECTO;
                 NotEnableButtons();
-                Respondido[currentQuestion] = true;
+                Respondido[act.getCurrentQuestion()] = true;
             }
         }
     }
@@ -526,11 +553,11 @@ public class Activity3 extends AppCompatActivity {
         boolean finish = true;
         while (finish) {
             int aleatorio = rand.nextInt(4);
-            if (respuestas[currentQuestion][aleatorio].isEnabled()) {
-                if (respuestas[currentQuestion][aleatorio].getText() != answersToShow[currentQuestion][0].getAnswerText()) {
-                    habilitadorDeRespuestas[currentQuestion][aleatorio] = false;
-                    colorsAnswers[currentQuestion][aleatorio] = COLOR_TRAMPA;
-                    respuestas[currentQuestion][aleatorio].setEnabled(habilitadorDeRespuestas[currentQuestion][aleatorio]);
+            if (respuestas[act.getCurrentQuestion()][aleatorio].isEnabled()) {
+                if (respuestas[act.getCurrentQuestion()][aleatorio].getText() != answersToShow[act.getCurrentQuestion()][0].getAnswerText()) {
+                    habilitadorDeRespuestas[act.getCurrentQuestion()][aleatorio] = false;
+                    colorsAnswers[act.getCurrentQuestion()][aleatorio] = COLOR_TRAMPA;
+                    respuestas[act.getCurrentQuestion()][aleatorio].setEnabled(habilitadorDeRespuestas[act.getCurrentQuestion()][aleatorio]);
                     finish = false;
                 }
 
@@ -544,7 +571,7 @@ public class Activity3 extends AppCompatActivity {
     }
 
     public void CheatsButtonByQuestion() {
-        cheatsButton.setEnabled(habilitadorDeCheats[currentQuestion]);
+        cheatsButton.setEnabled(habilitadorDeCheats[act.getCurrentQuestion()]);
     }
 
     //#endregion
