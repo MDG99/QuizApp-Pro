@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,8 @@ public class Activity3 extends AppCompatActivity {
     private TextView cheatsFollower;
     private TextView questionsText;
     private TextView cheatsButton;
+    private String nickname;
+    private EditText NickName;
 
 
     //Colores a usar
@@ -99,6 +103,7 @@ public class Activity3 extends AppCompatActivity {
         prevButton = findViewById(R.id.prevButton);
         nextButton = findViewById(R.id.nextButton);
         cheatsButton = findViewById(R.id.cheatsQuantity);
+        NickName = findViewById(R.id.dialogo);
 
         puntajeCheats = new boolean[questionsQuantity];
         for (boolean b : puntajeCheats) {
@@ -266,12 +271,12 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(0)) {
-                    colorsAnswers[currentQuestion][0] = Color.rgb(0, 100, 0);
+                    colorsAnswers[currentQuestion][0] = COLOR_CORRECTO;
                     if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][0] = Color.rgb(100, 0, 0);
+                    colorsAnswers[currentQuestion][0] = COLOR_INCORRECTO;
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
@@ -288,12 +293,12 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(1)) {
-                    colorsAnswers[currentQuestion][1] = Color.rgb(0, 100, 0);
+                    colorsAnswers[currentQuestion][1] = COLOR_CORRECTO;
                     if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][1] = Color.rgb(100, 0, 0);
+                    colorsAnswers[currentQuestion][1] = COLOR_INCORRECTO;
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
@@ -310,12 +315,12 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(2)) {
-                    colorsAnswers[currentQuestion][2] = Color.rgb(0, 100, 0);
+                    colorsAnswers[currentQuestion][2] = COLOR_CORRECTO;
                     if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][2] = Color.rgb(100, 0, 0);
+                    colorsAnswers[currentQuestion][2] = COLOR_INCORRECTO;
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
@@ -331,12 +336,12 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AnswerChecker(3)) {
-                    colorsAnswers[currentQuestion][3] = Color.rgb(0, 100, 0);
+                    colorsAnswers[currentQuestion][3] = COLOR_CORRECTO;
                     if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
-                    colorsAnswers[currentQuestion][3] = Color.rgb(100, 0, 0);
+                    colorsAnswers[currentQuestion][3] = COLOR_INCORRECTO;
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
@@ -353,19 +358,11 @@ public class Activity3 extends AppCompatActivity {
 
 //Leer los temas de los que se va a preguntar, vienen de un arreglo
 
-// Revisar que las preguntas estén siendo seleccionadas al azar realmente
 
-        //Mensaje al salir sin terminar la partida: SnackBar
 
-        //Acción al presionar back();
-
-//Modificar dialogo
 //Falra que el botón de trampas se deshabilite cuando ya no sea necesario hacer trampas en la pregunta
         //Guardado de la partida
 
-        //Enviar información al siguiente activity: Puntaje, si hizo trampa y todas las respuestas
-
-//Cambiar los colores utilizados en las respuestas por las variables de los colores declarads
     }
 
 */
@@ -564,13 +561,29 @@ public class Activity3 extends AppCompatActivity {
 
     public void CreacionDialogo() {
         AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(this);
+        //final EditText Nickname_Input = new EditText(this);
+        DialogoNickname.setView(R.layout.dialogo_personalizado);
+
         DialogoNickname.setTitle("Juego terminado");
-        DialogoNickname.setMessage("Ingrese su Nickname (Solo 3 carácteres)");
+        DialogoNickname.setMessage("Ingrese su Nickname (Solo 3 carácteres)\n\n" +
+                "Aceptar para guardar \n\nCancelar para descartar (se perderá la partida)");
         DialogoNickname.setCancelable(false);
         DialogoNickname.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(Activity3.this, "Hi", Toast.LENGTH_SHORT);
+                if(NickName.getText().toString().isEmpty()){
+                    Toast.makeText(Activity3.this, "Favor de guardar un nickname válido", Toast.LENGTH_SHORT).show();
+                }else {
+                    nickname = NickName.getText().toString();
+                    String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
+
+                }
+            }
+        });
+        DialogoNickname.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(Activity3.this, "Partida descartada", Toast.LENGTH_SHORT).show();
             }
         });
         DialogoNickname.show();
@@ -578,13 +591,27 @@ public class Activity3 extends AppCompatActivity {
 
     public void onBackPressed() {
         View Contenido = findViewById(R.id.content);
-        Snackbar.make(Contenido, "Al salir se perderá tu partida", Snackbar.LENGTH_INDEFINITE).show();
-        //super.onBackPressed();
+        Snackbar.make(Contenido, "Al salir se perderá tu partida", Snackbar.LENGTH_LONG).setAction("Aceptar", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity3.this, MainActivity.class);
+                startActivity(intent);
+            }
+        }).show();
     }
 
     public void SnackTrampa() {
         View Contenido = findViewById(R.id.content);
         Snackbar.make(Contenido, "Haz hecho trampa", Snackbar.LENGTH_SHORT).show();
+    }
+
+    public void EnviarInfo(){
+        Intent intent = new Intent(Activity3.this,Activity4.class);
+        intent.putExtra("NICKNAME", nickname);
+        intent.putExtra("PUNTAJE", Puntaje);
+        intent.putExtra("CHECADOR_TRAMPAS",cheatsEnable);
+        startActivity(intent);
+
     }
 
 }
