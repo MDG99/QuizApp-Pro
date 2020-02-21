@@ -13,14 +13,5 @@ public class Activity4 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_4);
 
-        ImageView ViewImage = findViewById(R.id.imageViewFondo);
-
-        //Añadir fondo a la pantalla
-        Drawable fondo = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            fondo = getResources().getDrawable(R.drawable.fondo4, null);
-        }
-        ViewImage.setImageDrawable(fondo);
-
     }
 }

@@ -1,69 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo4vertical"
-    android:orientation="vertical"
-    tools:context=".Activity4">
+    android:background="@drawable/fondo4"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.5"
-        android:orientation="vertical">
+        android:layout_gravity="center|top"
+        android:layout_weight="1">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20sp"
-                android:layout_marginBottom="10sp"
-                android:fontFamily="@font/demode"
-                android:gravity="center"
-                android:text="PREGUNTADOS"
-                android:textColor="#FFF"
-                android:textSize="30dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/cloud3"
-                android:gravity="center"
-                android:text="Puntuaciones"
-                android:textColor="#FFF"
-                android:textSize="50dp" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/cloud3"
+            android:gravity="center"
+            android:text="Puntuaciones"
+            android:textColor="#FFF"
+            android:textSize="50dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -111,6 +89,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -163,11 +142,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -178,6 +159,7 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="   QWE"
                     android:textColor="#FFF"
                     android:textSize="15dp" />
@@ -189,6 +171,7 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="    ASD"
                     android:textColor="#FFF"
                     android:textSize="15dp" />
@@ -200,6 +183,7 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="    ZXC"
                     android:textColor="#FFF"
                     android:textSize="15dp" />
@@ -209,6 +193,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -258,27 +243,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/findeljuego_imagen"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/trampa" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/oro" />
 
         </LinearLayout>
 
@@ -288,13 +280,6 @@
             android:layout_weight="1">
 
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.5">
 
     </LinearLayout>
 
