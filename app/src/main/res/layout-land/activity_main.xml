@@ -84,7 +84,7 @@
             android:padding="22dp"
             android:text="jugar"
             android:textColor="#304FA2"
-            android:textSize="18dp" />
+            android:textSize="14dp" />
 
         <ImageView
             android:id="@+id/imagen_portada"
