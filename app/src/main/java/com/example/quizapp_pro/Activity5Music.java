@@ -42,6 +42,9 @@ public class Activity5Music extends AppCompatActivity {
     private final String NICKNAME_ARRAY = "PLAYER_NICKNAME";
     private final String PUNTAJE_ARRAY = "PLAYER_POINTS";
     private final String GALLINA_ARRAY = "PLAYER_CHEATED";
+    private String[] nicknames;
+    private int[] puntajes;
+    private boolean[] gallinas;
 
     private int[] topicsChosen;
     private int cuantasPreguntas;
@@ -83,6 +86,9 @@ public class Activity5Music extends AppCompatActivity {
         enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
         cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
 
+        nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
+        puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
+        gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
 
         BtnTrivia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -326,6 +332,9 @@ public class Activity5Music extends AppCompatActivity {
         intentBackMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
         intentBackMusic.putExtra(ENABLE_PISTAS, enabledPistas);
         intentBackMusic.putExtra(NO_PISTAS, cuantasPistas);
+        intentBackMusic.putExtra(NICKNAME_ARRAY, nicknames);
+        intentBackMusic.putExtra(PUNTAJE_ARRAY, puntajes);
+        intentBackMusic.putExtra(GALLINA_ARRAY, gallinas);
         startActivity(intentBackMusic);
     }
 }

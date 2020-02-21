@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private final String NICKNAME_ARRAY = "PLAYER_NICKNAME";
     private final String PUNTAJE_ARRAY = "PLAYER_POINTS";
     private final String GALLINA_ARRAY = "PLAYER_CHEATED";
+    private String[] nicknames;
+    private int[] puntajes;
+    private boolean[] gallinas;
 
     //private final String ENVIA_PREGUNTAS = "XD";
     //private MediaPlayer player;
@@ -50,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
             dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
             enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
             cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
+
+            nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
+            puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
+            gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
         } else {
             Toast.makeText(MainActivity.this, "INICIO DE APP", Toast.LENGTH_SHORT).show();
             topicsChosen = new int[]{0};
@@ -57,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
             dificultadPuntos = 2;
             enabledPistas = false;
             cuantasPistas = 0;
+
+            nicknames = new String[]{"MAX"};
+            puntajes = new int[]{0};
+            gallinas = new boolean[]{false};
+
         }
 
 
@@ -71,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
                     intentConfig.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
                     intentConfig.putExtra(ENABLE_PISTAS, enabledPistas);
                     intentConfig.putExtra(NO_PISTAS, cuantasPistas);
+
+                    intentConfig.putExtra(NICKNAME_ARRAY, nicknames);
+                    intentConfig.putExtra(PUNTAJE_ARRAY, puntajes);
+                    intentConfig.putExtra(GALLINA_ARRAY, gallinas);
                     startActivity(intentConfig);
 
                     startActivity(intentConfig);
@@ -92,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
                 intentPoints.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
                 intentPoints.putExtra(ENABLE_PISTAS, enabledPistas);
                 intentPoints.putExtra(NO_PISTAS, cuantasPistas);
+
+                intentPoints.putExtra(NICKNAME_ARRAY, nicknames);
+                intentPoints.putExtra(PUNTAJE_ARRAY, puntajes);
+                intentPoints.putExtra(GALLINA_ARRAY, gallinas);
                 startActivity(intentPoints);
 
 
@@ -109,6 +129,10 @@ public class MainActivity extends AppCompatActivity {
                 intentMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
                 intentMusic.putExtra(ENABLE_PISTAS, enabledPistas);
                 intentMusic.putExtra(NO_PISTAS, cuantasPistas);
+
+                intentMusic.putExtra(NICKNAME_ARRAY, nicknames);
+                intentMusic.putExtra(PUNTAJE_ARRAY, puntajes);
+                intentMusic.putExtra(GALLINA_ARRAY, gallinas);
                 //Esto manda la informacion de config
                 startActivity(intentMusic);
 
@@ -125,6 +149,11 @@ public class MainActivity extends AppCompatActivity {
                 intentPlay.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
                 intentPlay.putExtra(ENABLE_PISTAS, enabledPistas);
                 intentPlay.putExtra(NO_PISTAS, cuantasPistas);
+
+                intentPlay.putExtra(NICKNAME_ARRAY, nicknames);
+                intentPlay.putExtra(PUNTAJE_ARRAY, puntajes);
+                intentPlay.putExtra(GALLINA_ARRAY, gallinas);
+
                 startActivity(intentPlay);
 
             }

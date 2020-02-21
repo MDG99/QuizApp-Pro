@@ -47,6 +47,9 @@ public class OptionsActivity extends AppCompatActivity {
     private final String NICKNAME_ARRAY = "PLAYER_NICKNAME";
     private final String PUNTAJE_ARRAY = "PLAYER_POINTS";
     private final String GALLINA_ARRAY = "PLAYER_CHEATED";
+    private String[] nicknames;
+    private int[] puntajes;
+    private boolean[] gallinas;
     //private final String RECIBE_PREGUNTAS = "XD";
 
     @Override
@@ -139,6 +142,9 @@ public class OptionsActivity extends AppCompatActivity {
             int noPistas = getIntent().getIntExtra("NO_PISTAS", 0);
             int[] temasId = getIntent().getIntArrayExtra("CUALES_TOPICS");
 
+            nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
+            puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
+            gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
 
             pistaBoolean = cheats;
             dificultad = noDif;
@@ -296,6 +302,9 @@ public class OptionsActivity extends AppCompatActivity {
         intent.putExtra(DIFICULTAD_PUNTOS, dificultad);
         intent.putExtra(ENABLE_PISTAS, pistaBoolean);
         intent.putExtra(NO_PISTAS, pistasCuantas);
+        intent.putExtra(NICKNAME_ARRAY, nicknames);
+        intent.putExtra(PUNTAJE_ARRAY, puntajes);
+        intent.putExtra(GALLINA_ARRAY, gallinas);
         startActivity(intent);
     }
 
