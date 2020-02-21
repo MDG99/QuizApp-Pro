@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -241,6 +242,8 @@ public class Activity5Music extends AppCompatActivity {
                 } else {
                     playerX4.start();
                 }
+
+                Toast.makeText(Activity5Music.this, "BUENA ELECCIÓN", Toast.LENGTH_LONG).show();
 
                 //Intent intent = new Intent(Activity5Music.this, MainActivity.class);
                 //startActivity(intent);

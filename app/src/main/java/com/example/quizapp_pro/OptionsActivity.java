@@ -30,14 +30,14 @@ public class OptionsActivity extends AppCompatActivity {
     private RadioButton btnMedio;
     private RadioButton btnDificil;
     private Switch pistaSwitch;
-    private boolean pistaBoolean = false;
+    private boolean pistaBoolean;
     private Spinner pistasSpinner;
     private Topics[] topicsArray;
     private boolean[] topicsChosen;
-    private int preguntasCuantas = 10;
+    private int preguntasCuantas;
     private String auxText = "Fácil";
-    private int dificultad = 2;
-    private int pistasCuantas = 0;
+    private int dificultad;
+    private int pistasCuantas;
     private final String CUALES_TOPICS = "CUALES_TOPICS";
     private final String NO_PREGUNTAS = "NO_PREGUNTAS";
     private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";
@@ -76,8 +76,6 @@ public class OptionsActivity extends AppCompatActivity {
         };
 //seccion para checar que temas se eligieron
 
-
-        topicsChosen = new boolean[]{false, false, false, false, false, false};
 
         CompoundButton.OnCheckedChangeListener chkListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -135,11 +133,23 @@ public class OptionsActivity extends AppCompatActivity {
             int noDif = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
             boolean cheats = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
             int noPistas = getIntent().getIntExtra("NO_PISTAS", 0);
+            int[] temasId = getIntent().getIntArrayExtra("CUALES_TOPICS");
+
 
             pistaBoolean = cheats;
             dificultad = noDif;
             preguntasCuantas = noPreguntas;
             pistasCuantas = noPistas;
+            topicsChosen = recibeTemas(temasId);
+
+
+            chkArte.setChecked(topicsChosen[0]);
+            chkGeografia.setChecked(topicsChosen[1]);
+            chkFrases.setChecked(topicsChosen[2]);
+            chkVideojuegos.setChecked(topicsChosen[3]);
+            chkHistoria.setChecked(topicsChosen[4]);
+            chkCultura.setChecked(topicsChosen[5]);
+
 
             if (pistaBoolean) {
                 pistasSpinner.setSelection(pistasCuantas - 1);
@@ -161,16 +171,16 @@ public class OptionsActivity extends AppCompatActivity {
 
             switch (noDif) {
                 case 2:
-                    btnFacil.toggle();
+                    btnFacil.setChecked(true);
                     break;
                 case 3:
-                    btnMedio.toggle();
+                    btnMedio.setChecked(true);
                     break;
                 case 4:
-                    btnDificil.toggle();
+                    btnDificil.setChecked(true);
                     break;
                 default:
-                    btnFacil.toggle();
+                    btnFacil.setChecked(true);
                     break;
             }
 
@@ -180,6 +190,12 @@ public class OptionsActivity extends AppCompatActivity {
                 pistaSwitch.setChecked(false);
             }
 
+        } else {
+            pistaBoolean = false;
+            dificultad = 2;
+            preguntasCuantas = 5;
+            pistasCuantas = 0;
+            topicsChosen = new boolean[]{false, false, false, false, false, false};
         }
 
         preguntasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -297,6 +313,35 @@ public class OptionsActivity extends AppCompatActivity {
             i2++;
         }
         return arreglo;
+    }
+
+    public boolean[] recibeTemas(int[] temasId) {
+        boolean[] aux = new boolean[]{false, false, false, false, false, false};
+        for (int x : temasId) {
+            switch (x) {
+                case 0:
+                    aux[0] = true;
+                    break;
+                case 1:
+                    aux[1] = true;
+                    break;
+                case 2:
+                    aux[2] = true;
+                    break;
+                case 3:
+                    aux[3] = true;
+                    break;
+                case 4:
+                    aux[4] = true;
+                    break;
+                case 5:
+                    aux[5] = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return null;
     }
 }
 
