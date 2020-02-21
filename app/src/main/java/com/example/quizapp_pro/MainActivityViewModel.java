@@ -341,11 +341,11 @@ public class MainActivityViewModel extends ViewModel {
                 //region Preguntas sobre frases célebres
 
                 new Questions("¿Quién dijo: “¿No es la vida cien veces demasiado brece para aburrirnos?”?",
-                        2, 21, answersArray[0], answersArray[1], answersArray[2], answersArray[3]),
+                        2, 21, answersArray[80], answersArray[81], answersArray[82], answersArray[83]),
                 new Questions("¿Quién dijo: “Lo importa no es mantenerse vivo sino mantenerse humano”?",
-                        2, 22, answersArray[0], answersArray[1], answersArray[2], answersArray[3]),
+                        2, 22, answersArray[84], answersArray[85], answersArray[86], answersArray[87]),
                 new Questions("¿Quién dijo: “¿No hay camino para la verdad, la verdad es el camino”?",
-                        2, 23, answersArray[0], answersArray[1], answersArray[2], answersArray[3]),
+                        2, 23, answersArray[88], answersArray[89], answersArray[90], answersArray[91]),
                 new Questions("¿Quién dijo: “Nunca rompas el silencio si no es para mejorarlo”?",
                         2, 24, answersArray[0], answersArray[1], answersArray[2], answersArray[3]),
                 new Questions("¿Quién dijo: “Se necesitan dos años para aprender a hablar y sesenta para aprender a callar”?",

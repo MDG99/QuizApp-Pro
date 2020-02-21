@@ -30,20 +30,20 @@ import java.util.Random;
 public class Activity3 extends AppCompatActivity {
 
     private String nickname; //Al final se guarda y se pssa
-    private int difficult = 4; //guardar
-    private int currentQuestion = 0; //guardar
+    private int difficult; //guardar
+    private int currentQuestion; //guardar
     private int questionsQuantity; //guardar
     private int[] cheatsCounterByQuestion; //guardar
     private int questionsForTopic;
     private int residueQuestionsForTopic;
-    private int cheatsQuantity = 5; //guardar
+    private int cheatsQuantity; //guardar
     private int Puntaje; //guardar
     private int[] topicsToAsk; //guardar
     private int[][] colorsAnswers; //guardar
     private EditText Nickname_Input;
 
-    private boolean cheatsEnable = true; //guardar
-    private boolean cheatRecorder = false; //guardar
+    private boolean cheatsEnable; //guardar
+    private boolean cheatRecorder; //guardar
     private boolean cheatsFollowerEnable[];
     private boolean[][] habilitadorDeRespuestas;
     private boolean[] puntajeCheats;
@@ -57,6 +57,7 @@ public class Activity3 extends AppCompatActivity {
     private Answers[][] answersToShowSaved;
     private Answers[][] answersToShow;
 
+    private Bundle estado;
 
 
 
@@ -103,21 +104,20 @@ public class Activity3 extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
 
         Intent intent = getIntent();
-        //difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
+        difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
         questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60); //Me da valores de 0 o 1
-        //cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false); //Correcto
-        //cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
-        //topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
-        topicsToAsk = new int[3];
-        topicsToAsk[0] = 0;
-        topicsToAsk[1] = 1;
-        topicsToAsk[2] = 2;
+        cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false); //Correcto
+        cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
+        topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
+        //estado = intent.getBundleExtra("PARTIDA_REGRESO");
+
 
 
         habilitadorDeCheats = new boolean[questionsQuantity];
@@ -148,7 +148,9 @@ public class Activity3 extends AppCompatActivity {
         answersToShow = new Answers[questionsQuantity][difficult];
         answersToShowSaved = new Answers[questionsQuantity][difficult];
 
-
+        if(estado != null){
+            savedInstanceState = estado;
+        }
 
         if(savedInstanceState != null){
             currentQuestion = savedInstanceState.getInt("CURRENT_QUESTIONS");
@@ -170,6 +172,9 @@ public class Activity3 extends AppCompatActivity {
             answersToShow = (Answers[][]) savedInstanceState.getSerializable("ANSWERS_TO_SHOW");
             answersToShowSaved = (Answers[][]) savedInstanceState.getSerializable("ANSWERS_TO_SHOW_SAVED");
         }else{
+
+            currentQuestion = 0;
+            cheatRecorder = false;
 
             //#region Inicialización de variables
 
@@ -295,7 +300,6 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(Activity3.this, "Tramposo", Toast.LENGTH_SHORT).show();
                 cheatsQuantity--;
                 ShowCheatsQuantity();
                 cheatRecorder = true;
@@ -307,9 +311,10 @@ public class Activity3 extends AppCompatActivity {
                 } else {
                     Trampa();
                     ShowAnswerByCheats();
+                    habilitadorDeCheats[currentQuestion] = false;
                 }
-                SnackTrampa();
                 CheatsButtonByQuestion();
+                SnackTrampa();
                 GameChecker();
                 GetAnswersColors();
             }
@@ -331,6 +336,8 @@ public class Activity3 extends AppCompatActivity {
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
+                habilitadorDeCheats[currentQuestion] = false;
+                CheatsButtonByQuestion();
                 GameChecker();
                 GetAnswersColors();
             }
@@ -353,6 +360,8 @@ public class Activity3 extends AppCompatActivity {
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
+                habilitadorDeCheats[currentQuestion] = false;
+                CheatsButtonByQuestion();
                 GameChecker();
                 GetAnswersColors();
             }
@@ -375,6 +384,8 @@ public class Activity3 extends AppCompatActivity {
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
+                habilitadorDeCheats[currentQuestion] = false;
+                CheatsButtonByQuestion();
                 GameChecker();
                 GetAnswersColors();
             }
@@ -396,6 +407,8 @@ public class Activity3 extends AppCompatActivity {
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
+                habilitadorDeCheats[currentQuestion] = false;
+                CheatsButtonByQuestion();
                 GameChecker();
                 GetAnswersColors();
             }
@@ -434,7 +447,7 @@ public class Activity3 extends AppCompatActivity {
 //Leer los temas de los que se va a preguntar, vienen de un arreglo
 
 
-
+//El dialogo no funciona bien: No guarda el texto y tampoco se deshabilita cuando quiero el botón aceptar
 //Falra que el botón de trampas se deshabilite cuando ya no sea necesario hacer trampas en la pregunta
 
     }
@@ -645,8 +658,9 @@ public class Activity3 extends AppCompatActivity {
         DialogoNickname.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                nickname = NickName.getText().toString();
+                //nickname = NickName.getText().toString();
                 String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
+                Toast.makeText(Activity3.this, msg,Toast.LENGTH_SHORT).show();
                 EnviarInfo();
             }
         });
@@ -681,11 +695,12 @@ public class Activity3 extends AppCompatActivity {
     }
 
     public void EnviarInfo(){
-        Intent intent = new Intent(Activity3.this,Activity4.class);
-        intent.putExtra("NICKNAME", nickname);
-        intent.putExtra("PUNTAJE", Puntaje);
-        intent.putExtra("CHECADOR_TRAMPAS",cheatsEnable);
-        startActivity(intent);
+        Intent intent03 = new Intent(Activity3.this,Activity4.class);
+        //intent03.putExtra("NICKNAME", nickname);
+        intent03.putExtra("PUNTAJE", Puntaje);
+        intent03.putExtra("CHECADOR_TRAMPAS",cheatsEnable);
+        //intent03.putExtra("PARTIDA",estado);
+        startActivity(intent03);
 
     }
 

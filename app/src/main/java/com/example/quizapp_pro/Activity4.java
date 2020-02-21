@@ -1,5 +1,6 @@
 package com.example.quizapp_pro;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,13 +24,22 @@ public class Activity4 extends AppCompatActivity {
     private final String PUNTAJE_ARRAY = "PLAYER_POINTS";
     private final String GALLINA_ARRAY = "PLAYER_CHEATED";
     private String[] nicknames;
+    private String nicknameActual;
     private int[] puntajes;
+    private int puntajeActual;
     private boolean[] gallinas;
+    private boolean gallinaActual;
+    private Bundle estado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_4);
+
+        //Intent intent04 = getIntent();
+        //estado = intent04.getBundleExtra("PARTIDA");//gallinaActual = intent04.getBooleanExtra("CHECADOR_TRAMPAS",false);
+        //nicknameActual = intent04.getStringExtra("NICKNAME");
+        //puntajeActual = intent04.getIntExtra("PUNTAJE",0);
 
         //topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
         //cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
@@ -40,5 +50,17 @@ public class Activity4 extends AppCompatActivity {
         //puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
         //gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        //EnviarInfoBack();
+    }
+
+    public void EnviarInfoBack(){
+        Intent intentBacking = new Intent(Activity4.this,Activity3.class);
+        intentBacking.putExtra("PARTIDA_REGRESO",estado);
+        startActivity(intentBacking);
     }
 }
