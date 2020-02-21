@@ -429,7 +429,6 @@ public class Activity3 extends AppCompatActivity {
 
 
 //Falra que el botón de trampas se deshabilite cuando ya no sea necesario hacer trampas en la pregunta
-        //Guardado de la partida
 
     }
 
