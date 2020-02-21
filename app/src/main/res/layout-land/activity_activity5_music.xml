@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/fondomusic"
     android:orientation="horizontal">
 
@@ -43,13 +44,13 @@
 
         <Button
             android:id="@+id/btnExit"
-            tools:text="A DARLE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
             android:background="@drawable/boton_redondo_musica2"
             android:padding="15dp"
-            android:textColor="#FFF" />
+            android:textColor="#FFF"
+            tools:text="A DARLE" />
 
     </LinearLayout>
 
@@ -67,20 +68,20 @@
 
             <ImageView
                 android:id="@+id/imageView1"
-                app:srcCompat="@drawable/disco1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:srcCompat="@drawable/disco1" />
 
 
             <ImageView
                 android:id="@+id/imageView2"
-                app:srcCompat="@drawable/disco2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:srcCompat="@drawable/disco2" />
 
         </LinearLayout>
 
@@ -124,20 +125,20 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                app:srcCompat="@drawable/disco5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:srcCompat="@drawable/disco5" />
 
 
             <ImageView
                 android:id="@+id/imageView4"
-                app:srcCompat="@drawable/disco4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:srcCompat="@drawable/disco4" />
 
         </LinearLayout>
 
