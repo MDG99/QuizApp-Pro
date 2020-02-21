@@ -25,3 +25,7 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+def lifecycle_version = "1.1.1"
+implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"

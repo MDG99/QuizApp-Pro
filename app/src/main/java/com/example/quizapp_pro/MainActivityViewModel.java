@@ -1,10 +1,12 @@
 package com.example.quizapp_pro;
 
+import androidx.lifecycle.ViewModel;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivityViewModel {
+public class MainActivityViewModel extends ViewModel {
 
     private Questions[] questionsArray;
     private Answers[] answersArray;
