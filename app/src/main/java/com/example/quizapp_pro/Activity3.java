@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 
 
 public class Activity3 extends AppCompatActivity {
@@ -244,12 +242,12 @@ public class Activity3 extends AppCompatActivity {
                 Toast.makeText(Activity3.this, "Tramposo", Toast.LENGTH_SHORT).show();
                 cheatsQuantity--;
                 ShowCheatsQuantity();
-                cheatRecorder=true;
+                cheatRecorder = true;
 
-                if (cheatsCounterByQuestion[currentQuestion]>2) {
-                   Trampa();
-                puntajeCheats[currentQuestion] = true;
-                cheatsCounterByQuestion[currentQuestion]--;
+                if (cheatsCounterByQuestion[currentQuestion] > 2) {
+                    Trampa();
+                    puntajeCheats[currentQuestion] = true;
+                    cheatsCounterByQuestion[currentQuestion]--;
                 } else {
                     Trampa();
                     ShowAnswerByCheats();
@@ -269,14 +267,14 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(0)) {
                     colorsAnswers[currentQuestion][0] = Color.rgb(0, 100, 0);
-                    if(!puntajeCheats[currentQuestion])
-                    Puntaje += difficult;
+                    if (!puntajeCheats[currentQuestion])
+                        Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][0] = Color.rgb(100, 0, 0);
                 }
                 RespuestasHabilitador(false);
-                Respondido[currentQuestion]=true;
+                Respondido[currentQuestion] = true;
                 GameChecker();
                 GetAnswersColors();
             }
@@ -291,20 +289,18 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(1)) {
                     colorsAnswers[currentQuestion][1] = Color.rgb(0, 100, 0);
-                    if(!puntajeCheats[currentQuestion])
+                    if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][1] = Color.rgb(100, 0, 0);
                 }
                 RespuestasHabilitador(false);
-                Respondido[currentQuestion]=true;
+                Respondido[currentQuestion] = true;
                 GameChecker();
                 GetAnswersColors();
             }
         });
-
-
 
 
         //# endregion
@@ -315,14 +311,14 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(2)) {
                     colorsAnswers[currentQuestion][2] = Color.rgb(0, 100, 0);
-                    if(!puntajeCheats[currentQuestion])
+                    if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][2] = Color.rgb(100, 0, 0);
                 }
                 RespuestasHabilitador(false);
-                Respondido[currentQuestion]=true;
+                Respondido[currentQuestion] = true;
                 GameChecker();
                 GetAnswersColors();
             }
@@ -336,14 +332,14 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(3)) {
                     colorsAnswers[currentQuestion][3] = Color.rgb(0, 100, 0);
-                    if(!puntajeCheats[currentQuestion])
+                    if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][3] = Color.rgb(100, 0, 0);
                 }
                 RespuestasHabilitador(false);
-                Respondido[currentQuestion]=true;
+                Respondido[currentQuestion] = true;
                 GameChecker();
                 GetAnswersColors();
             }
@@ -519,8 +515,8 @@ public class Activity3 extends AppCompatActivity {
     }
 
     public void ShowAnswerByCheats() {
-        for (int o =0; o<4;o++){
-            if(respuestas[currentQuestion][o].isEnabled()){
+        for (int o = 0; o < 4; o++) {
+            if (respuestas[currentQuestion][o].isEnabled()) {
                 colorsAnswers[currentQuestion][o] = COLOR_CORRECTO;
                 NotEnableButtons();
                 Respondido[currentQuestion] = true;
@@ -543,30 +539,30 @@ public class Activity3 extends AppCompatActivity {
 
             }
         }
-        if(cheatsQuantity == 0){
+        if (cheatsQuantity == 0) {
             for (int t = 0; t < questionsQuantity; t++) {
                 habilitadorDeCheats[t] = false;
             }
         }
     }
 
-    public void CheatsButtonByQuestion(){
+    public void CheatsButtonByQuestion() {
         cheatsButton.setEnabled(habilitadorDeCheats[currentQuestion]);
     }
 
     //#endregion
 
-    public void GameChecker(){
-        int finish =0;
-        for(int d = 0; d<questionsQuantity;d++){
-            if(Respondido[d])
-                    finish++;
+    public void GameChecker() {
+        int finish = 0;
+        for (int d = 0; d < questionsQuantity; d++) {
+            if (Respondido[d])
+                finish++;
         }
-        if(finish==questionsQuantity)
+        if (finish == questionsQuantity)
             CreacionDialogo();
     }
 
-    public void CreacionDialogo(){
+    public void CreacionDialogo() {
         AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(this);
         DialogoNickname.setTitle("Juego terminado");
         DialogoNickname.setMessage("Ingrese su Nickname (Solo 3 carácteres)");
@@ -574,7 +570,7 @@ public class Activity3 extends AppCompatActivity {
         DialogoNickname.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-           Toast.makeText(Activity3.this,"Hi",Toast.LENGTH_SHORT);
+                Toast.makeText(Activity3.this, "Hi", Toast.LENGTH_SHORT);
             }
         });
         DialogoNickname.show();
@@ -582,13 +578,13 @@ public class Activity3 extends AppCompatActivity {
 
     public void onBackPressed() {
         View Contenido = findViewById(R.id.content);
-        Snackbar.make(Contenido,"Al salir se perderá tu partida",Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(Contenido, "Al salir se perderá tu partida", Snackbar.LENGTH_INDEFINITE).show();
         //super.onBackPressed();
     }
 
-    public void SnackTrampa(){
+    public void SnackTrampa() {
         View Contenido = findViewById(R.id.content);
-        Snackbar.make(Contenido,"Haz hecho trampa",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(Contenido, "Haz hecho trampa", Snackbar.LENGTH_SHORT).show();
     }
 
 }
