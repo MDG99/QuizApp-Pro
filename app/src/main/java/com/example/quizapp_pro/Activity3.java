@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +40,7 @@ public class Activity3 extends AppCompatActivity {
     private int Puntaje; //guardar
     private int[] topicsToAsk; //guardar
     private int[][] colorsAnswers; //guardar
+    private EditText Nickname_Input;
 
     private boolean cheatsEnable = true; //guardar
     private boolean cheatRecorder = false; //guardar
@@ -46,6 +50,7 @@ public class Activity3 extends AppCompatActivity {
     private boolean[] habilitadorDeCheats;
     private boolean[] Respondido;
 
+    private AlertDialog Dialogo;
     private List<Questions> questionsToShow;
     private Questions[] questionsToShowSaved;
 
@@ -133,6 +138,8 @@ public class Activity3 extends AppCompatActivity {
         nextButton = findViewById(R.id.nextButton);
         cheatsButton = findViewById(R.id.cheatsQuantity);
         NickName = findViewById(R.id.dialogo);
+        Nickname_Input = findViewById(R.id.dialogo);
+
 
         MainActivityViewModel model = new MainActivityViewModel();
 
@@ -627,8 +634,8 @@ public class Activity3 extends AppCompatActivity {
     }
 
     public void CreacionDialogo() {
-        AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(this);
-        //final EditText Nickname_Input = new EditText(this);
+        final AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(this);
+        Nickname_Input = new EditText(this);
         DialogoNickname.setView(R.layout.dialogo_personalizado);
 
         DialogoNickname.setTitle("Juego terminado");
@@ -638,13 +645,9 @@ public class Activity3 extends AppCompatActivity {
         DialogoNickname.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(NickName.getText().toString().isEmpty()){
-                    Toast.makeText(Activity3.this, "Favor de guardar un nickname válido", Toast.LENGTH_SHORT).show();
-                }else {
-                    nickname = NickName.getText().toString();
-                    String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
-
-                }
+                nickname = NickName.getText().toString();
+                String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
+                EnviarInfo();
             }
         });
         DialogoNickname.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -653,7 +656,12 @@ public class Activity3 extends AppCompatActivity {
                 Toast.makeText(Activity3.this, "Partida descartada", Toast.LENGTH_SHORT).show();
             }
         });
-        DialogoNickname.show();
+        Dialogo = DialogoNickname.create();
+        Dialogo.show();
+
+        Dialogo.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+
+
     }
 
     public void onBackPressed() {
