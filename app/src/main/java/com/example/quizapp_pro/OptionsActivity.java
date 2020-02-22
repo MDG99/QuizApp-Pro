@@ -312,14 +312,14 @@ public class OptionsActivity extends AppCompatActivity {
         List<Integer> list = new ArrayList<>();
         int i = 0;
         for (boolean x : b) {
-            if (x == true) {
+            if (x) {
                 list.add(i);
             }
             i++;
         }
 
 
-        int[] arreglo = new int[i];
+        int[] arreglo = new int[list.size()];
         int i2 = 0;
         for (Integer y : list) {
             arreglo[i2] = list.get(i2);
