@@ -29,7 +29,7 @@ import java.util.Random;
 
 public class Activity3 extends AppCompatActivity {
 
-    private String nickname; //Al final se guarda y se pssa
+    private String nickname = "CALISTO"; //Al final se guarda y se pssa
     private int difficult; //guardar
     private int currentQuestion; //guardar
     private int questionsQuantity; //guardar
@@ -40,7 +40,6 @@ public class Activity3 extends AppCompatActivity {
     private int Puntaje; //guardar
     private int[] topicsToAsk; //guardar
     private int[][] colorsAnswers; //guardar
-    private EditText Nickname_Input;
 
     private boolean cheatsEnable; //guardar
     private boolean cheatRecorder; //guardar
@@ -66,8 +65,6 @@ public class Activity3 extends AppCompatActivity {
     private TextView cheatsFollower;
     private TextView questionsText;
     private TextView cheatsButton;
-
-    private EditText NickName;
 
 
     //Colores a usar
@@ -137,8 +134,6 @@ public class Activity3 extends AppCompatActivity {
         prevButton = findViewById(R.id.prevButton);
         nextButton = findViewById(R.id.nextButton);
         cheatsButton = findViewById(R.id.cheatsQuantity);
-        NickName = findViewById(R.id.dialogo);
-        Nickname_Input = findViewById(R.id.dialogo);
 
 
         MainActivityViewModel model = new MainActivityViewModel();
@@ -648,8 +643,8 @@ public class Activity3 extends AppCompatActivity {
 
     public void CreacionDialogo() {
         final AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(this);
-        Nickname_Input = new EditText(this);
         DialogoNickname.setView(R.layout.dialogo_personalizado);
+
 
         DialogoNickname.setTitle("Juego terminado");
         DialogoNickname.setMessage("Ingrese su Nickname (Solo 3 carácteres)\n\n" +
@@ -658,9 +653,9 @@ public class Activity3 extends AppCompatActivity {
         DialogoNickname.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //nickname = NickName.getText().toString();
-                String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
-                Toast.makeText(Activity3.this, msg,Toast.LENGTH_SHORT).show();
+                //nickname = findViewById(R.id.dialogo).toString();
+                //String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
+                Toast.makeText(Activity3.this, "Infomración Falsa pasada",Toast.LENGTH_SHORT).show();
                 EnviarInfo();
             }
         });
@@ -674,6 +669,7 @@ public class Activity3 extends AppCompatActivity {
         Dialogo.show();
 
         Dialogo.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+
 
 
     }
@@ -696,7 +692,7 @@ public class Activity3 extends AppCompatActivity {
 
     public void EnviarInfo(){
         Intent intent03 = new Intent(Activity3.this,Activity4.class);
-        //intent03.putExtra("NICKNAME", nickname);
+        intent03.putExtra("NICKNAME", nickname);
         intent03.putExtra("PUNTAJE", Puntaje);
         intent03.putExtra("CHECADOR_TRAMPAS",cheatsEnable);
         //intent03.putExtra("PARTIDA",estado);
