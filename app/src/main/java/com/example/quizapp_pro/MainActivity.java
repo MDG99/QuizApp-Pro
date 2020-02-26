@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         ImagenMundo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Elaborado por: Ignacio Isaac, Maximiliano Ballina y Aarón Calixto", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Elaborado por: Ignacio Isaac, Maximiliano Segura y Aarón Calixto", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -168,6 +168,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }
