@@ -90,13 +90,15 @@
                 android:layout_marginLeft="20sp"
                 android:text="Prev" />
 
-            <TextView
+            <ImageView
+                android:id="@+id/ImageTopic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Elige la opción correcta"
-                android:textSize="12sp" />
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/mainphoto" />
 
             <Button
                 android:id="@+id/nextButton"

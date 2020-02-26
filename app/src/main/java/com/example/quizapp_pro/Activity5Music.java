@@ -243,6 +243,7 @@ public class Activity5Music extends AppCompatActivity {
         BtnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 MediaPlayer playerX1 = MediaPlayer.create(Activity5Music.this, R.raw.trivia);
                 MediaPlayer playerX2 = MediaPlayer.create(Activity5Music.this, R.raw.rock);
                 MediaPlayer playerX3 = MediaPlayer.create(Activity5Music.this, R.raw.general);
@@ -257,7 +258,6 @@ public class Activity5Music extends AppCompatActivity {
                 } else if (player4.isPlaying()) {
                     player4.stop();
                 }
-
 
                 if (!BtnTrivia.isClickable()) {
                     playerX1.start();

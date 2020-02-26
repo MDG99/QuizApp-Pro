@@ -3,6 +3,7 @@ package com.example.quizapp_pro;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.Editable;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.media.MediaPlayer;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -87,7 +89,9 @@ public class Activity3 extends AppCompatActivity {
     private Button respuesta04;
     private Button[][] respuestas;
 
-
+    private MediaPlayer playercorrect;
+    private MediaPlayer playercheat;
+    private MediaPlayer playerincorrect;
 
 
     //Nombres de los Intents de donde se recaudará información del OptionsActivity
@@ -99,13 +103,14 @@ public class Activity3 extends AppCompatActivity {
 
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
+
+        playercorrect = MediaPlayer.create(Activity3.this, R.raw.fxacierto);
+        playercheat = MediaPlayer.create(Activity3.this, R.raw.fxgallina);
+        playerincorrect = MediaPlayer.create(Activity3.this, R.raw.fxincorrecto);
 
         Intent intent = getIntent();
         difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
@@ -301,10 +306,12 @@ public class Activity3 extends AppCompatActivity {
 
                 if (cheatsCounterByQuestion[currentQuestion] > 2) {
                     Trampa();
+                    playercheat.start();
                     puntajeCheats[currentQuestion] = true;
                     cheatsCounterByQuestion[currentQuestion]--;
                 } else {
                     Trampa();
+                    playercorrect.start();
                     ShowAnswerByCheats();
                     habilitadorDeCheats[currentQuestion] = false;
                 }
@@ -323,11 +330,13 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(0)) {
                     colorsAnswers[currentQuestion][0] = COLOR_CORRECTO;
+                    playercorrect.start();
                     if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][0] = COLOR_INCORRECTO;
+                    playerincorrect.start();
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
@@ -347,11 +356,13 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(1)) {
                     colorsAnswers[currentQuestion][1] = COLOR_CORRECTO;
+                    playercorrect.start();
                     if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][1] = COLOR_INCORRECTO;
+                    playerincorrect.start();
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
@@ -371,11 +382,13 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(2)) {
                     colorsAnswers[currentQuestion][2] = COLOR_CORRECTO;
+                    playercorrect.start();
                     if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][2] = COLOR_INCORRECTO;
+                    playerincorrect.start();
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;
@@ -394,11 +407,13 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 if (AnswerChecker(3)) {
                     colorsAnswers[currentQuestion][3] = COLOR_CORRECTO;
+                    playercorrect.start();
                     if (!puntajeCheats[currentQuestion])
                         Puntaje += difficult;
 
                 } else {
                     colorsAnswers[currentQuestion][3] = COLOR_INCORRECTO;
+                    playerincorrect.start();
                 }
                 RespuestasHabilitador(false);
                 Respondido[currentQuestion] = true;

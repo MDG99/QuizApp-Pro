@@ -1,6 +1,7 @@
 package com.example.quizapp_pro;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,6 +53,9 @@ public class OptionsActivity extends AppCompatActivity {
     private boolean[] gallinas;
     //private final String RECIBE_PREGUNTAS = "XD";
 
+    private MediaPlayer playercheck;
+    private MediaPlayer playercheat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,9 @@ public class OptionsActivity extends AppCompatActivity {
         pistaSwitch = findViewById(R.id.pistas_button);
         pistasSpinner = findViewById(R.id.pistas_spinner);
 
+        playercheck = MediaPlayer.create(OptionsActivity.this, R.raw.fxburbuja);
+        playercheat = MediaPlayer.create(OptionsActivity.this, R.raw.fxgallina);
+
         final CheckBox[] checkBoxes = {chkArte, chkGeografia, chkFrases, chkVideojuegos, chkHistoria, chkCultura};
         topicsArray = new Topics[]{
                 new Topics(0, "Arte"),
@@ -91,6 +98,7 @@ public class OptionsActivity extends AppCompatActivity {
                 for (CheckBox chk : checkBoxes) {
                     if (chk.isChecked()) {
                         topicsChosen[i] = true;
+                        playercheck.start();
                     } else {
                         topicsChosen[i] = false;
                     }
@@ -110,6 +118,7 @@ public class OptionsActivity extends AppCompatActivity {
                     checkBoxes[3].setChecked(true);
                     checkBoxes[4].setChecked(true);
                     checkBoxes[5].setChecked(true);
+                    playercheck.start();
 
                     topicsChosen[0] = true;
                     topicsChosen[1] = true;
@@ -258,6 +267,7 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (pistaSwitch.isChecked()) {
+                    playercheat.start();
                     pistasSpinner.setEnabled(true);
                     pistasCuantas = Integer.parseInt(pistasSpinner.getSelectedItem().toString());
                     pistasSpinner.getBackground().setAlpha(255);
