@@ -448,7 +448,6 @@ public class MainActivityViewModel extends ViewModel {
                 new Topics(4, "Historia"),
                 new Topics(5, "Cultura general")
         };
-
     }
 
     public Questions[] getQuestionsArray() {

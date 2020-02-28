@@ -93,6 +93,7 @@ public class Activity3 extends AppCompatActivity {
     private MediaPlayer playercheat;
     private MediaPlayer playerincorrect;
 
+    private ImageView TopicPhoto;
 
     //Nombres de los Intents de donde se recaudará información del OptionsActivity
     public static final String DIFFICULT_INTENT = "DIFICULTAD_PUNTOS";
@@ -139,6 +140,7 @@ public class Activity3 extends AppCompatActivity {
         prevButton = findViewById(R.id.prevButton);
         nextButton = findViewById(R.id.nextButton);
         cheatsButton = findViewById(R.id.cheatsQuantity);
+        TopicPhoto = findViewById(R.id.ImageTopic);
 
 
         MainActivityViewModel model = new MainActivityViewModel();
