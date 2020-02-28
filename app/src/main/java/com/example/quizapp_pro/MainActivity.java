@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                     intentConfig.putExtra(GALLINA_ARRAY, gallinas);
                     startActivity(intentConfig);
 
-                    startActivity(intentConfig);
                 } else {
 
                     Intent intentConfig = new Intent(MainActivity.this, OptionsActivity.class);

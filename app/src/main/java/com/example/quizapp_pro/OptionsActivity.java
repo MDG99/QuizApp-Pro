@@ -52,7 +52,7 @@ public class OptionsActivity extends AppCompatActivity {
     private int[] puntajes;
     private boolean[] gallinas;
     //private final String RECIBE_PREGUNTAS = "XD";
-
+    private Bundle estado;
     private MediaPlayer playercheck;
     private MediaPlayer playercheat;
 
@@ -215,7 +215,70 @@ public class OptionsActivity extends AppCompatActivity {
             dificultad = 2;
             preguntasCuantas = 5;
             pistasCuantas = 0;
-            topicsChosen = new boolean[]{false, false, false, false, false, false};
+            topicsChosen = new boolean[]{false, true, false, false, false, false};
+        }
+
+        if(estado != null){
+            savedInstanceState = estado;
+        }
+
+        if(savedInstanceState != null){
+            topicsChosen=recibeTemas(savedInstanceState.getIntArray(CUALES_TOPICS));
+            dificultad = savedInstanceState.getInt(DIFICULTAD_PUNTOS);
+            preguntasCuantas = savedInstanceState.getInt(NO_PREGUNTAS);
+            pistasCuantas = savedInstanceState.getInt(NO_PISTAS);
+            pistaBoolean = savedInstanceState.getBoolean(ENABLE_PISTAS);
+            nicknames=savedInstanceState.getStringArray(NICKNAME_ARRAY);
+            puntajes=savedInstanceState.getIntArray(PUNTAJE_ARRAY);
+            gallinas=savedInstanceState.getBooleanArray(GALLINA_ARRAY);
+
+
+            chkArte.setChecked(topicsChosen[0]);
+            chkGeografia.setChecked(topicsChosen[1]);
+            chkFrases.setChecked(topicsChosen[2]);
+            chkVideojuegos.setChecked(topicsChosen[3]);
+            chkHistoria.setChecked(topicsChosen[4]);
+            chkCultura.setChecked(topicsChosen[5]);
+
+
+            if (pistaBoolean) {
+                pistasSpinner.setSelection(pistasCuantas - 1);
+                pistasSpinner.setEnabled(true);
+                pistasSpinner.getBackground().setAlpha(255);
+            }
+
+            switch (preguntasCuantas) {
+                case 5:
+                    preguntasSpinner.setSelection(0);
+                    break;
+                case 10:
+                    preguntasSpinner.setSelection(1);
+                    break;
+                default:
+                    preguntasSpinner.setSelection(0);
+                    break;
+            }
+
+            switch (dificultad) {
+                case 2:
+                    btnFacil.setChecked(true);
+                    break;
+                case 3:
+                    btnMedio.setChecked(true);
+                    break;
+                case 4:
+                    btnDificil.setChecked(true);
+                    break;
+                default:
+                    btnFacil.setChecked(true);
+                    break;
+            }
+
+            if (pistaBoolean) {
+                pistaSwitch.setChecked(true);
+            } else {
+                pistaSwitch.setChecked(false);
+            }
         }
 
         preguntasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -337,6 +400,19 @@ public class OptionsActivity extends AppCompatActivity {
             i2++;
         }
         return arreglo;
+    }
+
+    public void onSaveInstanceState(Bundle estado) {
+        estado.putIntArray(CUALES_TOPICS,ArregloTemasId(topicsChosen));
+        estado.putInt(NO_PREGUNTAS,preguntasCuantas);
+        estado.putInt(DIFICULTAD_PUNTOS,dificultad);
+        estado.putBoolean(ENABLE_PISTAS,pistaBoolean);
+        estado.putInt(NO_PISTAS,pistasCuantas);
+        estado.putStringArray(NICKNAME_ARRAY, nicknames);
+        estado.putIntArray(PUNTAJE_ARRAY, puntajes);
+        estado.putBooleanArray(GALLINA_ARRAY, gallinas);
+        super.onSaveInstanceState(estado);
+
     }
 
     public boolean[] recibeTemas(int[] temasId) {
