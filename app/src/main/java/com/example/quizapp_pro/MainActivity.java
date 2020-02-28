@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] nicknames;
     private int[] puntajes;
     private boolean[] gallinas;
+    private Bundle estado;
 
     //private final String ENVIA_PREGUNTAS = "XD";
     //private MediaPlayer player;
@@ -81,6 +82,21 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        if (estado != null) {
+            savedInstanceState = estado;
+        }
+
+        if (savedInstanceState != null) {
+            topicsChosen = savedInstanceState.getIntArray(CUALES_TOPICS);
+            cuantasPreguntas = savedInstanceState.getInt(NO_PREGUNTAS);
+            dificultadPuntos = savedInstanceState.getInt(DIFICULTAD_PUNTOS);
+            enabledPistas = savedInstanceState.getBoolean(ENABLE_PISTAS);
+            cuantasPistas = savedInstanceState.getInt(NO_PISTAS);
+
+            nicknames = savedInstanceState.getStringArray(NICKNAME_ARRAY);
+            puntajes = savedInstanceState.getIntArray(PUNTAJE_ARRAY);
+            gallinas = savedInstanceState.getBooleanArray(GALLINA_ARRAY);
+        }
 
         btnConfig.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,5 +183,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void onSaveInstanceState(Bundle estado) {
+        estado.putIntArray(CUALES_TOPICS, topicsChosen);
+        estado.putInt(NO_PREGUNTAS, cuantasPreguntas);
+        estado.putInt(DIFICULTAD_PUNTOS, dificultadPuntos);
+        estado.putBoolean(ENABLE_PISTAS, enabledPistas);
+        estado.putInt(NO_PISTAS, cuantasPistas);
+        estado.putStringArray(NICKNAME_ARRAY, nicknames);
+        estado.putIntArray(PUNTAJE_ARRAY, puntajes);
+        estado.putBooleanArray(GALLINA_ARRAY, gallinas);
+        super.onSaveInstanceState(estado);
+
     }
 }
