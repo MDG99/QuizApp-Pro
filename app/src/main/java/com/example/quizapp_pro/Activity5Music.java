@@ -290,6 +290,17 @@ public class Activity5Music extends AppCompatActivity {
                     mp.start();
                 }
 
+                Intent intentBackMusic = new Intent(Activity5Music.this, MainActivity.class);
+                intentBackMusic.putExtra(CUALES_TOPICS, topicsChosen);
+                intentBackMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
+                intentBackMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
+                intentBackMusic.putExtra(ENABLE_PISTAS, enabledPistas);
+                intentBackMusic.putExtra(NO_PISTAS, cuantasPistas);
+                intentBackMusic.putExtra(NICKNAME_ARRAY, nicknames);
+                intentBackMusic.putExtra(PUNTAJE_ARRAY, puntajes);
+                intentBackMusic.putExtra(GALLINA_ARRAY, gallinas);
+                startActivity(intentBackMusic);
+
                 Toast.makeText(Activity5Music.this, "BUENA ELECCIÓN", Toast.LENGTH_LONG).show();
 
                 //Intent intent = new Intent(Activity5Music.this, MainActivity.class);

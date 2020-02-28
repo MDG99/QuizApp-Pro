@@ -81,16 +81,16 @@
             android:layout_marginBottom="160dp"
             android:layout_weight="4"
             android:background="@drawable/jugarmain2"
-            android:padding="22dp"
             android:text="jugar"
             android:textColor="#304FA2"
-            android:textSize="14dp" />
+            android:textSize="10dp" />
 
         <ImageView
             android:id="@+id/imagen_portada"
-            android:layout_width="480dp"
-            android:layout_height="380dp"
-            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:layout_width="450dp"
+            android:layout_height="350dp"
+            android:layout_margin="20dp"
             android:layout_weight="1"
             android:background="@drawable/fondomundo"
             app:srcCompat="@drawable/mainphoto" />
