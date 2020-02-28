@@ -668,8 +668,8 @@ public class Activity3 extends AppCompatActivity {
         DialogoNickname.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //nickname = findViewById(R.id.dialogo).toString();
-                //String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
+                nickname = findViewById(R.id.dialogo).toString();
+                String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
                 Toast.makeText(Activity3.this, "Infomración Falsa pasada",Toast.LENGTH_SHORT).show();
                 EnviarInfo();
             }
@@ -710,7 +710,7 @@ public class Activity3 extends AppCompatActivity {
         intent03.putExtra("NICKNAME", nickname);
         intent03.putExtra("PUNTAJE", Puntaje);
         intent03.putExtra("CHECADOR_TRAMPAS",cheatsEnable);
-        //intent03.putExtra("PARTIDA",estado);
+        intent03.putExtra("PARTIDA",estado);
         startActivity(intent03);
 
     }

@@ -68,6 +68,7 @@ public class OptionsActivity extends AppCompatActivity {
         chkVideojuegos = findViewById(R.id.videojuegos_checkbox);
         chkHistoria = findViewById(R.id.historia_checkbox);
         chkCultura = findViewById(R.id.cultura_checkbox);
+        chkGeografia.setChecked(true);
 
         preguntasSpinner = findViewById(R.id.preguntas_spinner);
         btnFacil = findViewById(R.id.facil_radio);

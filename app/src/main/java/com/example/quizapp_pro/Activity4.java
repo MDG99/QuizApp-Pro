@@ -68,13 +68,14 @@ public class Activity4 extends AppCompatActivity {
         txtPuntaje6 = findViewById(R.id.puntaje6);
         btnGallina = findViewById(R.id.findeljuego_imagen);
 
-        Intent intent04 = getIntent();
+        //Intent intent04 = getIntent();
         //estado = intent04.getBundleExtra("PARTIDA");//gallinaActual = intent04.getBooleanExtra("CHECADOR_TRAMPAS",false);
-        nicknameActual = intent04.getStringExtra("NICKNAME");
-        puntajeActual = intent04.getIntExtra("PUNTAJE", 0);
+        //nicknameActual = intent04.getStringExtra("NICKNAME");
+        //puntajeActual = intent04.getIntExtra("PUNTAJE", 0);
 
 
-        topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
+
+        //topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
         //cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
         //dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
         //enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);

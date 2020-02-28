@@ -32,6 +32,7 @@ public class Activity5Music extends AppCompatActivity {
     private MediaPlayer player2;
     private MediaPlayer player3;
     private MediaPlayer player4;
+    private MediaPlayer mp;
 
     private final String CUALES_TOPICS = "CUALES_TOPICS";
     private final String NO_PREGUNTAS = "NO_PREGUNTAS";
@@ -62,6 +63,7 @@ public class Activity5Music extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity5_music);
 
+        stopPlaying();
         player1 = MediaPlayer.create(Activity5Music.this, R.raw.trividademo);
         player2 = MediaPlayer.create(Activity5Music.this, R.raw.rockdemo);
         player3 = MediaPlayer.create(Activity5Music.this, R.raw.generaldemo);
@@ -93,6 +95,9 @@ public class Activity5Music extends AppCompatActivity {
         BtnTrivia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopPlaying();
+                mp = MediaPlayer.create(Activity5Music.this, R.raw.trividademo);
+                mp.start();
                 BtnTrivia.setBackgroundResource(R.drawable.opcionescogida1);
                 Activity.setBackgroundResource(R.drawable.opcionescogidat);
 
@@ -115,14 +120,14 @@ public class Activity5Music extends AppCompatActivity {
                 BtnClasica.setClickable(true);
 
 
-                if (player2.isPlaying()) {
-                    player2.stop();
-                } else if (player3.isPlaying()) {
-                    player3.stop();
-                } else if (player4.isPlaying()) {
-                    player4.stop();
-                }
-                player1.start();
+                //if (player2.isPlaying()) {
+                //    player2.stop();
+                //} else if (player3.isPlaying()) {
+                //    player3.stop();
+                //} else if (player4.isPlaying()) {
+                //    player4.stop();
+                //}
+                //player1.start();
                 //final MediaPlayer mp = MediaPlayer.create(this, R.raw.music1);
                 //mp.setLooping(true);
                 //mp.start();
@@ -135,6 +140,9 @@ public class Activity5Music extends AppCompatActivity {
         BtnRock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopPlaying();
+                mp = MediaPlayer.create(Activity5Music.this, R.raw.rockdemo);
+                mp.start();
                 BtnRock.setBackgroundResource(R.drawable.opcionescogida2);
                 Activity.setBackgroundResource(R.drawable.opcionescogidar);
 
@@ -156,14 +164,14 @@ public class Activity5Music extends AppCompatActivity {
                 BtnGeneral.setClickable(true);
                 BtnClasica.setClickable(true);
 
-                if (player1.isPlaying()) {
-                    player1.stop();
-                } else if (player4.isPlaying()) {
-                    player4.stop();
-                } else if (player3.isPlaying()) {
-                    player3.stop();
-                }
-                player2.start();
+                //if (player1.isPlaying()) {
+                //    player1.stop();
+                //} else if (player4.isPlaying()) {
+                //    player4.stop();
+                //} else if (player3.isPlaying()) {
+                //    player3.stop();
+                //}
+                //player2.start();
                 animacion("rotation2");
             }
         });
@@ -171,6 +179,9 @@ public class Activity5Music extends AppCompatActivity {
         BtnGeneral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopPlaying();
+                mp = MediaPlayer.create(Activity5Music.this, R.raw.generaldemo);
+                mp.start();
                 BtnGeneral.setBackgroundResource(R.drawable.opcionescogida3);
                 Activity.setBackgroundResource(R.drawable.fondomusic);
 
@@ -192,15 +203,15 @@ public class Activity5Music extends AppCompatActivity {
                 BtnRock.setClickable(true);
                 BtnClasica.setClickable(true);
 
-                if (player1.isPlaying()) {
-                    player1.stop();
-                } else if (player2.isPlaying()) {
-                    player2.stop();
-                } else if (player4.isPlaying()) {
-                    player4.stop();
-                }
-
-                player3.start();
+                //if (player1.isPlaying()) {
+                //    player1.stop();
+                //} else if (player2.isPlaying()) {
+                //    player2.stop();
+                //} else if (player4.isPlaying()) {
+                //    player4.stop();
+                //}
+//
+                //player3.start();
                 animacion("rotation3");
             }
         });
@@ -208,6 +219,9 @@ public class Activity5Music extends AppCompatActivity {
         BtnClasica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopPlaying();
+                mp = MediaPlayer.create(Activity5Music.this, R.raw.clasicademo);
+                mp.start();
                 BtnClasica.setBackgroundResource(R.drawable.opcionescogida4);
                 Activity.setBackgroundResource(R.drawable.opcionescogidac);
 
@@ -229,46 +243,51 @@ public class Activity5Music extends AppCompatActivity {
                 BtnRock.setClickable(true);
                 BtnGeneral.setClickable(true);
 
-                if (player1.isPlaying()) {
-                    player1.stop();
-                } else if (player2.isPlaying()) {
-                    player2.stop();
-                } else if (player3.isPlaying()) {
-                    player3.stop();
-                }
-                player4.start();
+                //if (player1.isPlaying()) {
+                //    player1.stop();
+                //} else if (player2.isPlaying()) {
+                //    player2.stop();
+                //} else if (player3.isPlaying()) {
+                //    player3.stop();
+                //}
+                //player4.start();
                 animacion("bucle");
             }
         });
         BtnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopPlaying();
+                //MediaPlayer playerX1 = MediaPlayer.create(Activity5Music.this, R.raw.trivia);
+                //MediaPlayer playerX2 = MediaPlayer.create(Activity5Music.this, R.raw.rock);
+                //MediaPlayer playerX3 = MediaPlayer.create(Activity5Music.this, R.raw.general);
+                //MediaPlayer playerX4 = MediaPlayer.create(Activity5Music.this, R.raw.clasica);
 
-                MediaPlayer playerX1 = MediaPlayer.create(Activity5Music.this, R.raw.trivia);
-                MediaPlayer playerX2 = MediaPlayer.create(Activity5Music.this, R.raw.rock);
-                MediaPlayer playerX3 = MediaPlayer.create(Activity5Music.this, R.raw.general);
-                MediaPlayer playerX4 = MediaPlayer.create(Activity5Music.this, R.raw.clasica);
-
-                if (player1.isPlaying()) {
-                    player1.stop();
-                } else if (player2.isPlaying()) {
-                    player2.stop();
-                } else if (player3.isPlaying()) {
-                    player3.stop();
-                } else if (player4.isPlaying()) {
-                    player4.stop();
-                }
-
+                //if (player1.isPlaying()) {
+                //    player1.stop();
+                //} else if (player2.isPlaying()) {
+                //    player2.stop();
+                //} else if (player3.isPlaying()) {
+                //    player3.stop();
+                //} else if (player4.isPlaying()) {
+                //    player4.stop();
+                //}
+//
                 if (!BtnTrivia.isClickable()) {
-                    playerX1.start();
+                    mp = MediaPlayer.create(Activity5Music.this, R.raw.trivia);
+                    mp.start();
                 } else if (!BtnRock.isClickable()) {
-                    playerX2.start();
+                    mp = MediaPlayer.create(Activity5Music.this, R.raw.rock);
+                    mp.start();
                 } else if (!BtnGeneral.isClickable()) {
-                    playerX3.start();
+                    mp = MediaPlayer.create(Activity5Music.this, R.raw.general);
+                    mp.start();
                 } else if (!BtnClasica.isClickable()) {
-                    playerX4.start();
+                    mp = MediaPlayer.create(Activity5Music.this, R.raw.clasica);
+                    mp.start();
                 } else {
-                    playerX4.start();
+                    mp = MediaPlayer.create(Activity5Music.this, R.raw.general);
+                    mp.start();
                 }
 
                 Toast.makeText(Activity5Music.this, "BUENA ELECCIÓN", Toast.LENGTH_LONG).show();
@@ -336,5 +355,13 @@ public class Activity5Music extends AppCompatActivity {
         intentBackMusic.putExtra(PUNTAJE_ARRAY, puntajes);
         intentBackMusic.putExtra(GALLINA_ARRAY, gallinas);
         startActivity(intentBackMusic);
+    }
+
+    private void stopPlaying() {
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
     }
 }
