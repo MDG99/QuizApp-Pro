@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -118,11 +117,10 @@
                 android:id="@+id/ImageTopic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                app:srcCompat="@drawable/mainphoto" />
+                android:layout_weight="1"
+                android:gravity="center" />
 
             <Button
                 android:id="@+id/nextButton"

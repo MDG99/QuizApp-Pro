@@ -5,20 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.media.MediaPlayer;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,7 +51,6 @@ public class Activity3 extends AppCompatActivity {
     private Answers[][] answersToShow;
 
     private Bundle estado;
-
 
 
     //TextViews: contador, trampas y pregunta
@@ -103,7 +94,6 @@ public class Activity3 extends AppCompatActivity {
     public static final String TOPICS_ID_INTENT = "CUALES_TOPICS";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +110,6 @@ public class Activity3 extends AppCompatActivity {
         cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
         topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
         //estado = intent.getBundleExtra("PARTIDA_REGRESO");
-
 
 
         habilitadorDeCheats = new boolean[questionsQuantity];
@@ -150,11 +139,11 @@ public class Activity3 extends AppCompatActivity {
         answersToShow = new Answers[questionsQuantity][difficult];
         answersToShowSaved = new Answers[questionsQuantity][difficult];
 
-        if(estado != null){
+        if (estado != null) {
             savedInstanceState = estado;
         }
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             currentQuestion = savedInstanceState.getInt("CURRENT_QUESTIONS");
             difficult = savedInstanceState.getInt("DIFICULTAD");
             questionsToShowSaved = (Questions[]) savedInstanceState.getSerializable("QUESTIONS_TO_SHOW_SAVED");
@@ -168,20 +157,17 @@ public class Activity3 extends AppCompatActivity {
             cheatRecorder = savedInstanceState.getBoolean("CHEATS_RECORDER");
             cheatsFollowerEnable = savedInstanceState.getBooleanArray("CHEATS_FOLLOWER_ENABLE");
             habilitadorDeRespuestas = (boolean[][]) savedInstanceState.getSerializable("HABILITADOR_DE_RESPUESTAS");
-            puntajeCheats =  savedInstanceState.getBooleanArray("PUNTAJE_CHEATS");
+            puntajeCheats = savedInstanceState.getBooleanArray("PUNTAJE_CHEATS");
             habilitadorDeCheats = savedInstanceState.getBooleanArray("HABILITADOR_DE_CHEATS");
             Respondido = savedInstanceState.getBooleanArray("RESPONDIDO");
             answersToShow = (Answers[][]) savedInstanceState.getSerializable("ANSWERS_TO_SHOW");
             answersToShowSaved = (Answers[][]) savedInstanceState.getSerializable("ANSWERS_TO_SHOW_SAVED");
-        }else{
+        } else {
 
             currentQuestion = 0;
             cheatRecorder = false;
 
             //#region Inicialización de variables
-
-
-
 
 
             for (int x = 0; x < questionsQuantity; x++) {
@@ -270,6 +256,30 @@ public class Activity3 extends AppCompatActivity {
         DesplegarRespuestas(currentQuestion);
         //#endregion
 
+        switch (questionsToShowSaved[currentQuestion].getTopicId()) {
+            case 0:
+                TopicPhoto.setBackgroundResource(R.drawable.arteicono);
+                break;
+            case 1:
+                TopicPhoto.setBackgroundResource(R.drawable.geografiaicono);
+                break;
+            case 2:
+                TopicPhoto.setBackgroundResource(R.drawable.frasesicono);
+                break;
+            case 3:
+                TopicPhoto.setBackgroundResource(R.drawable.juegosicono);
+                break;
+            case 4:
+                TopicPhoto.setBackgroundResource(R.drawable.historiaicono);
+                break;
+            case 5:
+                TopicPhoto.setBackgroundResource(R.drawable.mainphoto);
+                break;
+            default:
+                TopicPhoto.setBackgroundResource(R.drawable.mainphoto);
+
+        }
+
         //#region Click botón Next
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -280,6 +290,29 @@ public class Activity3 extends AppCompatActivity {
                 DesplegarRespuestas(currentQuestion);
                 GetAnswersColors();
                 CheatsButtonByQuestion();
+                switch (questionsToShowSaved[currentQuestion].getTopicId()) {
+                    case 0:
+                        TopicPhoto.setBackgroundResource(R.drawable.arteicono);
+                        break;
+                    case 1:
+                        TopicPhoto.setBackgroundResource(R.drawable.geografiaicono);
+                        break;
+                    case 2:
+                        TopicPhoto.setBackgroundResource(R.drawable.frasesicono);
+                        break;
+                    case 3:
+                        TopicPhoto.setBackgroundResource(R.drawable.juegosicono);
+                        break;
+                    case 4:
+                        TopicPhoto.setBackgroundResource(R.drawable.historiaicono);
+                        break;
+                    case 5:
+                        TopicPhoto.setBackgroundResource(R.drawable.mainphoto);
+                        break;
+                    default:
+                        TopicPhoto.setBackgroundResource(R.drawable.mainphoto);
+
+                }
             }
         });
         //#endregion
@@ -294,6 +327,29 @@ public class Activity3 extends AppCompatActivity {
                 DesplegarRespuestas(currentQuestion);
                 GetAnswersColors();
                 CheatsButtonByQuestion();
+                switch (questionsToShowSaved[currentQuestion].getTopicId()) {
+                    case 0:
+                        TopicPhoto.setBackgroundResource(R.drawable.arteicono);
+                        break;
+                    case 1:
+                        TopicPhoto.setBackgroundResource(R.drawable.geografiaicono);
+                        break;
+                    case 2:
+                        TopicPhoto.setBackgroundResource(R.drawable.frasesicono);
+                        break;
+                    case 3:
+                        TopicPhoto.setBackgroundResource(R.drawable.juegosicono);
+                        break;
+                    case 4:
+                        TopicPhoto.setBackgroundResource(R.drawable.historiaicono);
+                        break;
+                    case 5:
+                        TopicPhoto.setBackgroundResource(R.drawable.mainphoto);
+                        break;
+                    default:
+                        TopicPhoto.setBackgroundResource(R.drawable.mainphoto);
+
+                }
             }
         });
         //#endregion
@@ -431,24 +487,24 @@ public class Activity3 extends AppCompatActivity {
 
 
     public void onSaveInstanceState(Bundle estado) {
-        estado.putInt("CURRENT_QUESTIONS",currentQuestion);
-        estado.putInt("DIFICULTAD",difficult);
-        estado.putSerializable("QUESTIONS_TO_SHOW_SAVED",questionsToShowSaved);
-        estado.putInt("QUESTIONS_QUANTITY",questionsQuantity);
-        estado.putIntArray("CHEATS_COUNTER_BY_QUESTION",cheatsCounterByQuestion);
-        estado.putInt("CHEATS_QUANTITY",cheatsQuantity);
-        estado.putInt("PUNTAJE",Puntaje);
-        estado.putIntArray("TOPICs_TO_ASK",topicsToAsk);
-        estado.putSerializable("COLOR_ANSWERS",colorsAnswers);
-        estado.putBoolean("CHEATS_ENABLE",cheatsEnable);
-        estado.putBoolean("CHEATS_RECORDER",cheatRecorder);
-        estado.putBooleanArray("CHEATS_FOLLOWER_ENABLE",cheatsFollowerEnable);
-        estado.putSerializable("HABILITADOR_DE_RESPUESTAS",habilitadorDeRespuestas);
-        estado.putBooleanArray("PUNTAJE_CHEATS",puntajeCheats);
-        estado.putBooleanArray("HABILITADOR_DE_CHEATS",habilitadorDeCheats);
-        estado.putBooleanArray("RESPONDIDO",Respondido);
-        estado.putSerializable("ANSWERS_TO_SHOW",answersToShow);
-        estado.putSerializable("ANSWERS_TO_SHOW_SAVED",answersToShowSaved);
+        estado.putInt("CURRENT_QUESTIONS", currentQuestion);
+        estado.putInt("DIFICULTAD", difficult);
+        estado.putSerializable("QUESTIONS_TO_SHOW_SAVED", questionsToShowSaved);
+        estado.putInt("QUESTIONS_QUANTITY", questionsQuantity);
+        estado.putIntArray("CHEATS_COUNTER_BY_QUESTION", cheatsCounterByQuestion);
+        estado.putInt("CHEATS_QUANTITY", cheatsQuantity);
+        estado.putInt("PUNTAJE", Puntaje);
+        estado.putIntArray("TOPICs_TO_ASK", topicsToAsk);
+        estado.putSerializable("COLOR_ANSWERS", colorsAnswers);
+        estado.putBoolean("CHEATS_ENABLE", cheatsEnable);
+        estado.putBoolean("CHEATS_RECORDER", cheatRecorder);
+        estado.putBooleanArray("CHEATS_FOLLOWER_ENABLE", cheatsFollowerEnable);
+        estado.putSerializable("HABILITADOR_DE_RESPUESTAS", habilitadorDeRespuestas);
+        estado.putBooleanArray("PUNTAJE_CHEATS", puntajeCheats);
+        estado.putBooleanArray("HABILITADOR_DE_CHEATS", habilitadorDeCheats);
+        estado.putBooleanArray("RESPONDIDO", Respondido);
+        estado.putSerializable("ANSWERS_TO_SHOW", answersToShow);
+        estado.putSerializable("ANSWERS_TO_SHOW_SAVED", answersToShowSaved);
         super.onSaveInstanceState(estado);
 
     }
@@ -672,7 +728,7 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 nickname = findViewById(R.id.dialogo).toString();
                 String msg = nickname + ": " + Integer.toString(Puntaje) + " puntos";
-                Toast.makeText(Activity3.this, "Infomración Falsa pasada",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity3.this, "Infomración Falsa pasada", Toast.LENGTH_SHORT).show();
                 EnviarInfo();
             }
         });
@@ -686,7 +742,6 @@ public class Activity3 extends AppCompatActivity {
         Dialogo.show();
 
         Dialogo.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-
 
 
     }
@@ -707,12 +762,12 @@ public class Activity3 extends AppCompatActivity {
         Snackbar.make(Contenido, "Haz hecho trampa", Snackbar.LENGTH_SHORT).show();
     }
 
-    public void EnviarInfo(){
-        Intent intent03 = new Intent(Activity3.this,Activity4.class);
+    public void EnviarInfo() {
+        Intent intent03 = new Intent(Activity3.this, Activity4.class);
         intent03.putExtra("NICKNAME", nickname);
         intent03.putExtra("PUNTAJE", Puntaje);
-        intent03.putExtra("CHECADOR_TRAMPAS",cheatsEnable);
-        intent03.putExtra("PARTIDA",estado);
+        intent03.putExtra("CHECADOR_TRAMPAS", cheatsEnable);
+        intent03.putExtra("PARTIDA", estado);
         startActivity(intent03);
 
     }
