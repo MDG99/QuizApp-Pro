@@ -168,7 +168,6 @@ public class OptionsActivity extends AppCompatActivity {
             topicsChosen[4] = auxTopics[4];
             topicsChosen[5] = auxTopics[5];
 
-
             chkArte.setChecked(topicsChosen[0]);
             chkGeografia.setChecked(topicsChosen[1]);
             chkFrases.setChecked(topicsChosen[2]);
