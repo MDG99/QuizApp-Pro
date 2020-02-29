@@ -68,7 +68,6 @@ public class OptionsActivity extends AppCompatActivity {
         chkVideojuegos = findViewById(R.id.videojuegos_checkbox);
         chkHistoria = findViewById(R.id.historia_checkbox);
         chkCultura = findViewById(R.id.cultura_checkbox);
-        chkGeografia.setChecked(true);
 
         preguntasSpinner = findViewById(R.id.preguntas_spinner);
         btnFacil = findViewById(R.id.facil_radio);
@@ -160,7 +159,14 @@ public class OptionsActivity extends AppCompatActivity {
             dificultad = noDif;
             preguntasCuantas = noPreguntas;
             pistasCuantas = noPistas;
-            topicsChosen = recibeTemas(temasId);
+            boolean[] auxTopics = recibeTemas(temasId);
+
+            topicsChosen[0] = auxTopics[0];
+            topicsChosen[1] = auxTopics[1];
+            topicsChosen[2] = auxTopics[2];
+            topicsChosen[3] = auxTopics[3];
+            topicsChosen[4] = auxTopics[4];
+            topicsChosen[5] = auxTopics[5];
 
 
             chkArte.setChecked(topicsChosen[0]);
@@ -218,19 +224,19 @@ public class OptionsActivity extends AppCompatActivity {
             topicsChosen = new boolean[]{false, true, false, false, false, false};
         }
 
-        if(estado != null){
+        if (estado != null) {
             savedInstanceState = estado;
         }
 
-        if(savedInstanceState != null){
-            topicsChosen=recibeTemas(savedInstanceState.getIntArray(CUALES_TOPICS));
+        if (savedInstanceState != null) {
+            topicsChosen = recibeTemas(savedInstanceState.getIntArray(CUALES_TOPICS));
             dificultad = savedInstanceState.getInt(DIFICULTAD_PUNTOS);
             preguntasCuantas = savedInstanceState.getInt(NO_PREGUNTAS);
             pistasCuantas = savedInstanceState.getInt(NO_PISTAS);
             pistaBoolean = savedInstanceState.getBoolean(ENABLE_PISTAS);
-            nicknames=savedInstanceState.getStringArray(NICKNAME_ARRAY);
-            puntajes=savedInstanceState.getIntArray(PUNTAJE_ARRAY);
-            gallinas=savedInstanceState.getBooleanArray(GALLINA_ARRAY);
+            nicknames = savedInstanceState.getStringArray(NICKNAME_ARRAY);
+            puntajes = savedInstanceState.getIntArray(PUNTAJE_ARRAY);
+            gallinas = savedInstanceState.getBooleanArray(GALLINA_ARRAY);
 
 
             chkArte.setChecked(topicsChosen[0]);
@@ -403,11 +409,11 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     public void onSaveInstanceState(Bundle estado) {
-        estado.putIntArray(CUALES_TOPICS,ArregloTemasId(topicsChosen));
-        estado.putInt(NO_PREGUNTAS,preguntasCuantas);
-        estado.putInt(DIFICULTAD_PUNTOS,dificultad);
-        estado.putBoolean(ENABLE_PISTAS,pistaBoolean);
-        estado.putInt(NO_PISTAS,pistasCuantas);
+        estado.putIntArray(CUALES_TOPICS, ArregloTemasId(topicsChosen));
+        estado.putInt(NO_PREGUNTAS, preguntasCuantas);
+        estado.putInt(DIFICULTAD_PUNTOS, dificultad);
+        estado.putBoolean(ENABLE_PISTAS, pistaBoolean);
+        estado.putInt(NO_PISTAS, pistasCuantas);
         estado.putStringArray(NICKNAME_ARRAY, nicknames);
         estado.putIntArray(PUNTAJE_ARRAY, puntajes);
         estado.putBooleanArray(GALLINA_ARRAY, gallinas);
