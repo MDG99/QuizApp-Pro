@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5C84E2"
+    android:background="@drawable/backgroundmain"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -17,8 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:layout_marginBottom="10sp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/demode"
             android:gravity="center"
             android:textColor="#FFF"
@@ -79,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:background="#365BAD"
+        android:background="#00616F"
         android:orientation="horizontal">
 
         <ImageButton
@@ -87,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#365BAD"
+            android:background="#00616F"
             android:padding="10dp"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_sort_by_size" />
@@ -106,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#365BAD"
+            android:background="#00616F"
             android:padding="10dp"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_lock_silent_mode_off" />
@@ -125,7 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#365BAD"
+            android:background="#00616F"
             android:padding="10dp"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_preferences" />

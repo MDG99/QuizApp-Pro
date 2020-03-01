@@ -584,7 +584,6 @@ public class Activity3 extends AppCompatActivity {
                 respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
                 respuesta02.setText(answersToShowSaved[current][1].getAnswerText());
 
-
                 break;
             case 3:
                 respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
@@ -791,6 +790,7 @@ public class Activity3 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Activity3.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         }).show();
     }
