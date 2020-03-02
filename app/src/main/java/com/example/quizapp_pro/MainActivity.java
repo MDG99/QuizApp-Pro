@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 if (getIntent().getExtras() != null) {
 
                     Intent intentConfig = new Intent(MainActivity.this, OptionsActivity.class);
+                    startActivity(intentConfig);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     intentConfig.putExtra(CUALES_TOPICS, topicsChosen);
                     intentConfig.putExtra(NO_PREGUNTAS, cuantasPreguntas);
                     intentConfig.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
@@ -130,6 +132,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentPoints = new Intent(MainActivity.this, Activity4.class);
+                startActivity(intentPoints);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 intentPoints.putExtra(CUALES_TOPICS, topicsChosen);
                 intentPoints.putExtra(NO_PREGUNTAS, cuantasPreguntas);
                 intentPoints.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
@@ -151,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
 
                 //Toast.makeText(MainActivity.this, cuantasPreguntas + " - " + dificultadPuntos + " - " + cuantasPistas, Toast.LENGTH_SHORT).show();
                 Intent intentMusic = new Intent(MainActivity.this, Activity5Music.class);
+                startActivity(intentMusic);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 intentMusic.putExtra(CUALES_TOPICS, topicsChosen);
                 intentMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
                 intentMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
@@ -171,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this, "LA APP CRASHEA", Toast.LENGTH_SHORT).show();
                 Intent intentPlay = new Intent(MainActivity.this, Activity3.class);
+                startActivity(intentPlay);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 intentPlay.putExtra(CUALES_TOPICS, topicsChosen);
                 intentPlay.putExtra(NO_PREGUNTAS, cuantasPreguntas);
                 intentPlay.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);

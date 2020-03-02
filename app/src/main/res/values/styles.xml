@@ -10,7 +10,7 @@
 
     <style name="MainActivity" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="colorPrimaryDark">@android:color/holo_blue_dark </item>
+        <item name="colorPrimaryDark">#00616F </item>
 
     </style>
 
@@ -28,7 +28,7 @@
 
     <style name="Activity3" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="colorPrimaryDark">@android:color/holo_orange_light </item>
+        <item name="colorPrimaryDark">#FFC400</item>
 
     </style>
 

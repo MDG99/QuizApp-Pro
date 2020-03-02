@@ -142,9 +142,15 @@ public class OptionsActivity extends AppCompatActivity {
 //seccion para tomar el numero de preguntas del spinner
 
         pistasSpinner.setEnabled(false);
-        pistasSpinner.getBackground().setAlpha(64);
+        pistasSpinner.getBackground().
 
-        if (getIntent().getExtras() != null) {
+                setAlpha(64);
+
+        if (
+
+                getIntent().
+
+                        getExtras() != null) {
             int noPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
             int noDif = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
             boolean cheats = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
@@ -223,9 +229,9 @@ public class OptionsActivity extends AppCompatActivity {
             topicsChosen = new boolean[]{false, true, false, false, false, false};
         }
 
-        if (estado != null) {
+        if (estado != null)
+
             savedInstanceState = estado;
-        }
 
         if (savedInstanceState != null) {
             topicsChosen = recibeTemas(savedInstanceState.getIntArray(CUALES_TOPICS));
@@ -376,6 +382,8 @@ public class OptionsActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(OptionsActivity.this, MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         intent.putExtra(CUALES_TOPICS, ArregloTemasId(topicsChosen));
         intent.putExtra(NO_PREGUNTAS, preguntasCuantas);
         intent.putExtra(DIFICULTAD_PUNTOS, dificultad);

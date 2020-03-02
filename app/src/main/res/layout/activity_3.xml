@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/content"
     android:orientation="vertical"
     tools:context=".Activity3">
 
@@ -92,13 +92,13 @@
 
             <ImageView
                 android:id="@+id/ImageTopic"
-                android:layout_width="60dp"
+                android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center" />
 
             <Button
                 android:id="@+id/nextButton"
@@ -111,73 +111,73 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/fondo_abajo"
-        android:orientation="vertical">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.25" />
-
-        <Button
-            android:id="@+id/respuesta01"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30sp"
-            android:layout_marginTop="30sp"
-            android:layout_marginRight="30sp"
             android:layout_weight="1"
-            android:background="@drawable/respuesta"
-            android:text="Respuesta 1"
-            android:textColor="#FFFFFF" />
+            android:background="@drawable/fondo_abajo"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/respuesta02"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30sp"
-            android:layout_marginTop="18sp"
-            android:layout_marginRight="30sp"
-            android:layout_marginBottom="9sp"
-            android:layout_weight="1"
-            android:background="@drawable/respuesta"
-            android:text="Respuesta 2"
-            android:textColor="#FFFFFF" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.25" />
 
-        <Button
-            android:id="@+id/respuesta03"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30sp"
-            android:layout_marginTop="9sp"
-            android:layout_marginRight="30sp"
-            android:layout_marginBottom="18sp"
-            android:layout_weight="1"
-            android:background="@drawable/respuesta"
-            android:text="Respuesta 3"
-            android:textColor="#FFFFFF" />
+            <Button
+                android:id="@+id/respuesta01"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30sp"
+                android:layout_marginTop="30sp"
+                android:layout_marginRight="30sp"
+                android:layout_weight="1"
+                android:background="@drawable/respuesta"
+                android:text="Respuesta 1"
+                android:textColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/respuesta04"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30sp"
-            android:layout_marginRight="30sp"
-            android:layout_marginBottom="30sp"
-            android:layout_weight="1"
-            android:background="@drawable/respuesta"
-            android:text="Respuesta 4"
-            android:textColor="#FFFFFF" />
+            <Button
+                android:id="@+id/respuesta02"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30sp"
+                android:layout_marginTop="18sp"
+                android:layout_marginRight="30sp"
+                android:layout_marginBottom="9sp"
+                android:layout_weight="1"
+                android:background="@drawable/respuesta"
+                android:text="Respuesta 2"
+                android:textColor="#FFFFFF" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2" />
+            <Button
+                android:id="@+id/respuesta03"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30sp"
+                android:layout_marginTop="9sp"
+                android:layout_marginRight="30sp"
+                android:layout_marginBottom="18sp"
+                android:layout_weight="1"
+                android:background="@drawable/respuesta"
+                android:text="Respuesta 3"
+                android:textColor="#FFFFFF" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/respuesta04"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30sp"
+                android:layout_marginRight="30sp"
+                android:layout_marginBottom="30sp"
+                android:layout_weight="1"
+                android:background="@drawable/respuesta"
+                android:text="Respuesta 4"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2" />
+
+        </LinearLayout>
 
 </LinearLayout>

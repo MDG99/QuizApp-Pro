@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5C84E2"
+    android:background="@drawable/backgroundmain"
     android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3.4"
-        android:background="#365BAD"
+        android:background="#00616F"
         android:orientation="vertical">
 
         <ImageButton
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#365BAD"
+            android:background="#00616F"
             android:padding="15dp"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_sort_by_size" />
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#365BAD"
+            android:background="#00616F"
             android:padding="15dp"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_lock_silent_mode_off" />
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#365BAD"
+            android:background="#00616F"
             android:padding="15dp"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_preferences" />

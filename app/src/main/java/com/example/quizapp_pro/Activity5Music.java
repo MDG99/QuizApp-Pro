@@ -310,6 +310,8 @@ public class Activity5Music extends AppCompatActivity {
                 }
 
                 Intent intentBackMusic = new Intent(Activity5Music.this, MainActivity.class);
+                startActivity(intentBackMusic);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 intentBackMusic.putExtra(CUALES_TOPICS, topicsChosen);
                 intentBackMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
                 intentBackMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
@@ -384,6 +386,8 @@ public class Activity5Music extends AppCompatActivity {
     public void onBackPressed() {
 
         Intent intentBackMusic = new Intent(Activity5Music.this, MainActivity.class);
+        startActivity(intentBackMusic);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         intentBackMusic.putExtra(CUALES_TOPICS, topicsChosen);
         intentBackMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
         intentBackMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
