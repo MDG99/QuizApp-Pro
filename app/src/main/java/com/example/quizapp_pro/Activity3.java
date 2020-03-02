@@ -3,12 +3,10 @@ package com.example.quizapp_pro;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -802,7 +799,7 @@ public class Activity3 extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void EnviarInfo() {
-        Intent intent03 = new Intent(getApplicationContext(), Activity4.class);
+        Intent intent03 = new Intent(Activity3.this, Activity4.class);
         intent03.putExtra("NICKNAME", nickname);
         intent03.putExtra("PUNTAJE", Puntaje);
         intent03.putExtra("CHECADOR_TRAMPAS", cheatsEnable);
@@ -849,7 +846,7 @@ public class Activity3 extends AppCompatActivity {
         intent03.putExtra("ANSWERS_TO_SHOW", answersToShow);
         intent03.putExtra("ANSWERS_TO_SHOW_SAVED", answersToShowSaved);*/
 
-        Toast.makeText(getApplicationContext(), "Se pasó la informacion", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Activity3.this, "Se pasó la informacion", Toast.LENGTH_SHORT).show();
         startActivity(intent03);
         finish();
 
