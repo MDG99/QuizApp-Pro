@@ -115,10 +115,12 @@ public class MainActivity extends AppCompatActivity {
                     intentConfig.putExtra(GALLINA_ARRAY, gallinas);
                     startActivity(intentConfig);
 
+
                 } else {
 
                     Intent intentConfig = new Intent(MainActivity.this, OptionsActivity.class);
                     startActivity(intentConfig);
+
                 }
 
             }

@@ -18,12 +18,18 @@ public class UsuariosViewModel extends ViewModel {
 
         usuarios = new Usuario[]{
                 new Usuario("MDG",9,false),
-                new Usuario("CLT",8,true),
-                new Usuario("MAX",1,true),
-                new Usuario("IGN",7,false),
-                new Usuario("EDS",2,false),
-                new Usuario("999",5,false),
+                new Usuario("CLT",8,false),
+                new Usuario("MAX",7,false),
+                new Usuario("IGN",6,false),
+                new Usuario("EDS",3,true),
+                new Usuario("999",5,true),
         };
+
+
         Arrays.sort(usuarios, new SortByPoints());
+    }
+
+    public void AddUser(String nickname,int points, boolean cheat){
+
     }
 }

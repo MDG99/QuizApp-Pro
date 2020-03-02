@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class Activity3 extends AppCompatActivity {
+public class ReviewActivity extends AppCompatActivity {
 
     private String nickname = "CALISTO"; //Al final se guarda y se pssa
     private int difficult; //guardar
@@ -112,9 +112,9 @@ public class Activity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
 
-        playercorrect = MediaPlayer.create(Activity3.this, R.raw.fxacierto);
-        playercheat = MediaPlayer.create(Activity3.this, R.raw.fxgallina);
-        playerincorrect = MediaPlayer.create(Activity3.this, R.raw.fxincorrecto);
+        playercorrect = MediaPlayer.create(ReviewActivity.this, R.raw.fxacierto);
+        playercheat = MediaPlayer.create(ReviewActivity.this, R.raw.fxgallina);
+        playerincorrect = MediaPlayer.create(ReviewActivity.this, R.raw.fxincorrecto);
 
         Intent intent = getIntent();
         extadoAux = new Bundle();
@@ -746,8 +746,8 @@ public class Activity3 extends AppCompatActivity {
 
     public void CreacionDialogo() {
 
-        final AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(Activity3.this);
-        final EditText input = new EditText(Activity3.this);
+        final AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(ReviewActivity.this);
+        final EditText input = new EditText(ReviewActivity.this);
         LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
@@ -769,7 +769,7 @@ public class Activity3 extends AppCompatActivity {
         DialogoNickname.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(Activity3.this, "Partida descartada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReviewActivity.this, "Partida descartada", Toast.LENGTH_SHORT).show();
             }
         });
         Dialogo = DialogoNickname.create();
@@ -806,7 +806,7 @@ public class Activity3 extends AppCompatActivity {
         Snackbar.make(Contenido, "Al salir se perderá tu partida", Snackbar.LENGTH_LONG).setAction("Aceptar", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity3.this, MainActivity.class);
+                Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
                 intent.putExtra("CUALES_TOPICS", topicsToAsk);
                 intent.putExtra("NO_PREGUNTAS", questionsQuantity);
                 intent.putExtra("DIFICULTAD_PUNTOS", difficult);
@@ -831,10 +831,10 @@ public class Activity3 extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == START_POINTS_FOR_RESULT) {
             if (resultCode == Activity4.RESULT_OK) {
-                Toast.makeText(Activity3.this, "REVISIÓN DE RESULTADOS", Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this, "REVISIÓN DE RESULTADOS", Toast.LENGTH_LONG).show();
             }
             if (resultCode == Activity4.RESULT_CANCELED) {
-                Toast.makeText(Activity3.this, "MENSAJE SECRETO", Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this, "MENSAJE SECRETO", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -842,7 +842,7 @@ public class Activity3 extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void EnviarInfo() {
-        Intent intent03 = new Intent(Activity3.this, Activity4.class);
+        Intent intent03 = new Intent(ReviewActivity.this, Activity4.class);
         //intent03.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent03.putExtra("NICKNAME", nickname);
         intent03.putExtra("PUNTAJE", Puntaje);
@@ -904,13 +904,10 @@ public class Activity3 extends AppCompatActivity {
         intent03.putExtra("ANSWERS_TO_SHOW", answersToShow);
         intent03.putExtra("ANSWERS_TO_SHOW_SAVED", answersToShowSaved);*/
 
-        Toast.makeText(Activity3.this, "Se pasó la informacion", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReviewActivity.this, "Se pasó la informacion", Toast.LENGTH_SHORT).show();
         startActivity(intent03);
         finish();
 
     }
 
 }
-
-
-

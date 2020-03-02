@@ -1,7 +1,6 @@
 package com.example.quizapp_pro;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -9,15 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Arrays;
 
 
 public class Activity4 extends AppCompatActivity {
@@ -94,7 +90,7 @@ public class Activity4 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_4);
 
-        Toast.makeText(this, "Bienvenido del Activity 3", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Activity4.this, "Bienvenido del Activity 3", Toast.LENGTH_SHORT).show();
 
 
         txtName1 = findViewById(R.id.nombre1);
@@ -123,17 +119,16 @@ public class Activity4 extends AppCompatActivity {
         Intent intent04 = getIntent();
         nicknameActual = intent04.getStringExtra("NICKNAME");
         puntajeActual = intent04.getIntExtra("PUNTAJE", 0);
-        gallinaActual = intent04.getBooleanExtra("CHECADOR_TRAMPAS",false);
+        gallinaActual = intent04.getBooleanExtra("CHECADOR_TRAMPAS", false);
 
 
-
-        if(nicknameActual == null) {
+        if (nicknameActual == null) {
             topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
             cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
             dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
             enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
             cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
-        }else{
+        } else {
 
           /*
           difficult = intent04.getIntExtra("DIFICULTAD",2);
@@ -181,22 +176,20 @@ public class Activity4 extends AppCompatActivity {
         });
 
 
-        if(nicknameActual == null){
+        if (nicknameActual == null) {
             UsuariosViewModel U = new UsuariosViewModel();
             UsuariosPoints = new Usuario[6];
             UsuariosPoints = U.getUsuarios();
             MostrarNombres(UsuariosPoints);
-        }else{
+        } else {
             UsuariosViewModel U = new UsuariosViewModel();
             UsuariosPoints = new Usuario[6];
             UsuariosPoints = U.getUsuarios();
-            Usuario NuevoUsuario = new Usuario(nicknameActual,puntajeActual,gallinaActual);
-            String msg = nicknameActual + ", "+puntajeActual + " " +gallinaActual;
-            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-            MostrarNombres(usuariosToShow(UsuariosPoints,NuevoUsuario));
+            Usuario NuevoUsuario = new Usuario(nicknameActual, puntajeActual, gallinaActual);
+            String msg = nicknameActual + ", " + puntajeActual + " " + gallinaActual;
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            MostrarNombres(usuariosToShow(UsuariosPoints, NuevoUsuario));
         }
-
-
 
 
         //Usuario UsuarioPartida = new Usuario(nicknameActual, puntajeActual, gallinaActual);
@@ -210,14 +203,14 @@ public class Activity4 extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        EnviarInfoBack();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        EnviarInfoBack();
+//    }
 
     public void EnviarInfoBack() {
-        if(nicknameActual == null){
-            Intent mainintent = new Intent(Activity4.this,MainActivity.class);
+        if (nicknameActual == null) {
+            Intent mainintent = new Intent(Activity4.this, MainActivity.class);
             mainintent.putExtra(CUALES_TOPICS, topicsChosen);
             mainintent.putExtra(NO_PREGUNTAS, cuantasPreguntas);
             mainintent.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
@@ -225,11 +218,23 @@ public class Activity4 extends AppCompatActivity {
             mainintent.putExtra(NO_PISTAS, cuantasPistas);
 
             startActivity(mainintent);
-            finish();
-        }else{
-            Intent playintent = new Intent(getApplicationContext(),Activity3.class);
+
+        } else {
+            //Intent playintent = new Intent(Activity4.this, Activity3.class);
+            Intent playintent = new Intent(Activity4.this, Activity3.class);//(Activity4.this, OptionsActivity.class);
+            playintent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            playintent.putExtra(CUALES_TOPICS, topicsChosen);
+            playintent.putExtra(NO_PREGUNTAS, cuantasPreguntas);
+            playintent.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
+            playintent.putExtra(ENABLE_PISTAS, enabledPistas);
+            playintent.putExtra(NO_PISTAS, cuantasPistas);
+
+            playintent.putExtra(NICKNAME_ARRAY, nicknames);
+            playintent.putExtra(PUNTAJE_ARRAY, puntajes);
+            playintent.putExtra(GALLINA_ARRAY, gallinas);
             startActivity(playintent);
-            finish();
+            //startActivity(playintent);
+
             //onBackPressed();
         }
     }
@@ -238,7 +243,7 @@ public class Activity4 extends AppCompatActivity {
     public void MostrarNombres(Usuario[] UAux) {
         for (int i = 0; i < Nombres.length; i++) {
             Nombres[i].setText(UAux[i].getNickname());
-            String msg = " "+UAux[i].getPuntaje()+" ";
+            String msg = " " + UAux[i].getPuntaje() + " ";
             Puntajes[i].setText(msg);
         }
     }
@@ -259,7 +264,7 @@ public class Activity4 extends AppCompatActivity {
         ordenador.toArray(AUX);
         Usuario[] arregloOrdenado = new Usuario[6];
         Arrays.sort(AUX, new SortByPoints());
-        for(int h = 0; h<6;h++){
+        for (int h = 0; h < 6; h++) {
             arregloOrdenado[h] = AUX[h];
         }
 
@@ -269,9 +274,9 @@ public class Activity4 extends AppCompatActivity {
 
 }
 
+
 class SortByPoints implements Comparator<Usuario> {
-    public int compare(Usuario a, Usuario b)
-    {
+    public int compare(Usuario a, Usuario b) {
         return -(a.getPuntaje() - b.getPuntaje());
     }
 }
