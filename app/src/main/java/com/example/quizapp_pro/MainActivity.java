@@ -2,6 +2,7 @@ package com.example.quizapp_pro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -9,6 +10,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,39 +23,44 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton btnConfig;
     private ImageButton btnPoints;
     private ImageButton btnMusic;
-    private int[] topicsChosen;
-    private int cuantasPreguntas;
-    private int dificultadPuntos;
-    private boolean enabledPistas;
     private ImageView ImagenMundo;
-    private int cuantasPistas;
-    private final String CUALES_TOPICS = "CUALES_TOPICS";
-    private final String NO_PREGUNTAS = "NO_PREGUNTAS";
-    private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";
-    private final String ENABLE_PISTAS = "ENABLE_PISTAS";
-    private final String NO_PISTAS = "NO_PISTAS";
-    private final String NICKNAME_ARRAY = "PLAYER_NICKNAME";
-    private final String PUNTAJE_ARRAY = "PLAYER_POINTS";
-    private final String GALLINA_ARRAY = "PLAYER_CHEATED";
-    private String[] nicknames;
-    private int[] puntajes;
-    private boolean[] gallinas;
-    private Bundle estado;
-
-    //private final String ENVIA_PREGUNTAS = "XD";
-    //private MediaPlayer player;
+    private PlayViewModel opcionesDeJuego;
+    private UsuariosViewModel bestPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Inicialización de las variables del Activity
 
         btnPlay = findViewById(R.id.play_button);
         btnConfig = findViewById(R.id.options_button);
         btnPoints = findViewById(R.id.points_button);
         btnMusic = findViewById(R.id.music_button);
         ImagenMundo = findViewById(R.id.imagen_portada);
+
+        final Intent intent = getIntent();
+
+        opcionesDeJuego = new ViewModelProvider(this).get(PlayViewModel.class);
+        bestPlayers = new ViewModelProvider(this).get(UsuariosViewModel.class);
+
+
+        if (intent.getSerializableExtra("LISTA_USUARIOS") != null) {
+            bestPlayers.setUsuarios((Usuario[]) intent.getSerializableExtra("LISTA_USUARIOS"));
+        }
+
+
+        if (intent.getSerializableExtra("TOPICS_TO_ASK") == null) {
+            opcionesDeJuego.Predeterminado();
+        } else {
+            opcionesDeJuego.setCuantasPistas(intent.getIntExtra("CHEATS_QUANTITY", 0));
+            opcionesDeJuego.setCuantasPreguntas(intent.getIntExtra("QUESTIONS_QUANTITY", 5));
+            opcionesDeJuego.setDificultadPuntos(intent.getIntExtra("DIFFICULT", 2));
+            opcionesDeJuego.setEnabledPistas(intent.getBooleanExtra("CHEATS_ENABLE", false));
+            opcionesDeJuego.setTopicsChosen((int[]) intent.getSerializableExtra("TOPICS_TO_ASK"));
+        }
+
 
         ImagenMundo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,73 +69,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (getIntent().getExtras() != null) {
-            //Toast.makeText(MainActivity.this, "ME DEVUELVE EL INTENT", Toast.LENGTH_SHORT).show();
-            topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
-            cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
-            dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
-            enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
-            cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
-
-            nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
-            puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
-            gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
-        } else {
-            Toast.makeText(MainActivity.this, "INICIO DE APP", Toast.LENGTH_SHORT).show();
-            topicsChosen = new int[]{0};
-            cuantasPreguntas = 5;
-            dificultadPuntos = 2;
-            enabledPistas = false;
-            cuantasPistas = 0;
-
-            nicknames = new String[]{"MAX"};
-            puntajes = new int[]{0};
-            gallinas = new boolean[]{false};
-
-        }
-
-        if (estado != null) {
-            savedInstanceState = estado;
-        }
-
-        if (savedInstanceState != null) {
-            topicsChosen = savedInstanceState.getIntArray(CUALES_TOPICS);
-            cuantasPreguntas = savedInstanceState.getInt(NO_PREGUNTAS);
-            dificultadPuntos = savedInstanceState.getInt(DIFICULTAD_PUNTOS);
-            enabledPistas = savedInstanceState.getBoolean(ENABLE_PISTAS);
-            cuantasPistas = savedInstanceState.getInt(NO_PISTAS);
-
-            nicknames = savedInstanceState.getStringArray(NICKNAME_ARRAY);
-            puntajes = savedInstanceState.getIntArray(PUNTAJE_ARRAY);
-            gallinas = savedInstanceState.getBooleanArray(GALLINA_ARRAY);
-        }
-
         btnConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getIntent().getExtras() != null) {
+                Intent intentConfig = new Intent(MainActivity.this, OptionsActivity.class);
+                startActivity(intentConfig);
+                intentConfig.putExtra("QUESTIONS_QUANTITY", opcionesDeJuego.getCuantasPreguntas());
+                intentConfig.putExtra("CHEATS_QUANTITY", opcionesDeJuego.getCuantasPistas());
+                intentConfig.putExtra("DIFFICULT", opcionesDeJuego.getDificultadPuntos());
+                intentConfig.putExtra("TOPICS_TO_ASK", opcionesDeJuego.getTopicsChosen());
+                intentConfig.putExtra("CHEATS_ENABLE", opcionesDeJuego.isEnabledPistas());
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                startActivity(intentConfig);
 
-                    Intent intentConfig = new Intent(MainActivity.this, OptionsActivity.class);
-                    startActivity(intentConfig);
-                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                    intentConfig.putExtra(CUALES_TOPICS, topicsChosen);
-                    intentConfig.putExtra(NO_PREGUNTAS, cuantasPreguntas);
-                    intentConfig.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
-                    intentConfig.putExtra(ENABLE_PISTAS, enabledPistas);
-                    intentConfig.putExtra(NO_PISTAS, cuantasPistas);
-
-                    intentConfig.putExtra(NICKNAME_ARRAY, nicknames);
-                    intentConfig.putExtra(PUNTAJE_ARRAY, puntajes);
-                    intentConfig.putExtra(GALLINA_ARRAY, gallinas);
-                    startActivity(intentConfig);
-
-
-                } else {
-
-                    Intent intentConfig = new Intent(MainActivity.this, OptionsActivity.class);
-                    startActivity(intentConfig);
-
-                }
 
             }
         });
@@ -132,20 +90,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentPoints = new Intent(MainActivity.this, Activity4.class);
-                startActivity(intentPoints);
+                String[] s = new String[6];
+                for (int i = 0; i<6;i++){
+                    s[i] = bestPlayers.getUsuarios()[i].getNickname();
+                }
+                int[] p = new int[6];
+                for (int i = 0; i<6;i++){
+                    p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
+                }
+                boolean[] g = new boolean[6];
+                for (int i = 0; i<6;i++){
+                    g[i] = bestPlayers.getUsuarios()[i].isCheat();
+                }
+
+
+                intentPoints.putExtra("BEST_USERS_NICKNAME", s);
+                intentPoints.putExtra("BEST_USERS_POINTS", p);
+                intentPoints.putExtra("BEST_USERS_CHEATS", g);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                intentPoints.putExtra(CUALES_TOPICS, topicsChosen);
-                intentPoints.putExtra(NO_PREGUNTAS, cuantasPreguntas);
-                intentPoints.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
-                intentPoints.putExtra(ENABLE_PISTAS, enabledPistas);
-                intentPoints.putExtra(NO_PISTAS, cuantasPistas);
-
-                intentPoints.putExtra(NICKNAME_ARRAY, nicknames);
-                intentPoints.putExtra(PUNTAJE_ARRAY, puntajes);
-                intentPoints.putExtra(GALLINA_ARRAY, gallinas);
                 startActivity(intentPoints);
-
-
             }
         });
 
@@ -155,18 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
                 //Toast.makeText(MainActivity.this, cuantasPreguntas + " - " + dificultadPuntos + " - " + cuantasPistas, Toast.LENGTH_SHORT).show();
                 Intent intentMusic = new Intent(MainActivity.this, Activity5Music.class);
-                startActivity(intentMusic);
+                intentMusic.putExtra("QUESTIONS_QUANTITY", opcionesDeJuego.getCuantasPreguntas());
+                intentMusic.putExtra("CHEATS_QUANTITY", opcionesDeJuego.getCuantasPistas());
+                intentMusic.putExtra("DIFFICULT", opcionesDeJuego.getDificultadPuntos());
+                intentMusic.putExtra("TOPICS_TO_ASK", opcionesDeJuego.getTopicsChosen());
+                intentMusic.putExtra("CHEATS_ENABLE", opcionesDeJuego.isEnabledPistas());
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                intentMusic.putExtra(CUALES_TOPICS, topicsChosen);
-                intentMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
-                intentMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
-                intentMusic.putExtra(ENABLE_PISTAS, enabledPistas);
-                intentMusic.putExtra(NO_PISTAS, cuantasPistas);
-
-                intentMusic.putExtra(NICKNAME_ARRAY, nicknames);
-                intentMusic.putExtra(PUNTAJE_ARRAY, puntajes);
-                intentMusic.putExtra(GALLINA_ARRAY, gallinas);
-                //Esto manda la informacion de config
                 startActivity(intentMusic);
 
             }
@@ -175,36 +132,36 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "LA APP CRASHEA", Toast.LENGTH_SHORT).show();
                 Intent intentPlay = new Intent(MainActivity.this, Activity3.class);
-                startActivity(intentPlay);
+
+                String[] s = new String[6];
+                for (int i = 0; i<6;i++){
+                    s[i] = bestPlayers.getUsuarios()[i].getNickname();
+                }
+                int[] p = new int[6];
+                for (int i = 0; i<6;i++){
+                    p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
+                }
+                boolean[] g = new boolean[6];
+                for (int i = 0; i<6;i++){
+                    g[i] = bestPlayers.getUsuarios()[i].isCheat();
+                }
+
+
+                intentPlay.putExtra("BEST_USERS_NICKNAME", s);
+                intentPlay.putExtra("BEST_USERS_POINTS", p);
+                intentPlay.putExtra("BEST_USERS_CHEATS", g);
+
+
+                intentPlay.putExtra("QUESTIONS_QUANTITY", opcionesDeJuego.getCuantasPreguntas());
+                intentPlay.putExtra("CHEATS_QUANTITY", opcionesDeJuego.getCuantasPistas());
+                intentPlay.putExtra("DIFFICULT", opcionesDeJuego.getDificultadPuntos());
+                intentPlay.putExtra("TOPICS_TO_ASK", opcionesDeJuego.getTopicsChosen());
+                intentPlay.putExtra("CHEATS_ENABLE", opcionesDeJuego.isEnabledPistas());
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                intentPlay.putExtra(CUALES_TOPICS, topicsChosen);
-                intentPlay.putExtra(NO_PREGUNTAS, cuantasPreguntas);
-                intentPlay.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
-                intentPlay.putExtra(ENABLE_PISTAS, enabledPistas);
-                intentPlay.putExtra(NO_PISTAS, cuantasPistas);
-
-                intentPlay.putExtra(NICKNAME_ARRAY, nicknames);
-                intentPlay.putExtra(PUNTAJE_ARRAY, puntajes);
-                intentPlay.putExtra(GALLINA_ARRAY, gallinas);
-
                 startActivity(intentPlay);
-
             }
         });
     }
 
-    public void onSaveInstanceState(Bundle estado) {
-        estado.putIntArray(CUALES_TOPICS, topicsChosen);
-        estado.putInt(NO_PREGUNTAS, cuantasPreguntas);
-        estado.putInt(DIFICULTAD_PUNTOS, dificultadPuntos);
-        estado.putBoolean(ENABLE_PISTAS, enabledPistas);
-        estado.putInt(NO_PISTAS, cuantasPistas);
-        estado.putStringArray(NICKNAME_ARRAY, nicknames);
-        estado.putIntArray(PUNTAJE_ARRAY, puntajes);
-        estado.putBooleanArray(GALLINA_ARRAY, gallinas);
-        super.onSaveInstanceState(estado);
-
-    }
 }
