@@ -34,6 +34,8 @@ public class Activity5Music extends AppCompatActivity {
     private MediaPlayer player4;
     private MediaPlayer mp;
 
+    private AnimatorSet animatorSetRotation;
+
     private final String CUALES_TOPICS = "CUALES_TOPICS";
     private final String NO_PREGUNTAS = "NO_PREGUNTAS";
     private final String DIFICULTAD_PUNTOS = "DIFICULTAD_PUNTOS";
@@ -322,9 +324,9 @@ public class Activity5Music extends AppCompatActivity {
 
                 Toast.makeText(Activity5Music.this, "BUENA ELECCIÓN", Toast.LENGTH_LONG).show();
 
-                //Intent intent = new Intent(Activity5Music.this, MainActivity.class);
-                //startActivity(intent);
+
             }
+
         });
     }
 
@@ -332,27 +334,35 @@ public class Activity5Music extends AppCompatActivity {
     private void animacion(String animacion) {
         switch (animacion) {
             case "rotation":
+
+
                 animatorRotation = ObjectAnimator.ofFloat(ImgTrvia, "rotation", 0f, 360f);
                 animatorRotation.setDuration(30000);
-                AnimatorSet animatorSetRotation = new AnimatorSet();
+                animatorSetRotation = new AnimatorSet();
+                animatorSetRotation.play(animatorRotation);
+                animatorSetRotation.start();
+
+
+                break;
+
+            case "rotation2":
+
+
+                animatorRotation = ObjectAnimator.ofFloat(ImgRock, "rotation", 0f, 360f);
+                animatorRotation.setDuration(30000);
+                animatorSetRotation = new AnimatorSet();
                 animatorSetRotation.play(animatorRotation);
                 animatorSetRotation.start();
                 break;
 
-            case "rotation2":
-                animatorRotation = ObjectAnimator.ofFloat(ImgRock, "rotation", 0f, 360f);
-                animatorRotation.setDuration(30000);
-                AnimatorSet animatorSetRotation2 = new AnimatorSet();
-                animatorSetRotation2.play(animatorRotation);
-                animatorSetRotation2.start();
-                break;
-
             case "rotation3":
+
+
                 animatorRotation = ObjectAnimator.ofFloat(ImgGeneral, "rotation", 0f, 360f);
                 animatorRotation.setDuration(30000);
-                AnimatorSet animatorSetRotation3 = new AnimatorSet();
-                animatorSetRotation3.play(animatorRotation);
-                animatorSetRotation3.start();
+                animatorSetRotation = new AnimatorSet();
+                animatorSetRotation.play(animatorRotation);
+                animatorSetRotation.start();
                 break;
 
             case "bucle":
@@ -387,6 +397,7 @@ public class Activity5Music extends AppCompatActivity {
         intentBackMusic.putExtra(PUNTAJE_ARRAY, puntajes);
         intentBackMusic.putExtra(GALLINA_ARRAY, gallinas);
         startActivity(intentBackMusic);
+
     }
 
     public void onSaveInstanceState(Bundle estado) {

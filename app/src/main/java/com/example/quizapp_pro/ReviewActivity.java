@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class Activity3 extends AppCompatActivity {
+public class ReviewActivity extends AppCompatActivity {
 
     private String nickname = "CALISTO"; //Al final se guarda y se pssa
     private int difficult; //guardar
@@ -43,6 +43,9 @@ public class Activity3 extends AppCompatActivity {
     private int a = 0;
     private Bundle extadoAux;
 
+    private String[] nicknames;
+    private int[] puntajes;
+    private boolean[] gallinas;
 
     private boolean cheatsEnable; //guardar
     private boolean cheatRecorder; //guardar
@@ -70,7 +73,7 @@ public class Activity3 extends AppCompatActivity {
 
 
     //Colores a usar
-    private int COLOR_NORMAL = Color.rgb(0, 122, 254);
+    private int COLOR_NORMAL = Color.rgb(55, 134, 197);
     private int COLOR_CORRECTO = Color.rgb(55, 197, 62);
     private int COLOR_INCORRECTO = Color.rgb(197, 55, 72);
     private int COLOR_TRAMPA = Color.rgb(46, 55, 58);
@@ -102,15 +105,16 @@ public class Activity3 extends AppCompatActivity {
     public static final String CHEATS_QUANTITY_INTENT = "NO_PISTAS";
     public static final String TOPICS_ID_INTENT = "CUALES_TOPICS";
 
+    final int START_POINTS_FOR_RESULT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
 
-        playercorrect = MediaPlayer.create(Activity3.this, R.raw.fxacierto);
-        playercheat = MediaPlayer.create(Activity3.this, R.raw.fxgallina);
-        playerincorrect = MediaPlayer.create(Activity3.this, R.raw.fxincorrecto);
+        playercorrect = MediaPlayer.create(ReviewActivity.this, R.raw.fxacierto);
+        playercheat = MediaPlayer.create(ReviewActivity.this, R.raw.fxgallina);
+        playerincorrect = MediaPlayer.create(ReviewActivity.this, R.raw.fxincorrecto);
 
         Intent intent = getIntent();
         extadoAux = new Bundle();
@@ -136,12 +140,22 @@ public class Activity3 extends AppCompatActivity {
             cheatsEnable = savedInstanceState.getBoolean("CHEATS_ENABLE");
             cheatsQuantity = savedInstanceState.getInt("CHEATS_QUANTITY");
             topicsToAsk = savedInstanceState.getIntArray("TOPICs_TO_ASK");
+
+            nicknames = getIntent().getStringArrayExtra("PLAYER_NICKNAME");
+            puntajes = getIntent().getIntArrayExtra("PLAYER_POINTS");
+            gallinas = getIntent().getBooleanArrayExtra("PLAYER_CHEATED");
+
+
         } else {
             difficult = intent.getIntExtra(DIFFICULT_INTENT, 4); //Correcto
             questionsQuantity = intent.getIntExtra(QUANTITY_QUESTIONS_INTENT, 60); //Me da valores de 0 o 1
             cheatsEnable = intent.getBooleanExtra(CHEATS_ENABLE_INTENT, false); //Correcto
             cheatsQuantity = intent.getIntExtra(CHEATS_QUANTITY_INTENT, 0); //Correcto
             topicsToAsk = intent.getIntArrayExtra(TOPICS_ID_INTENT);
+
+            nicknames = getIntent().getStringArrayExtra("PLAYER_NICKNAME");
+            puntajes = getIntent().getIntArrayExtra("PLAYER_POINTS");
+            gallinas = getIntent().getBooleanArrayExtra("PLAYER_CHEATED");
 
         }
 
@@ -172,6 +186,8 @@ public class Activity3 extends AppCompatActivity {
             Respondido = savedInstanceState.getBooleanArray("RESPONDIDO");
             answersToShow = (Answers[][]) savedInstanceState.getSerializable("ANSWERS_TO_SHOW");
             answersToShowSaved = (Answers[][]) savedInstanceState.getSerializable("ANSWERS_TO_SHOW_SAVED");
+
+
         } else {
 
             currentQuestion = 0;
@@ -515,6 +531,9 @@ public class Activity3 extends AppCompatActivity {
         estado.putBooleanArray("RESPONDIDO", Respondido);
         estado.putSerializable("ANSWERS_TO_SHOW", answersToShow);
         estado.putSerializable("ANSWERS_TO_SHOW_SAVED", answersToShowSaved);
+        estado.putStringArray("PLAYER_NICKNAME", nicknames);
+        estado.putIntArray("PLAYER_POINTS", puntajes);
+        estado.putBooleanArray("PLAYER_CHEATED", gallinas);
         super.onSaveInstanceState(estado);
 
     }
@@ -580,6 +599,7 @@ public class Activity3 extends AppCompatActivity {
             case 2:
                 respuesta01.setText(answersToShowSaved[current][0].getAnswerText());
                 respuesta02.setText(answersToShowSaved[current][1].getAnswerText());
+
 
                 break;
             case 3:
@@ -719,14 +739,15 @@ public class Activity3 extends AppCompatActivity {
             if (Respondido[d])
                 finish++;
         }
-        if (finish == questionsQuantity)
+        if (finish == questionsQuantity) {
             CreacionDialogo();
+        }
     }
 
     public void CreacionDialogo() {
 
-        final AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(this);
-        final EditText input = new EditText(Activity3.this);
+        final AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(ReviewActivity.this);
+        final EditText input = new EditText(ReviewActivity.this);
         LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
@@ -748,7 +769,7 @@ public class Activity3 extends AppCompatActivity {
         DialogoNickname.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(Activity3.this, "Partida descartada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReviewActivity.this, "Partida descartada", Toast.LENGTH_SHORT).show();
             }
         });
         Dialogo = DialogoNickname.create();
@@ -785,9 +806,17 @@ public class Activity3 extends AppCompatActivity {
         Snackbar.make(Contenido, "Al salir se perderá tu partida", Snackbar.LENGTH_LONG).setAction("Aceptar", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity3.this, MainActivity.class);
+                Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
+                intent.putExtra("CUALES_TOPICS", topicsToAsk);
+                intent.putExtra("NO_PREGUNTAS", questionsQuantity);
+                intent.putExtra("DIFICULTAD_PUNTOS", difficult);
+                intent.putExtra("ENABLE_PISTAS", cheatsEnable);
+                intent.putExtra("NO_PISTAS", cheatsQuantity);
+                intent.putExtra("PLAYER_NICKNAME", nickname);
+                intent.putExtra("PLAYER_POINTS", puntajes);
+                intent.putExtra("PLAYER_CHEATED", gallinas);
                 startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                finish();
             }
         }).show();
     }
@@ -797,12 +826,41 @@ public class Activity3 extends AppCompatActivity {
         Snackbar.make(Contenido, "Haz hecho trampa", Snackbar.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == START_POINTS_FOR_RESULT) {
+            if (resultCode == Activity4.RESULT_OK) {
+                Toast.makeText(ReviewActivity.this, "REVISIÓN DE RESULTADOS", Toast.LENGTH_LONG).show();
+            }
+            if (resultCode == Activity4.RESULT_CANCELED) {
+                Toast.makeText(ReviewActivity.this, "MENSAJE SECRETO", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void EnviarInfo() {
-        Intent intent03 = new Intent(Activity3.this, Activity4.class);
+        Intent intent03 = new Intent(ReviewActivity.this, Activity4.class);
+        //intent03.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent03.putExtra("NICKNAME", nickname);
         intent03.putExtra("PUNTAJE", Puntaje);
         intent03.putExtra("CHECADOR_TRAMPAS", cheatsEnable);
+
+        intent03.putExtra("PLAYER_NICKNAME", nicknames);
+        intent03.putExtra("PLAYER_POINTS", puntajes);
+        intent03.putExtra("PLAYER_CHEATED", gallinas);
+
+        intent03.putExtra(DIFFICULT_INTENT, difficult);
+        intent03.putExtra(QUANTITY_QUESTIONS_INTENT, questionsQuantity);
+        intent03.putExtra(CHEATS_ENABLE_INTENT, cheatsEnable);
+        intent03.putExtra(CHEATS_QUANTITY_INTENT, cheatsQuantity);
+        intent03.putExtra(TOPICS_ID_INTENT, topicsToAsk);
+
+
+
+
 /*estado = new Bundle();
             estado.putInt("CURRENT_QUESTIONS", currentQuestion);
             estado.putInt("DIFICULTAD", difficult);
@@ -846,13 +904,10 @@ public class Activity3 extends AppCompatActivity {
         intent03.putExtra("ANSWERS_TO_SHOW", answersToShow);
         intent03.putExtra("ANSWERS_TO_SHOW_SAVED", answersToShowSaved);*/
 
-        Toast.makeText(Activity3.this, "Se pasó la informacion", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ReviewActivity.this, "Se pasó la informacion", Toast.LENGTH_SHORT).show();
         startActivity(intent03);
         finish();
 
     }
 
 }
-
-
-

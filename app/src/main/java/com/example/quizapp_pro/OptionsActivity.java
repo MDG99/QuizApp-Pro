@@ -393,6 +393,8 @@ public class OptionsActivity extends AppCompatActivity {
         intent.putExtra(PUNTAJE_ARRAY, puntajes);
         intent.putExtra(GALLINA_ARRAY, gallinas);
         startActivity(intent);
+
+
     }
 
     public int[] ArregloTemasId(boolean[] b) {
