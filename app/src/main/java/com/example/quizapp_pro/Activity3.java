@@ -73,7 +73,7 @@ public class Activity3 extends AppCompatActivity {
 
 
     //Colores a usar
-    private int COLOR_NORMAL = Color.rgb(55, 134, 197);
+    private int COLOR_NORMAL = Color.rgb(0, 122, 254);
     private int COLOR_CORRECTO = Color.rgb(55, 197, 62);
     private int COLOR_INCORRECTO = Color.rgb(197, 55, 72);
     private int COLOR_TRAMPA = Color.rgb(46, 55, 58);
