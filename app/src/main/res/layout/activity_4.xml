@@ -74,11 +74,10 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/primerlugar"
                     android:gravity="center"
-                    android:text="   CLT"
                     android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    tools:text="HAP" />
 
                 <TextView
                     android:id="@+id/nombre2"
@@ -87,11 +86,10 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/segundolugar"
                     android:gravity="center"
-                    android:text="   MAX"
                     android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    tools:text="MAX" />
 
                 <TextView
                     android:id="@+id/nombre3"
@@ -100,11 +98,10 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/tercerlugar"
                     android:gravity="center"
-                    android:text="   IGN"
                     android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    tools:text="IGN" />
 
             </LinearLayout>
 
@@ -114,47 +111,104 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/puntaje1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:drawableRight="@drawable/oro2"
-                    android:gravity="center"
-                    android:text="950   "
-                    android:textColor="#FFF"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/puntaje2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:drawableRight="@drawable/plata2"
-                    android:gravity="center"
-                    android:text="700   "
-                    android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    <TextView
+                        android:id="@+id/puntaje1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3.5"
+                        android:gravity="left"
+                        android:textColor="#FFF"
+                        android:textSize="15dp"
+                        tools:text="900" />
 
-                <TextView
-                    android:id="@+id/puntaje3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:drawableRight="@drawable/plata2"
-                    android:gravity="center"
-                    android:text="600   "
-                    android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    <ImageView
+                        android:id="@+id/Imgpuntaje1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="left"
+                        android:src="@drawable/oro" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/puntaje2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3.5"
+                        android:gravity="left"
+                        android:textColor="#FFF"
+                        android:textSize="15dp"
+                        tools:text="700" />
+
+                    <ImageView
+                        android:id="@+id/Imgpuntaje2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="left"
+                        android:src="@drawable/plata" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/puntaje3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3.5"
+                        android:gravity="left"
+                        android:textColor="#FFF"
+                        android:textSize="15dp"
+                        tools:text="600" />
+
+                    <ImageView
+                        android:id="@+id/Imgpuntaje3"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="left"
+                        android:src="@drawable/bronce" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -178,9 +232,10 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:text="   QWE"
+                    android:gravity="center"
                     android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    tools:text="QWE" />
 
                 <TextView
                     android:id="@+id/nombre5"
@@ -189,20 +244,22 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:text="    ASD"
+                    android:gravity="center"
                     android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    tools:text="ASD" />
 
                 <TextView
                     android:id="@+id/nombre6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="right|center"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:text="    ZXC"
+                    android:gravity="center"
                     android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    tools:text="ZXC" />
 
             </LinearLayout>
 
@@ -212,47 +269,104 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/puntaje4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:drawableRight="@drawable/bronce2"
-                    android:gravity="center"
-                    android:text="300   "
-                    android:textColor="#FFF"
-                    android:textSize="15dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/puntaje5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:drawableRight="@drawable/trampa2"
-                    android:gravity="center"
-                    android:text="980   "
-                    android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    <TextView
+                        android:id="@+id/puntaje4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3.5"
+                        android:gravity="left"
+                        android:textColor="#FFF"
+                        android:textSize="15dp"
+                        tools:text="400" />
 
-                <TextView
-                    android:id="@+id/puntaje6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:drawableRight="@drawable/trampa2"
-                    android:gravity="center"
-                    android:text="210   "
-                    android:textColor="#FFF"
-                    android:textSize="15dp" />
+                    <ImageView
+                        android:id="@+id/Imgpuntaje4"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="left"
+                        android:src="@drawable/pulgar" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/puntaje5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3.5"
+                        android:gravity="left"
+                        android:textColor="#FFF"
+                        android:textSize="15dp"
+                        tools:text="700" />
+
+                    <ImageView
+                        android:id="@+id/Imgpuntaje5"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="left"
+                        android:src="@drawable/trampa" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/puntaje6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3.5"
+                        android:gravity="left"
+                        android:textColor="#FFF"
+                        android:textSize="15dp"
+                        tools:text="600" />
+
+                    <ImageView
+                        android:id="@+id/Imgpuntaje6"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="left"
+                        android:src="@drawable/trampa" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -275,9 +389,10 @@
 
             <ImageView
                 android:id="@+id/findeljuego_imagen"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="5dp"
+                tools:src="@drawable/ninguno" />
 
         </LinearLayout>
 
@@ -293,7 +408,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.5">
+        android:layout_weight="1.5"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textinicio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:text="Empieza a jugar para tener tu primera puntuación"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

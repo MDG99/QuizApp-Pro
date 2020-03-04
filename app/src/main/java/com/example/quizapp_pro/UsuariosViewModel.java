@@ -23,12 +23,12 @@ public class UsuariosViewModel extends ViewModel {
     public UsuariosViewModel() {
 
         usuarios = new Usuario[]{
-                new Usuario("MDG", 9, false),
-                new Usuario("CLT", 8, false),
-                new Usuario("MAX", 7, false),
-                new Usuario("IGN", 6, false),
-                new Usuario("EDS", 3, true),
-                new Usuario("999", 5, true),
+                new Usuario("CLX", 20, false),
+                new Usuario("MAX", 15, false),
+                new Usuario("IGN", 10, false),
+                new Usuario("QWE", 8, false),
+                new Usuario("ASD", 12, true),
+                new Usuario("ZXC", 15, true),
         };
 
 
