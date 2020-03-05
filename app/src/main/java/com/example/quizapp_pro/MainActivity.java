@@ -118,11 +118,11 @@ public class MainActivity extends AppCompatActivity {
 
                 //Toast.makeText(MainActivity.this, cuantasPreguntas + " - " + dificultadPuntos + " - " + cuantasPistas, Toast.LENGTH_SHORT).show();
                 Intent intentMusic = new Intent(MainActivity.this, Activity5Music.class);
-                intentMusic.putExtra("QUESTIONS_QUANTITY", opcionesDeJuego.getCuantasPreguntas());
-                intentMusic.putExtra("CHEATS_QUANTITY", opcionesDeJuego.getCuantasPistas());
-                intentMusic.putExtra("DIFFICULT", opcionesDeJuego.getDificultadPuntos());
-                intentMusic.putExtra("TOPICS_TO_ASK", opcionesDeJuego.getTopicsChosen());
-                intentMusic.putExtra("CHEATS_ENABLE", opcionesDeJuego.isEnabledPistas());
+//                intentMusic.putExtra("QUESTIONS_QUANTITY", opcionesDeJuego.getCuantasPreguntas());
+//                intentMusic.putExtra("CHEATS_QUANTITY", opcionesDeJuego.getCuantasPistas());
+//                intentMusic.putExtra("DIFFICULT", opcionesDeJuego.getDificultadPuntos());
+//                intentMusic.putExtra("TOPICS_TO_ASK", opcionesDeJuego.getTopicsChosen());
+//                intentMusic.putExtra("CHEATS_ENABLE", opcionesDeJuego.isEnabledPistas());
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 startActivity(intentMusic);
 

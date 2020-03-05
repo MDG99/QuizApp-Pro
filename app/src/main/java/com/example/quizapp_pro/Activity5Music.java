@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -85,30 +84,30 @@ public class Activity5Music extends AppCompatActivity {
 
         BtnExit.getBackground().setAlpha(60);
 
-        topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
-        cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
-        dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
-        enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
-        cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
-
-        nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
-        puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
-        gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
+//        topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
+//        cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
+//        dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
+//        enabledPistas = getIntent().getBooleanExtra("ENABLE_PISTAS", false);
+//        cuantasPistas = getIntent().getIntExtra("NO_PISTAS", 0);
+//
+//        nicknames = getIntent().getStringArrayExtra(NICKNAME_ARRAY);
+//        puntajes = getIntent().getIntArrayExtra(PUNTAJE_ARRAY);
+//        gallinas = getIntent().getBooleanArrayExtra(GALLINA_ARRAY);
 
         if (estado != null) {
             savedInstanceState = estado;
         }
 
         if (savedInstanceState != null) {
-            topicsChosen = savedInstanceState.getIntArray(CUALES_TOPICS);
-            cuantasPreguntas = savedInstanceState.getInt(NO_PREGUNTAS);
-            dificultadPuntos = savedInstanceState.getInt(DIFICULTAD_PUNTOS);
-            enabledPistas = savedInstanceState.getBoolean(ENABLE_PISTAS);
-            cuantasPistas = savedInstanceState.getInt(NO_PISTAS);
-
-            nicknames = savedInstanceState.getStringArray(NICKNAME_ARRAY);
-            puntajes = savedInstanceState.getIntArray(PUNTAJE_ARRAY);
-            gallinas = savedInstanceState.getBooleanArray(GALLINA_ARRAY);
+//            topicsChosen = savedInstanceState.getIntArray(CUALES_TOPICS);
+//            cuantasPreguntas = savedInstanceState.getInt(NO_PREGUNTAS);
+//            dificultadPuntos = savedInstanceState.getInt(DIFICULTAD_PUNTOS);
+//            enabledPistas = savedInstanceState.getBoolean(ENABLE_PISTAS);
+//            cuantasPistas = savedInstanceState.getInt(NO_PISTAS);
+//
+//            nicknames = savedInstanceState.getStringArray(NICKNAME_ARRAY);
+//            puntajes = savedInstanceState.getIntArray(PUNTAJE_ARRAY);
+//            gallinas = savedInstanceState.getBooleanArray(GALLINA_ARRAY);
         }
 
         BtnTrivia.setOnClickListener(new View.OnClickListener() {
@@ -309,21 +308,22 @@ public class Activity5Music extends AppCompatActivity {
                     mp.start();
                 }
 
-                Intent intentBackMusic = new Intent(Activity5Music.this, MainActivity.class);
-                startActivity(intentBackMusic);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                intentBackMusic.putExtra(CUALES_TOPICS, topicsChosen);
-                intentBackMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
-                intentBackMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
-                intentBackMusic.putExtra(ENABLE_PISTAS, enabledPistas);
-                intentBackMusic.putExtra(NO_PISTAS, cuantasPistas);
-                intentBackMusic.putExtra(NICKNAME_ARRAY, nicknames);
-                intentBackMusic.putExtra(PUNTAJE_ARRAY, puntajes);
-                intentBackMusic.putExtra(GALLINA_ARRAY, gallinas);
-                startActivity(intentBackMusic);
+//                Intent intentBackMusic = new Intent(Activity5Music.this, MainActivity.class);
+//                startActivity(intentBackMusic);
+//                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//                intentBackMusic.putExtra(CUALES_TOPICS, topicsChosen);
+//                intentBackMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
+//                intentBackMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
+//                intentBackMusic.putExtra(ENABLE_PISTAS, enabledPistas);
+//                intentBackMusic.putExtra(NO_PISTAS, cuantasPistas);
+//                intentBackMusic.putExtra(NICKNAME_ARRAY, nicknames);
+//                intentBackMusic.putExtra(PUNTAJE_ARRAY, puntajes);
+//                intentBackMusic.putExtra(GALLINA_ARRAY, gallinas);
+//                startActivity(intentBackMusic);
+
 
                 Toast.makeText(Activity5Music.this, "BUENA ELECCIÓN", Toast.LENGTH_LONG).show();
-
+                finish();
 
             }
 
@@ -382,33 +382,33 @@ public class Activity5Music extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-
-        Intent intentBackMusic = new Intent(Activity5Music.this, MainActivity.class);
-        startActivity(intentBackMusic);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        intentBackMusic.putExtra(CUALES_TOPICS, topicsChosen);
-        intentBackMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
-        intentBackMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
-        intentBackMusic.putExtra(ENABLE_PISTAS, enabledPistas);
-        intentBackMusic.putExtra(NO_PISTAS, cuantasPistas);
-        intentBackMusic.putExtra(NICKNAME_ARRAY, nicknames);
-        intentBackMusic.putExtra(PUNTAJE_ARRAY, puntajes);
-        intentBackMusic.putExtra(GALLINA_ARRAY, gallinas);
-        startActivity(intentBackMusic);
-
-    }
+//    @Override
+//    public void onBackPressed() {
+//
+//        Intent intentBackMusic = new Intent(Activity5Music.this, MainActivity.class);
+//        startActivity(intentBackMusic);
+//        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//        intentBackMusic.putExtra(CUALES_TOPICS, topicsChosen);
+//        intentBackMusic.putExtra(NO_PREGUNTAS, cuantasPreguntas);
+//        intentBackMusic.putExtra(DIFICULTAD_PUNTOS, dificultadPuntos);
+//        intentBackMusic.putExtra(ENABLE_PISTAS, enabledPistas);
+//        intentBackMusic.putExtra(NO_PISTAS, cuantasPistas);
+//        intentBackMusic.putExtra(NICKNAME_ARRAY, nicknames);
+//        intentBackMusic.putExtra(PUNTAJE_ARRAY, puntajes);
+//        intentBackMusic.putExtra(GALLINA_ARRAY, gallinas);
+//        startActivity(intentBackMusic);
+//
+//    }
 
     public void onSaveInstanceState(Bundle estado) {
-        estado.putIntArray(CUALES_TOPICS, topicsChosen);
-        estado.putInt(NO_PREGUNTAS, cuantasPreguntas);
-        estado.putInt(DIFICULTAD_PUNTOS, dificultadPuntos);
-        estado.putBoolean(ENABLE_PISTAS, enabledPistas);
-        estado.putInt(NO_PISTAS, cuantasPistas);
-        estado.putStringArray(NICKNAME_ARRAY, nicknames);
-        estado.putIntArray(PUNTAJE_ARRAY, puntajes);
-        estado.putBooleanArray(GALLINA_ARRAY, gallinas);
+//        estado.putIntArray(CUALES_TOPICS, topicsChosen);
+//        estado.putInt(NO_PREGUNTAS, cuantasPreguntas);
+//        estado.putInt(DIFICULTAD_PUNTOS, dificultadPuntos);
+//        estado.putBoolean(ENABLE_PISTAS, enabledPistas);
+//        estado.putInt(NO_PISTAS, cuantasPistas);
+//        estado.putStringArray(NICKNAME_ARRAY, nicknames);
+//        estado.putIntArray(PUNTAJE_ARRAY, puntajes);
+//        estado.putBooleanArray(GALLINA_ARRAY, gallinas);
         super.onSaveInstanceState(estado);
 
     }
