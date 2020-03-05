@@ -2,7 +2,6 @@ package com.example.quizapp_pro;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -11,11 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ImagenMundo;
     private PlayViewModel opcionesDeJuego;
     private UsuariosViewModel bestPlayers;
+    private String[] s = new String[6];
+    private int[] p = new int[6];
+    private boolean[] g = new boolean[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +43,11 @@ public class MainActivity extends AppCompatActivity {
         bestPlayers = new ViewModelProvider(this).get(UsuariosViewModel.class);
 
 
-        if (intent.getSerializableExtra("LISTA_USUARIOS") != null) {
-            bestPlayers.setUsuarios((Usuario[]) intent.getSerializableExtra("LISTA_USUARIOS"));
+        if (intent.getSerializableExtra("BEST_USERS_NICKNAME") != null) {
+            s = intent.getStringArrayExtra("BEST_USERS_NICKNAME");
+            p = intent.getIntArrayExtra("BEST_USERS_POINTS");
+            g = intent.getBooleanArrayExtra("BEST_USERS_CHEATS");
+            bestPlayers.setUsuarios(bestPlayers.Construir(s, p, g));
         }
 
 
@@ -89,17 +89,11 @@ public class MainActivity extends AppCompatActivity {
         btnPoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intentPoints = new Intent(MainActivity.this, Activity4.class);
-                String[] s = new String[6];
-                for (int i = 0; i<6;i++){
+                for (int i = 0; i < 6; i++) {
                     s[i] = bestPlayers.getUsuarios()[i].getNickname();
-                }
-                int[] p = new int[6];
-                for (int i = 0; i<6;i++){
                     p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
-                }
-                boolean[] g = new boolean[6];
-                for (int i = 0; i<6;i++){
                     g[i] = bestPlayers.getUsuarios()[i].isCheat();
                 }
 
@@ -135,15 +129,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentPlay = new Intent(MainActivity.this, Activity3.class);
 
                 String[] s = new String[6];
-                for (int i = 0; i<6;i++){
+                for (int i = 0; i < 6; i++) {
                     s[i] = bestPlayers.getUsuarios()[i].getNickname();
                 }
                 int[] p = new int[6];
-                for (int i = 0; i<6;i++){
+                for (int i = 0; i < 6; i++) {
                     p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
                 }
                 boolean[] g = new boolean[6];
-                for (int i = 0; i<6;i++){
+                for (int i = 0; i < 6; i++) {
                     g[i] = bestPlayers.getUsuarios()[i].isCheat();
                 }
 

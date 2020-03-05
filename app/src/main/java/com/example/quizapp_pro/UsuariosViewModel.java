@@ -2,10 +2,7 @@ package com.example.quizapp_pro;
 
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class UsuariosViewModel extends ViewModel {
 
@@ -39,10 +36,11 @@ public class UsuariosViewModel extends ViewModel {
         Usuario[] UsuarioAux = new Usuario[6];
 
         for (int i = 0; i < 6; i++) {
-            UsuarioAux[i]= new Usuario(s[i],p[i],g[i]);
+            UsuarioAux[i] = new Usuario(s[i], p[i], g[i]);
         }
 
         return UsuarioAux;
     }
+
 
 }

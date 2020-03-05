@@ -2,7 +2,6 @@ package com.example.quizapp_pro;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,13 +18,12 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -93,7 +91,7 @@ public class Activity3 extends AppCompatActivity {
         Intent intent = getIntent();
 
 
-        if(estado.isAux()){
+        if (estado.isAux()) {
             String[] s = intent.getStringArrayExtra("BEST_USERS_NICKNAME");
             int[] p = intent.getIntArrayExtra("BEST_USERS_POINTS");
             boolean[] g = intent.getBooleanArrayExtra("BEST_USERS_CHEATS");
@@ -473,9 +471,9 @@ public class Activity3 extends AppCompatActivity {
 
     public void CheckerCheatsButton(boolean checker) {
         if (checker) {
-            if(play.getCuantasPistas() == 0){
+            if (play.getCuantasPistas() == 0) {
                 cheatsButton.setEnabled(false);
-            }else{
+            } else {
                 cheatsButton.setEnabled(true); //Aquí tienes que cheacar si te quedan chafas
                 habilitadorDeCheats = new boolean[play.getCuantasPreguntas()];
                 for (int t = 0; t < play.getCuantasPreguntas(); t++) {
@@ -611,6 +609,19 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Activity3.this, MainActivity.class);
+                Usuario currentUser = new Usuario(estado.getNickname(), estado.getPuntaje(), estado.isCheatRecorder());
+                bestPlayers.setUsuarios(usuariosToShow(bestPlayers.getUsuarios(), currentUser));
+                String[] s = new String[6];
+                int[] p = new int[6];
+                boolean[] g = new boolean[6];
+                for (int i = 0; i < 6; i++) {
+                    s[i] = bestPlayers.getUsuarios()[i].getNickname();
+                    p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
+                    g[i] = bestPlayers.getUsuarios()[i].isCheat();
+                }
+                intent.putExtra("BEST_USERS_NICKNAME", s);
+                intent.putExtra("BEST_USERS_POINTS", p);
+                intent.putExtra("BEST_USERS_CHEATS", g);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
@@ -621,26 +632,45 @@ public class Activity3 extends AppCompatActivity {
         Intent intent03 = new Intent(Activity3.this, Activity4.class);
 
         String[] s = new String[6];
-        for (int i = 0; i<6;i++){
-            s[i] = bestPlayers.getUsuarios()[i].getNickname();
-        }
         int[] p = new int[6];
-        for (int i = 0; i<6;i++){
-            p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
-        }
         boolean[] g = new boolean[6];
-        for (int i = 0; i<6;i++){
+        for (int i = 0; i < 6; i++) {
+            s[i] = bestPlayers.getUsuarios()[i].getNickname();
+            p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
             g[i] = bestPlayers.getUsuarios()[i].isCheat();
         }
+
 
         intent03.putExtra("BEST_USERS_NICKNAME", s);
         intent03.putExtra("BEST_USERS_POINTS", p);
         intent03.putExtra("BEST_USERS_CHEATS", g);
 
-        intent03.putExtra("NICKNAME",estado.getNickname());
-        intent03.putExtra("PUNTAJE",estado.getPuntaje());
+        intent03.putExtra("NICKNAME", estado.getNickname());
+        intent03.putExtra("PUNTAJE", estado.getPuntaje());
         intent03.putExtra("TRAMPAS", estado.isCheatRecorder());
         startActivity(intent03);
+    }
+
+    public Usuario[] usuariosToShow(Usuario[] arregloPrevio, Usuario nuevoUsuario) {
+        List<Usuario> ordenador = new ArrayList<Usuario>();
+
+        for (Usuario u : arregloPrevio
+        ) {
+            ordenador.add(u);
+        }
+
+        ordenador.add(nuevoUsuario);
+
+        Usuario[] AUX = new Usuario[ordenador.size()];
+        ordenador.toArray(AUX);
+        Usuario[] arregloOrdenado = new Usuario[6];
+        Arrays.sort(AUX, new SortByPoints());
+        for (int h = 0; h < 6; h++) {
+            arregloOrdenado[h] = AUX[h];
+        }
+
+        bestPlayers.setUsuarios(arregloOrdenado);
+        return arregloOrdenado;
     }
 
 }
