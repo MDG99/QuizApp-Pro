@@ -61,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
             opcionesDeJuego.setTopicsChosen((int[]) intent.getSerializableExtra("TOPICS_TO_ASK"));
         }
 
+        for (int i = 0; i < 6; i++) {
+            s[i] = bestPlayers.getUsuarios()[i].getNickname();
+            p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
+            g[i] = bestPlayers.getUsuarios()[i].isCheat();
+        }
 
         ImagenMundo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
                 intentConfig.putExtra("DIFFICULT", opcionesDeJuego.getDificultadPuntos());
                 intentConfig.putExtra("TOPICS_TO_ASK", opcionesDeJuego.getTopicsChosen());
                 intentConfig.putExtra("CHEATS_ENABLE", opcionesDeJuego.isEnabledPistas());
+                intentConfig.putExtra("BEST_USERS_NICKNAME", s);
+                intentConfig.putExtra("BEST_USERS_POINTS", p);
+                intentConfig.putExtra("BEST_USERS_CHEATS", g);
+
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 startActivity(intentConfig);
 
@@ -91,13 +100,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intentPoints = new Intent(MainActivity.this, Activity4.class);
-                for (int i = 0; i < 6; i++) {
-                    s[i] = bestPlayers.getUsuarios()[i].getNickname();
-                    p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
-                    g[i] = bestPlayers.getUsuarios()[i].isCheat();
-                }
-
-
                 intentPoints.putExtra("BEST_USERS_NICKNAME", s);
                 intentPoints.putExtra("BEST_USERS_POINTS", p);
                 intentPoints.putExtra("BEST_USERS_CHEATS", g);
@@ -127,26 +129,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentPlay = new Intent(MainActivity.this, Activity3.class);
-
-                String[] s = new String[6];
-                for (int i = 0; i < 6; i++) {
-                    s[i] = bestPlayers.getUsuarios()[i].getNickname();
-                }
-                int[] p = new int[6];
-                for (int i = 0; i < 6; i++) {
-                    p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
-                }
-                boolean[] g = new boolean[6];
-                for (int i = 0; i < 6; i++) {
-                    g[i] = bestPlayers.getUsuarios()[i].isCheat();
-                }
-
-
                 intentPlay.putExtra("BEST_USERS_NICKNAME", s);
                 intentPlay.putExtra("BEST_USERS_POINTS", p);
                 intentPlay.putExtra("BEST_USERS_CHEATS", g);
-
-
                 intentPlay.putExtra("QUESTIONS_QUANTITY", opcionesDeJuego.getCuantasPreguntas());
                 intentPlay.putExtra("CHEATS_QUANTITY", opcionesDeJuego.getCuantasPistas());
                 intentPlay.putExtra("DIFFICULT", opcionesDeJuego.getDificultadPuntos());

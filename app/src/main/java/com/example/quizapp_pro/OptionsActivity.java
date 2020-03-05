@@ -3,7 +3,6 @@ package com.example.quizapp_pro;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -15,9 +14,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OptionsActivity extends AppCompatActivity {
 
@@ -53,10 +49,11 @@ public class OptionsActivity extends AppCompatActivity {
     private final String ENABLE_PISTAS = "CHEATS_ENABLE";
     private final String NO_PISTAS = "CHEATS_QUANTITY";
 
-    private String[] nicknames;
-    private int[] puntajes;
-    private boolean[] gallinas;
-    private Bundle estado;
+    private UsuariosViewModel bestPlayers;
+    private String[] s = new String[6];
+    private int[] p = new int[6];
+    private boolean[] g = new boolean[6];
+
     private MediaPlayer playercheck;
     private MediaPlayer playercheat;
 
@@ -82,6 +79,21 @@ public class OptionsActivity extends AppCompatActivity {
 
         playercheck = MediaPlayer.create(OptionsActivity.this, R.raw.fxburbuja);
         playercheat = MediaPlayer.create(OptionsActivity.this, R.raw.fxgallina);
+
+//seccion de datos de usuarios
+        bestPlayers = new ViewModelProvider(this).get(UsuariosViewModel.class);
+        if (getIntent().getSerializableExtra("BEST_USERS_NICKNAME") != null) {
+            s = getIntent().getStringArrayExtra("BEST_USERS_NICKNAME");
+            p = getIntent().getIntArrayExtra("BEST_USERS_POINTS");
+            g = getIntent().getBooleanArrayExtra("BEST_USERS_CHEATS");
+            bestPlayers.setUsuarios(bestPlayers.Construir(s, p, g));
+        }
+        for (int i = 0; i < 6; i++) {
+            s[i] = bestPlayers.getUsuarios()[i].getNickname();
+            p[i] = bestPlayers.getUsuarios()[i].getPuntaje();
+            g[i] = bestPlayers.getUsuarios()[i].isCheat();
+        }
+        //end seccion
 
         checkBoxes = new CheckBox[]{chkArte, chkGeografia, chkFrases, chkVideojuegos, chkHistoria, chkCultura};
         play = new ViewModelProvider(this).get(PlayViewModel.class);
@@ -319,6 +331,9 @@ public class OptionsActivity extends AppCompatActivity {
         intent.putExtra(DIFICULTAD_PUNTOS, play.getDificultadPuntos());
         intent.putExtra(ENABLE_PISTAS, play.isEnabledPistas());
         intent.putExtra(NO_PISTAS, play.getCuantasPistas());
+        intent.putExtra("BEST_USERS_NICKNAME", s);
+        intent.putExtra("BEST_USERS_POINTS", p);
+        intent.putExtra("BEST_USERS_CHEATS", g);
         startActivity(intent);
 
     }
@@ -341,13 +356,13 @@ public class OptionsActivity extends AppCompatActivity {
         return arregloEnteros;
     }
 
-    public boolean[] ArregloBooleanos(int[] arregloEnteros){
+    public boolean[] ArregloBooleanos(int[] arregloEnteros) {
         boolean[] arregloBooleanos = new boolean[6];
-        for(int y = 0; y<6;y++){
+        for (int y = 0; y < 6; y++) {
             arregloBooleanos[y] = false;
         }
-        for(int i = 0; i<arregloEnteros.length;i++){
-           arregloBooleanos[arregloEnteros[i]] = true;
+        for (int i = 0; i < arregloEnteros.length; i++) {
+            arregloBooleanos[arregloEnteros[i]] = true;
         }
         return arregloBooleanos;
     }
