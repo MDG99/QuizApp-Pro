@@ -53,6 +53,9 @@ public class Activity5Music extends AppCompatActivity {
     private int dificultadPuntos;
     private boolean enabledPistas;
     private int cuantasPistas;
+
+    private int botonGreyedOuyt = 0;
+    private final String BUTTON_KEY = "BUTTON_KEY";
     private Bundle estado;
 
     private ObjectAnimator animatorRotation;
@@ -99,6 +102,8 @@ public class Activity5Music extends AppCompatActivity {
         }
 
         if (savedInstanceState != null) {
+            int aux = savedInstanceState.getInt(BUTTON_KEY);
+            botonGreyedOuyt = aux;
 //            topicsChosen = savedInstanceState.getIntArray(CUALES_TOPICS);
 //            cuantasPreguntas = savedInstanceState.getInt(NO_PREGUNTAS);
 //            dificultadPuntos = savedInstanceState.getInt(DIFICULTAD_PUNTOS);
@@ -108,7 +113,11 @@ public class Activity5Music extends AppCompatActivity {
 //            nicknames = savedInstanceState.getStringArray(NICKNAME_ARRAY);
 //            puntajes = savedInstanceState.getIntArray(PUNTAJE_ARRAY);
 //            gallinas = savedInstanceState.getBooleanArray(GALLINA_ARRAY);
+            estadosBotones(botonGreyedOuyt);
+
+
         }
+
 
         BtnTrivia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,7 +158,7 @@ public class Activity5Music extends AppCompatActivity {
                 //final MediaPlayer mp = MediaPlayer.create(this, R.raw.music1);
                 //mp.setLooping(true);
                 //mp.start();
-
+                botonGreyedOuyt = 1;
                 animacion("rotation");
                 //animacion("bucle");
             }
@@ -178,9 +187,9 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnRock.setClickable(false);
 
-                BtnTrivia.setClickable(true);
-                BtnGeneral.setClickable(true);
-                BtnClasica.setClickable(true);
+                BtnTrivia.setEnabled(true);
+                BtnGeneral.setEnabled(true);
+                BtnClasica.setEnabled(true);
 
                 //if (player1.isPlaying()) {
                 //    player1.stop();
@@ -190,6 +199,7 @@ public class Activity5Music extends AppCompatActivity {
                 //    player3.stop();
                 //}
                 //player2.start();
+                botonGreyedOuyt = 2;
                 animacion("rotation2");
             }
         });
@@ -217,9 +227,9 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnGeneral.setClickable(false);
 
-                BtnTrivia.setClickable(true);
-                BtnRock.setClickable(true);
-                BtnClasica.setClickable(true);
+                BtnTrivia.setEnabled(true);
+                BtnRock.setEnabled(true);
+                BtnClasica.setEnabled(true);
 
                 //if (player1.isPlaying()) {
                 //    player1.stop();
@@ -230,6 +240,7 @@ public class Activity5Music extends AppCompatActivity {
                 //}
 //
                 //player3.start();
+                botonGreyedOuyt = 3;
                 animacion("rotation3");
             }
         });
@@ -257,9 +268,9 @@ public class Activity5Music extends AppCompatActivity {
 
                 BtnClasica.setClickable(false);
 
-                BtnTrivia.setClickable(true);
-                BtnRock.setClickable(true);
-                BtnGeneral.setClickable(true);
+                BtnTrivia.setEnabled(true);
+                BtnRock.setEnabled(true);
+                BtnGeneral.setEnabled(true);
 
                 //if (player1.isPlaying()) {
                 //    player1.stop();
@@ -269,6 +280,7 @@ public class Activity5Music extends AppCompatActivity {
                 //    player3.stop();
                 //}
                 //player4.start();
+                botonGreyedOuyt = 4;
                 animacion("bucle");
             }
         });
@@ -409,9 +421,122 @@ public class Activity5Music extends AppCompatActivity {
 //        estado.putStringArray(NICKNAME_ARRAY, nicknames);
 //        estado.putIntArray(PUNTAJE_ARRAY, puntajes);
 //        estado.putBooleanArray(GALLINA_ARRAY, gallinas);
+        estado.putInt(BUTTON_KEY, botonGreyedOuyt);
         super.onSaveInstanceState(estado);
 
     }
+
+    private void estadosBotones(int btn) {
+        switch (btn) {
+            case 0:
+                break;
+
+            case 1:
+                BtnTrivia.setBackgroundResource(R.drawable.opcionescogida1);
+                Activity.setBackgroundResource(R.drawable.opcionescogidat);
+
+                BtnRock.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnGeneral.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnClasica.setBackgroundResource(R.drawable.boton_redondo_musica);
+
+                BtnRock.getBackground().setAlpha(60);
+                BtnGeneral.getBackground().setAlpha(60);
+                BtnClasica.getBackground().setAlpha(60);
+
+                BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
+                BtnExit.setText("A darle");
+                BtnExit.setTextColor(Color.rgb(255, 255, 255));
+
+                BtnTrivia.setClickable(false);
+                BtnTrivia.setEnabled(false);
+
+                BtnRock.setClickable(true);
+                BtnGeneral.setClickable(true);
+                BtnClasica.setClickable(true);
+                animacion("rotation");
+                break;
+
+            case 2:
+                BtnRock.setBackgroundResource(R.drawable.opcionescogida2);
+                Activity.setBackgroundResource(R.drawable.opcionescogidar);
+
+                BtnTrivia.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnGeneral.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnClasica.setBackgroundResource(R.drawable.boton_redondo_musica);
+
+                BtnTrivia.getBackground().setAlpha(60);
+                BtnGeneral.getBackground().setAlpha(60);
+                BtnClasica.getBackground().setAlpha(60);
+
+                BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
+                BtnExit.setText("Demuestra quien es el que sabe");
+                BtnExit.setTextColor(Color.rgb(255, 255, 255));
+
+                BtnRock.setClickable(false);
+                BtnRock.setEnabled(false);
+
+                BtnTrivia.setClickable(true);
+                BtnGeneral.setClickable(true);
+                BtnClasica.setClickable(true);
+                animacion("rotation2");
+                break;
+
+            case 3:
+                BtnGeneral.setBackgroundResource(R.drawable.opcionescogida3);
+                Activity.setBackgroundResource(R.drawable.fondomusic);
+
+                BtnTrivia.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnRock.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnClasica.setBackgroundResource(R.drawable.boton_redondo_musica);
+
+                BtnTrivia.getBackground().setAlpha(60);
+                BtnRock.getBackground().setAlpha(60);
+                BtnClasica.getBackground().setAlpha(60);
+
+                BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
+                BtnExit.setText("Bueno... si es que el quieres...");
+                BtnExit.setTextColor(Color.rgb(255, 255, 255));
+
+                BtnGeneral.setClickable(false);
+                BtnGeneral.setEnabled(false);
+
+                BtnTrivia.setClickable(true);
+                BtnRock.setClickable(true);
+                BtnClasica.setClickable(true);
+                animacion("rotation3");
+                break;
+
+            case 4:
+                BtnClasica.setBackgroundResource(R.drawable.opcionescogida4);
+                Activity.setBackgroundResource(R.drawable.opcionescogidac);
+
+                BtnTrivia.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnRock.setBackgroundResource(R.drawable.boton_redondo_musica);
+                BtnGeneral.setBackgroundResource(R.drawable.boton_redondo_musica);
+
+                BtnTrivia.getBackground().setAlpha(60);
+                BtnRock.getBackground().setAlpha(60);
+                BtnGeneral.getBackground().setAlpha(60);
+
+                BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
+                BtnExit.setText("Levanta el meñique, Jaime");
+                BtnExit.setTextColor(Color.rgb(255, 255, 255));
+
+                BtnClasica.setClickable(false);
+                BtnClasica.setEnabled(false);
+
+                BtnTrivia.setClickable(true);
+                BtnRock.setClickable(true);
+                BtnGeneral.setClickable(true);
+                animacion("bucle");
+                break;
+
+            default:
+                break;
+
+        }
+    }
+
 
     private void stopPlaying() {
         if (mp != null) {
