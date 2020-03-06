@@ -642,7 +642,7 @@ public class Activity5Music extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        stopPlaying();
+        Toast.makeText(Activity5Music.this, "NO SE ELIGIÓ NINGUNA CANCIÓN", Toast.LENGTH_LONG).show();
         finish();
         super.onBackPressed();
     }

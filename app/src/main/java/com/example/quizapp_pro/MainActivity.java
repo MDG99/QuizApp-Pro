@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         exit.addCategory(Intent.CATEGORY_HOME);
         exit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(exit);
-
+        onDestroy();
         super.onBackPressed();
     }
 
