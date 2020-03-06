@@ -108,6 +108,7 @@ public class Activity3 extends AppCompatActivity {
             estado.setAux(false);
         }
 
+
         ShowQuestionsFollower(estado.getCurrentQuestion());
 
         InicializacionBotones();
@@ -223,25 +224,26 @@ public class Activity3 extends AppCompatActivity {
         cheatsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!estado.getGameFinished()) {
+                    play.setCuantasPistas(play.getCuantasPistas() - 1);
+                    ShowCheatsQuantity();
+                    estado.setCheatRecorder(true);
 
-                play.setCuantasPistas(play.getCuantasPistas() - 1);
-                ShowCheatsQuantity();
-                estado.setCheatRecorder(true);
-
-                if (estado.getCheatsCounterByQuestion()[estado.getCurrentQuestion()] > 2) {
-                    Trampa();
-                    playercheat.start();
-                    estado.cheatsButtonClick01();
-                } else {
-                    Trampa();
-                    playercorrect.start();
-                    ShowAnswerByCheats();
-                    estado.cheatsButtonClick02();
+                    if (estado.getCheatsCounterByQuestion()[estado.getCurrentQuestion()] > 2) {
+                        Trampa();
+                        playercheat.start();
+                        estado.cheatsButtonClick01();
+                    } else {
+                        Trampa();
+                        playercorrect.start();
+                        ShowAnswerByCheats();
+                        estado.cheatsButtonClick02();
+                    }
+                    CheatsButtonByQuestion();
+                    SnackTrampa();
+                    GameChecker();
+                    GetAnswersColors();
                 }
-                CheatsButtonByQuestion();
-                SnackTrampa();
-                GameChecker();
-                GetAnswersColors();
             }
         });
 
@@ -565,6 +567,8 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 estado.setNickname(input.getText().toString());
+                cheatsButton.setEnabled(false);
+                estado.setGameFinished();
                 EnviarInfo();
             }
         });

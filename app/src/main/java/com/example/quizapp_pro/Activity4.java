@@ -1,17 +1,14 @@
 package com.example.quizapp_pro;
 
-import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -125,6 +122,9 @@ public class Activity4 extends AppCompatActivity {
                     btnGallina.setBackgroundResource(R.drawable.oro);
                     txtInicio.setText("");
                     Toast.makeText(this, "¡Felicidades!" + "¡Quedaste en primer lugar!", Toast.LENGTH_SHORT).show();
+
+                    MediaPlayer mp = MediaPlayer.create(Activity4.this, R.raw.applause);
+                    mp.start();
                 } else {
                     if (usuarios.getUsuarios()[1].getNickname() == estado.getNickname() && usuarios.getUsuarios()[1].getPuntaje() == estado.getPuntaje()) {
                         btnGallina.setBackgroundResource(R.drawable.plata);
@@ -200,9 +200,9 @@ public class Activity4 extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(estado.getNickname() == null){
+        if (estado.getNickname() == null) {
             super.onBackPressed();
-        }else{
+        } else {
             super.onBackPressed();
         }
     }

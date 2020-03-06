@@ -1,6 +1,7 @@
 package com.example.quizapp_pro;
 
 import android.graphics.Color;
+
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EstadoViewModel extends ViewModel {
-    private String nickname ;
+    private String nickname;
     private int currentQuestion; //guardar
     private int[] cheatsCounterByQuestion; //guardar
     private int Puntaje; //guardar
@@ -16,7 +17,7 @@ public class EstadoViewModel extends ViewModel {
 
     private boolean cheatRecorder; //guardar
     private boolean aux = true;
-    private boolean [] cheatsFollowerEnable;
+    private boolean[] cheatsFollowerEnable;
     private boolean[][] habilitadorDeRespuestas;
     private boolean[] puntajeCheats;
     private boolean[] habilitadorDeCheats;
@@ -32,6 +33,8 @@ public class EstadoViewModel extends ViewModel {
     private int COLOR_CORRECTO = Color.rgb(55, 197, 62);
     private int COLOR_INCORRECTO = Color.rgb(197, 55, 72);
     private int COLOR_TRAMPA = Color.rgb(46, 55, 58);
+
+    private boolean isGameFinished = false;
 
     public boolean isAux() {
         return aux;
@@ -161,13 +164,13 @@ public class EstadoViewModel extends ViewModel {
         this.answersToShow = answersToShow;
     }
 
-    public Questions[] ListToArrayQuestion(List<Questions> LQ){
+    public Questions[] ListToArrayQuestion(List<Questions> LQ) {
         Questions[] Q = new Questions[LQ.size()];
         LQ.toArray(Q);
         return Q;
     }
 
-    public void PlayDefault(int questionsQuantity, int difficult){
+    public void PlayDefault(int questionsQuantity, int difficult) {
 
         currentQuestion = 0;
         cheatRecorder = false;
@@ -184,7 +187,6 @@ public class EstadoViewModel extends ViewModel {
         questionsToShowSaved = new Questions[questionsQuantity];
         answersToShow = new Answers[questionsQuantity][difficult];
         answersToShowSaved = new Answers[questionsQuantity][difficult];
-
 
 
         for (int x = 0; x < questionsQuantity; x++) {
@@ -213,7 +215,7 @@ public class EstadoViewModel extends ViewModel {
 
     }
 
-    public void PlayRandomAnswers(int questionsQuantity, int difficult){
+    public void PlayRandomAnswers(int questionsQuantity, int difficult) {
         //Llenado de respuestas a mostrar aleatoriamente.- Te aseguras que esté la respuesta correcta
         for (int i = 0; i < questionsQuantity; i++) {
             List<Answers> fakeAnswers = new ArrayList<>();
@@ -250,8 +252,7 @@ public class EstadoViewModel extends ViewModel {
     }
 
 
-
-    public void NextQuestionIndex( int questionsQuantity) {
+    public void NextQuestionIndex(int questionsQuantity) {
         currentQuestion = (currentQuestion + 1) % questionsQuantity;
     }
 
@@ -260,43 +261,53 @@ public class EstadoViewModel extends ViewModel {
     }
 
     public void ShowAnswerByCheats(int o) {
-                colorsAnswers[currentQuestion][o] = COLOR_CORRECTO;
-                Respondido[currentQuestion] = true;
+        colorsAnswers[currentQuestion][o] = COLOR_CORRECTO;
+        Respondido[currentQuestion] = true;
 
 
     }
 
-    public void Trampa(int aleatorio){
+    public void Trampa(int aleatorio) {
         habilitadorDeRespuestas[currentQuestion][aleatorio] = false;
         colorsAnswers[currentQuestion][aleatorio] = COLOR_TRAMPA;
     }
 
-    public void TrampaCero(int questionsQuantity){
+    public void TrampaCero(int questionsQuantity) {
         for (int t = 0; t < questionsQuantity; t++) {
             habilitadorDeCheats[t] = false;
         }
     }
 
-    public void cheatsButtonClick01(){
+    public void cheatsButtonClick01() {
         puntajeCheats[currentQuestion] = true;
         cheatsCounterByQuestion[currentQuestion]--;
     }
 
-    public void cheatsButtonClick02(){
+    public void cheatsButtonClick02() {
         habilitadorDeCheats[currentQuestion] = false;
     }
 
-    public void RespuestaClick(){
+    public void RespuestaClick() {
         Respondido[currentQuestion] = true;
         habilitadorDeCheats[currentQuestion] = false;
     }
 
-    public void RespuestaClick01(int o){
+    public void RespuestaClick01(int o) {
         colorsAnswers[currentQuestion][o] = COLOR_CORRECTO;
 
     }
 
-    public void RespuestaClick02(int o){
+    public void RespuestaClick02(int o) {
         colorsAnswers[currentQuestion][o] = COLOR_INCORRECTO;
     }
+
+    public void setGameFinished() {
+        isGameFinished = true;
+    }
+
+    public boolean getGameFinished() {
+        return isGameFinished;
+    }
+
 }
+
