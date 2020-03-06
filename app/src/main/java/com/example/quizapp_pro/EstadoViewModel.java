@@ -35,6 +35,7 @@ public class EstadoViewModel extends ViewModel {
     private int COLOR_TRAMPA = Color.rgb(46, 55, 58);
 
     private boolean isGameFinished = false;
+    private boolean DialogRepeat = true;
 
     public boolean isAux() {
         return aux;
@@ -307,6 +308,14 @@ public class EstadoViewModel extends ViewModel {
 
     public boolean getGameFinished() {
         return isGameFinished;
+    }
+
+    public void setDialogRepeat() {
+        DialogRepeat = false;
+    }
+
+    public boolean getDialogRepeat() {
+        return DialogRepeat;
     }
 
 }

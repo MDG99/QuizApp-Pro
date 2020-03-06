@@ -108,6 +108,9 @@ public class Activity3 extends AppCompatActivity {
             estado.setAux(false);
         }
 
+        if (estado.getGameFinished() && estado.getDialogRepeat()) {
+            CreacionDialogo();
+        }
 
         ShowQuestionsFollower(estado.getCurrentQuestion());
 
@@ -549,7 +552,7 @@ public class Activity3 extends AppCompatActivity {
 
 
     public void CreacionDialogo() {
-
+        estado.setGameFinished();
         final AlertDialog.Builder DialogoNickname = new AlertDialog.Builder(this);
         final EditText input = new EditText(Activity3.this);
         LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(
@@ -567,7 +570,6 @@ public class Activity3 extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 estado.setNickname(input.getText().toString());
-                cheatsButton.setEnabled(false);
                 estado.setGameFinished();
                 EnviarInfo();
             }
@@ -575,6 +577,7 @@ public class Activity3 extends AppCompatActivity {
         DialogoNickname.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                estado.setDialogRepeat();
                 Toast.makeText(Activity3.this, "Partida descartada", Toast.LENGTH_SHORT).show();
             }
         });
@@ -634,7 +637,7 @@ public class Activity3 extends AppCompatActivity {
 
     public void EnviarInfo() {
         Intent intent03 = new Intent(Activity3.this, Activity4.class);
-
+        estado.setDialogRepeat();
         String[] s = new String[6];
         int[] p = new int[6];
         boolean[] g = new boolean[6];
