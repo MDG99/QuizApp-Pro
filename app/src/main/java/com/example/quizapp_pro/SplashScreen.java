@@ -46,14 +46,14 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         final MusicService mServ = new MusicService();
         music.setClass(SplashScreen.this, MusicService.class);
-        startService(music);
+
         setContentView(R.layout.activity_splash_screen);
 
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
+                startService(music);
                 Intent intentMain = new Intent(SplashScreen.this, MainActivity.class);
                 startActivity(intentMain);
                 finish();
