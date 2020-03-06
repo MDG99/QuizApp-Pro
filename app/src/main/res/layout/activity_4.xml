@@ -431,7 +431,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
                 android:gravity="right"
-                android:text="Empieza a jugar para estar dentro de las puntuaciones"
+                android:text=""
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

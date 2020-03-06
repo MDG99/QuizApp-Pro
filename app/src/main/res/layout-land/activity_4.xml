@@ -366,7 +366,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Empieza a jugar para estar dentro de las puntuaciones"
+                android:text=""
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>
