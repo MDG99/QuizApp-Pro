@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffff"
-    tools:context=".SplashScreen">
+    android:background="#FFFFFF"
+    tools:context=".SplashScreenA3">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,16 +14,16 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="375dp"
         android:layout_gravity="center|top"
-        app:lottie_rawRes="@raw/earth"
+        app:lottie_rawRes="@raw/loadinglego"
         app:lottie_autoPlay="true"
         app:lottie_loop="true" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:lottie_rawRes="@raw/loading"
+        android:layout_height="125dp"
+        app:lottie_rawRes="@raw/loadingword"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"/>
 

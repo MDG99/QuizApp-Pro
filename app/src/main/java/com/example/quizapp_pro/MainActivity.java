@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentPlay = new Intent(MainActivity.this, Activity3.class);
+                Intent intentPlay = new Intent(MainActivity.this, SplashScreenA3.class);
                 intentPlay.putExtra("BEST_USERS_NICKNAME", s);
                 intentPlay.putExtra("BEST_USERS_POINTS", p);
                 intentPlay.putExtra("BEST_USERS_CHEATS", g);

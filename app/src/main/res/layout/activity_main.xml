@@ -57,7 +57,7 @@
             android:layout_margin="30dp"
             android:layout_weight="1"
             android:background="@drawable/fondomundo"
-            app:srcCompat="@drawable/mainphoto" />
+            android:src="@drawable/mainphoto"/>
 
         <Button
             android:id="@+id/play_button"

@@ -325,7 +325,7 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:gravity="left"
-                        android:src="@drawable/trampa" />
+                        android:src="@drawable/pulgar" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -358,7 +358,7 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:gravity="left"
-                        android:src="@drawable/trampa" />
+                        android:src="@drawable/pulgar" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -431,7 +431,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
                 android:gravity="right"
-                android:text="Empieza a jugar para tener tu primera puntuación"
+                android:text="Empieza a jugar para estar dentro de las puntuaciones"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

@@ -545,4 +545,11 @@ public class Activity5Music extends AppCompatActivity {
             mp = null;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        stopPlaying();
+        finish();
+        super.onBackPressed();
+    }
 }

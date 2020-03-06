@@ -9,11 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity
+            android:name=".SplashScreenA3"
+            android:theme="@style/Activity3" />
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/Activity4">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activity5Music"
-            android:theme="@style/Activity5"></activity>
+            android:theme="@style/Activity5" />
         <activity
             android:name=".Activity4"
             android:theme="@style/Activity4" />
@@ -23,13 +33,7 @@
         <activity android:name=".OptionsActivity" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/MainActivity"></activity>
     </application>
 
 </manifest>
