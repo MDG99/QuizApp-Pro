@@ -124,7 +124,7 @@ public class Activity5Music extends AppCompatActivity {
         Activity = findViewById(R.id.activity);
 
         BtnExit.getBackground().setAlpha(60);
-
+        BtnExit.setEnabled(false);
 //        topicsChosen = getIntent().getIntArrayExtra("CUALES_TOPICS");
 //        cuantasPreguntas = getIntent().getIntExtra("NO_PREGUNTAS", 5);
 //        dificultadPuntos = getIntent().getIntExtra("DIFICULTAD_PUNTOS", 2);
@@ -151,6 +151,7 @@ public class Activity5Music extends AppCompatActivity {
 //            nicknames = savedInstanceState.getStringArray(NICKNAME_ARRAY);
 //            puntajes = savedInstanceState.getIntArray(PUNTAJE_ARRAY);
 //            gallinas = savedInstanceState.getBooleanArray(GALLINA_ARRAY);
+            BtnExit.setEnabled(false);
             estadosBotones(botonGreyedOuyt);
 
 
@@ -163,7 +164,7 @@ public class Activity5Music extends AppCompatActivity {
 //                stopPlaying();
 //                mp = MediaPlayer.create(Activity5Music.this, R.raw.trividademo);
 //                mp.start();
-
+                BtnExit.setEnabled(true);
                 stopService(music);
                 music = new Intent();
                 music.setClass(Activity5Music.this, MusicService.class);
@@ -219,6 +220,7 @@ public class Activity5Music extends AppCompatActivity {
 //                stopPlaying();
 //                mp = MediaPlayer.create(Activity5Music.this, R.raw.rockdemo);
 //                mp.start();
+                BtnExit.setEnabled(true);
                 stopService(music);
                 music = new Intent();
                 music.setClass(Activity5Music.this, MusicService.class);
@@ -269,6 +271,7 @@ public class Activity5Music extends AppCompatActivity {
 //                stopPlaying();
 //                mp = MediaPlayer.create(Activity5Music.this, R.raw.generaldemo);
 //                mp.start();
+                BtnExit.setEnabled(true);
                 stopService(music);
                 music = new Intent();
                 music.setClass(Activity5Music.this, MusicService.class);
@@ -320,6 +323,7 @@ public class Activity5Music extends AppCompatActivity {
 //                stopPlaying();
 //                mp = MediaPlayer.create(Activity5Music.this, R.raw.clasicademo);
 //                mp.start();
+                BtnExit.setEnabled(true);
                 stopService(music);
                 music = new Intent();
                 music.setClass(Activity5Music.this, MusicService.class);
@@ -537,6 +541,7 @@ public class Activity5Music extends AppCompatActivity {
                 BtnGeneral.getBackground().setAlpha(60);
                 BtnClasica.getBackground().setAlpha(60);
 
+                BtnExit.setEnabled(true);
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("A darle");
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
@@ -562,6 +567,7 @@ public class Activity5Music extends AppCompatActivity {
                 BtnGeneral.getBackground().setAlpha(60);
                 BtnClasica.getBackground().setAlpha(60);
 
+                BtnExit.setEnabled(true);
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("Demuestra quien es el que sabe");
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
@@ -587,6 +593,7 @@ public class Activity5Music extends AppCompatActivity {
                 BtnRock.getBackground().setAlpha(60);
                 BtnClasica.getBackground().setAlpha(60);
 
+                BtnExit.setEnabled(true);
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("Bueno... si es que el quieres...");
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
@@ -612,6 +619,7 @@ public class Activity5Music extends AppCompatActivity {
                 BtnRock.getBackground().setAlpha(60);
                 BtnGeneral.getBackground().setAlpha(60);
 
+                BtnExit.setEnabled(true);
                 BtnExit.setBackgroundResource(R.drawable.boton_redondo_musica2);
                 BtnExit.setText("Levanta el meñique, Jaime");
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
