@@ -67,6 +67,6 @@ public class SplashScreenA3 extends AppCompatActivity {
                 startActivity(intentPlay);
                 finish();
             }
-        }, 5555);
+        }, 4500);
     }
 }
