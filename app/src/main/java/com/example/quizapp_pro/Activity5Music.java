@@ -1,12 +1,15 @@
 package com.example.quizapp_pro;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -63,12 +66,47 @@ public class Activity5Music extends AppCompatActivity {
     //Reproduce un conjuto de ObjectAnimator en un orden en específico. Las animaciones, a su vez, pueden ser igual todas a las vez.
     private AnimatorSet animatorSet;
 
+    private boolean mIsBound = false;
+    private MusicService mServ;
+    private ServiceConnection Scon = new ServiceConnection() {
+
+        public void onServiceConnected(ComponentName name, IBinder
+                binder) {
+            mServ = ((MusicService.ServiceBinder) binder).getService();
+
+        }
+
+        public void onServiceDisconnected(ComponentName name) {
+            mServ = null;
+        }
+    };
+
+    void doBindService() {
+        bindService(new Intent(this, MusicService.class),
+                Scon, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
+    }
+
+    void doUnbindService() {
+        if (mIsBound) {
+            unbindService(Scon);
+            mIsBound = false;
+        }
+    }
+
+    private Intent music = new Intent();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final MusicService mServ = new MusicService();
+
+        music.setClass(Activity5Music.this, MusicService.class);
+
+
         setContentView(R.layout.activity_activity5_music);
 
-        stopPlaying();
+        //stopPlaying();
         player1 = MediaPlayer.create(Activity5Music.this, R.raw.trividademo);
         player2 = MediaPlayer.create(Activity5Music.this, R.raw.rockdemo);
         player3 = MediaPlayer.create(Activity5Music.this, R.raw.generaldemo);
@@ -122,9 +160,16 @@ public class Activity5Music extends AppCompatActivity {
         BtnTrivia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopPlaying();
-                mp = MediaPlayer.create(Activity5Music.this, R.raw.trividademo);
-                mp.start();
+//                stopPlaying();
+//                mp = MediaPlayer.create(Activity5Music.this, R.raw.trividademo);
+//                mp.start();
+
+                stopService(music);
+                music = new Intent();
+                music.setClass(Activity5Music.this, MusicService.class);
+                music.putExtra("DEMO_KEY", 1);
+                startService(music);
+
                 BtnTrivia.setBackgroundResource(R.drawable.opcionescogida1);
                 Activity.setBackgroundResource(R.drawable.opcionescogidat);
 
@@ -141,10 +186,14 @@ public class Activity5Music extends AppCompatActivity {
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
                 BtnTrivia.setClickable(false);
+                BtnTrivia.setEnabled(false);
 
                 BtnRock.setClickable(true);
+                BtnRock.setEnabled(true);
                 BtnGeneral.setClickable(true);
+                BtnGeneral.setEnabled(true);
                 BtnClasica.setClickable(true);
+                BtnClasica.setEnabled(true);
 
 
                 //if (player2.isPlaying()) {
@@ -167,9 +216,15 @@ public class Activity5Music extends AppCompatActivity {
         BtnRock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopPlaying();
-                mp = MediaPlayer.create(Activity5Music.this, R.raw.rockdemo);
-                mp.start();
+//                stopPlaying();
+//                mp = MediaPlayer.create(Activity5Music.this, R.raw.rockdemo);
+//                mp.start();
+                stopService(music);
+                music = new Intent();
+                music.setClass(Activity5Music.this, MusicService.class);
+                music.putExtra("DEMO_KEY", 2);
+                startService(music);
+
                 BtnRock.setBackgroundResource(R.drawable.opcionescogida2);
                 Activity.setBackgroundResource(R.drawable.opcionescogidar);
 
@@ -186,10 +241,14 @@ public class Activity5Music extends AppCompatActivity {
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
                 BtnRock.setClickable(false);
+                BtnRock.setEnabled(false);
 
                 BtnTrivia.setEnabled(true);
+                BtnTrivia.setClickable(true);
                 BtnGeneral.setEnabled(true);
+                BtnGeneral.setClickable(true);
                 BtnClasica.setEnabled(true);
+                BtnClasica.setClickable(true);
 
                 //if (player1.isPlaying()) {
                 //    player1.stop();
@@ -207,9 +266,15 @@ public class Activity5Music extends AppCompatActivity {
         BtnGeneral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopPlaying();
-                mp = MediaPlayer.create(Activity5Music.this, R.raw.generaldemo);
-                mp.start();
+//                stopPlaying();
+//                mp = MediaPlayer.create(Activity5Music.this, R.raw.generaldemo);
+//                mp.start();
+                stopService(music);
+                music = new Intent();
+                music.setClass(Activity5Music.this, MusicService.class);
+                music.putExtra("DEMO_KEY", 3);
+                startService(music);
+
                 BtnGeneral.setBackgroundResource(R.drawable.opcionescogida3);
                 Activity.setBackgroundResource(R.drawable.fondomusic);
 
@@ -226,10 +291,14 @@ public class Activity5Music extends AppCompatActivity {
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
                 BtnGeneral.setClickable(false);
+                BtnGeneral.setEnabled(false);
 
                 BtnTrivia.setEnabled(true);
+                BtnTrivia.setClickable(true);
                 BtnRock.setEnabled(true);
+                BtnRock.setClickable(true);
                 BtnClasica.setEnabled(true);
+                BtnClasica.setClickable(true);
 
                 //if (player1.isPlaying()) {
                 //    player1.stop();
@@ -248,9 +317,15 @@ public class Activity5Music extends AppCompatActivity {
         BtnClasica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopPlaying();
-                mp = MediaPlayer.create(Activity5Music.this, R.raw.clasicademo);
-                mp.start();
+//                stopPlaying();
+//                mp = MediaPlayer.create(Activity5Music.this, R.raw.clasicademo);
+//                mp.start();
+                stopService(music);
+                music = new Intent();
+                music.setClass(Activity5Music.this, MusicService.class);
+                music.putExtra("DEMO_KEY", 4);
+                startService(music);
+
                 BtnClasica.setBackgroundResource(R.drawable.opcionescogida4);
                 Activity.setBackgroundResource(R.drawable.opcionescogidac);
 
@@ -267,10 +342,14 @@ public class Activity5Music extends AppCompatActivity {
                 BtnExit.setTextColor(Color.rgb(255, 255, 255));
 
                 BtnClasica.setClickable(false);
+                BtnClasica.setEnabled(false);
 
                 BtnTrivia.setEnabled(true);
+                BtnTrivia.setClickable(true);
                 BtnRock.setEnabled(true);
+                BtnRock.setClickable(true);
                 BtnGeneral.setEnabled(true);
+                BtnGeneral.setClickable(true);
 
                 //if (player1.isPlaying()) {
                 //    player1.stop();
@@ -287,7 +366,8 @@ public class Activity5Music extends AppCompatActivity {
         BtnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopPlaying();
+//                stopPlaying();
+
                 //MediaPlayer playerX1 = MediaPlayer.create(Activity5Music.this, R.raw.trivia);
                 //MediaPlayer playerX2 = MediaPlayer.create(Activity5Music.this, R.raw.rock);
                 //MediaPlayer playerX3 = MediaPlayer.create(Activity5Music.this, R.raw.general);
@@ -303,21 +383,41 @@ public class Activity5Music extends AppCompatActivity {
                 //    player4.stop();
                 //}
 //
-                if (!BtnTrivia.isClickable()) {
-                    mp = MediaPlayer.create(Activity5Music.this, R.raw.trivia);
-                    mp.start();
-                } else if (!BtnRock.isClickable()) {
-                    mp = MediaPlayer.create(Activity5Music.this, R.raw.rock);
-                    mp.start();
-                } else if (!BtnGeneral.isClickable()) {
-                    mp = MediaPlayer.create(Activity5Music.this, R.raw.general);
-                    mp.start();
-                } else if (!BtnClasica.isClickable()) {
-                    mp = MediaPlayer.create(Activity5Music.this, R.raw.clasica);
-                    mp.start();
+                if (!BtnTrivia.isClickable() || !BtnTrivia.isEnabled()) {
+                    stopService(music);
+                    music = new Intent();
+                    music.setClass(Activity5Music.this, MusicService.class);
+                    music.putExtra("FULL_KEY", 1);
+                    startService(music);
+
+                } else if (!BtnRock.isClickable() || !BtnRock.isEnabled()) {
+                    stopService(music);
+                    music = new Intent();
+                    music.setClass(Activity5Music.this, MusicService.class);
+                    music.putExtra("FULL_KEY", 2);
+                    startService(music);
+
+                } else if (!BtnGeneral.isClickable() || !BtnGeneral.isEnabled()) {
+                    stopService(music);
+                    music = new Intent();
+                    music.setClass(Activity5Music.this, MusicService.class);
+                    music.putExtra("FULL_KEY", 3);
+                    startService(music);
+
+                } else if (!BtnClasica.isClickable() || !BtnClasica.isEnabled()) {
+                    stopService(music);
+                    music = new Intent();
+                    music.setClass(Activity5Music.this, MusicService.class);
+                    music.putExtra("FULL_KEY", 4);
+                    startService(music);
+
                 } else {
-                    mp = MediaPlayer.create(Activity5Music.this, R.raw.general);
-                    mp.start();
+                    stopService(music);
+                    music = new Intent();
+                    music.setClass(Activity5Music.this, MusicService.class);
+                    music.putExtra("FULL_KEY", 1);
+                    startService(music);
+
                 }
 
 //                Intent intentBackMusic = new Intent(Activity5Music.this, MainActivity.class);
@@ -349,7 +449,7 @@ public class Activity5Music extends AppCompatActivity {
 
 
                 animatorRotation = ObjectAnimator.ofFloat(ImgTrvia, "rotation", 0f, 360f);
-                animatorRotation.setDuration(30000);
+                animatorRotation.setDuration(20000);
                 animatorSetRotation = new AnimatorSet();
                 animatorSetRotation.play(animatorRotation);
                 animatorSetRotation.start();
@@ -361,7 +461,7 @@ public class Activity5Music extends AppCompatActivity {
 
 
                 animatorRotation = ObjectAnimator.ofFloat(ImgRock, "rotation", 0f, 360f);
-                animatorRotation.setDuration(30000);
+                animatorRotation.setDuration(20000);
                 animatorSetRotation = new AnimatorSet();
                 animatorSetRotation.play(animatorRotation);
                 animatorSetRotation.start();
@@ -371,7 +471,7 @@ public class Activity5Music extends AppCompatActivity {
 
 
                 animatorRotation = ObjectAnimator.ofFloat(ImgGeneral, "rotation", 0f, 360f);
-                animatorRotation.setDuration(30000);
+                animatorRotation.setDuration(20000);
                 animatorSetRotation = new AnimatorSet();
                 animatorSetRotation.play(animatorRotation);
                 animatorSetRotation.start();
@@ -379,16 +479,10 @@ public class Activity5Music extends AppCompatActivity {
 
             case "bucle":
                 animatorRotation = ObjectAnimator.ofFloat(ImgClasica, "rotation", 0f, 360f);
-                animatorRotation.setDuration(30000);
-                AnimatorSet animatorSetBucle = new AnimatorSet();
-                animatorSetBucle.play(animatorRotation);
-                animatorSetBucle.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        animation.start();
-                    }
-                });
-                animatorSetBucle.start();
+                animatorRotation.setDuration(20000);
+                animatorSetRotation = new AnimatorSet();
+                animatorSetRotation.play(animatorRotation);
+                animatorSetRotation.start();
                 break;
         }
     }

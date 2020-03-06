@@ -34,6 +34,10 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/MainActivity"></activity>
+
+        <service
+            android:name="com.example.quizapp_pro.MusicService"
+            android:enabled="true" />
     </application>
 
 </manifest>
