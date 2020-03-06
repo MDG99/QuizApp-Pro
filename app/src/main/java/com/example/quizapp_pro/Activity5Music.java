@@ -452,8 +452,8 @@ public class Activity5Music extends AppCompatActivity {
             case "rotation":
 
 
-                animatorRotation = ObjectAnimator.ofFloat(ImgTrvia, "rotation", 0f, 360f);
-                animatorRotation.setDuration(20000);
+                animatorRotation = ObjectAnimator.ofFloat(ImgTrvia, "rotation", 0f, 1500f);
+                animatorRotation.setDuration(25000);
                 animatorSetRotation = new AnimatorSet();
                 animatorSetRotation.play(animatorRotation);
                 animatorSetRotation.start();
@@ -464,8 +464,8 @@ public class Activity5Music extends AppCompatActivity {
             case "rotation2":
 
 
-                animatorRotation = ObjectAnimator.ofFloat(ImgRock, "rotation", 0f, 360f);
-                animatorRotation.setDuration(20000);
+                animatorRotation = ObjectAnimator.ofFloat(ImgRock, "rotation", 0f, 1500f);
+                animatorRotation.setDuration(25000);
                 animatorSetRotation = new AnimatorSet();
                 animatorSetRotation.play(animatorRotation);
                 animatorSetRotation.start();
@@ -474,16 +474,16 @@ public class Activity5Music extends AppCompatActivity {
             case "rotation3":
 
 
-                animatorRotation = ObjectAnimator.ofFloat(ImgGeneral, "rotation", 0f, 360f);
-                animatorRotation.setDuration(20000);
+                animatorRotation = ObjectAnimator.ofFloat(ImgGeneral, "rotation", 0f, 1500f);
+                animatorRotation.setDuration(25000);
                 animatorSetRotation = new AnimatorSet();
                 animatorSetRotation.play(animatorRotation);
                 animatorSetRotation.start();
                 break;
 
             case "bucle":
-                animatorRotation = ObjectAnimator.ofFloat(ImgClasica, "rotation", 0f, 360f);
-                animatorRotation.setDuration(20000);
+                animatorRotation = ObjectAnimator.ofFloat(ImgClasica, "rotation", 0f, 1500f);
+                animatorRotation.setDuration(25000);
                 animatorSetRotation = new AnimatorSet();
                 animatorSetRotation.play(animatorRotation);
                 animatorSetRotation.start();
