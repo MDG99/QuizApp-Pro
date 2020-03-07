@@ -1,7 +1,6 @@
 package com.example.quizapp_pro;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -122,9 +121,6 @@ public class Activity4 extends AppCompatActivity {
                     btnGallina.setBackgroundResource(R.drawable.oro);
                     txtInicio.setText("");
                     Toast.makeText(this, "¡Felicidades!" + "¡Quedaste en primer lugar!", Toast.LENGTH_SHORT).show();
-
-                    MediaPlayer mp = MediaPlayer.create(Activity4.this, R.raw.applause);
-                    mp.start();
                 } else {
                     if (usuarios.getUsuarios()[1].getNickname() == estado.getNickname() && usuarios.getUsuarios()[1].getPuntaje() == estado.getPuntaje()) {
                         btnGallina.setBackgroundResource(R.drawable.plata);
